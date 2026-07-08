@@ -152,6 +152,7 @@ const contact_link = [
         name="contact"
         method="POST"
         data-netlify="true"
+        data-netlify-recaptcha="true"
         netlify-honeypot="bot-field"
         class="space-y-5 flex-1 flex flex-col"
       >
@@ -264,13 +265,13 @@ const contact_link = [
             class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm resize-none transition-colors"
             placeholder="Dites-nous en plus..."></textarea>
         </div>
+        <button
+          type="submit"
+          class="w-full inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-6 py-3.5 hover:bg-brand-700 hover:border-brand-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          <span id="submit-label">Envoyer le message</span>
+        </button>
       </form>
-      <button
-        type="submit"
-        class="w-full inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-6 py-3.5 hover:bg-brand-700 hover:border-brand-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-      >
-        <span id="submit-label">Envoyer le message</span>
-      </button>
 
       <p id="form-status" class="text-sm text-center hidden" role="status"></p>
     </div>
