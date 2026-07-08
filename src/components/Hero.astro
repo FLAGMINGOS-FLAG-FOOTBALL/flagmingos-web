@@ -37,13 +37,48 @@ import Logo from '../assets/logo.png'
     <!-- HERO -->
     <div class="relative z-50 lg:pb-20">
       <!-- Ranking -->
-      <div
+      <!-- <div
         class="mb-5 inline-flex items-center gap-2 bg-ink px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
       >
         <span class="bg-brand-500 px-1.5 py-0.5"> #1 </span>
         ÉQUIPE D'OCCITANIE
-      </div>
+      </div> -->
+<div
+  class="mb-5 inline-flex items-center gap-2 bg-ink px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
+>
+  <span class="bg-brand-500 px-1.5 py-0.5">
+    <span id="achievement-icon">#1</span>
+  </span>
 
+  <span id="achievement-text">
+    ÉQUIPE D'OCCITANIE
+  </span>
+</div>
+
+<script>
+  const achievements = [
+    {
+      icon: "#1",
+      text: "ÉQUIPE D'OCCITANIE",
+    },
+    {
+      icon: "#1",
+      text: "CHAMPION DE FRANCE D2 2022",
+    },
+  ]
+
+  let index = 0
+
+  const icon = document.querySelector("#achievement-icon")
+  const text = document.querySelector("#achievement-text")
+
+  setInterval(() => {
+    index = (index + 1) % achievements.length
+
+    icon.textContent = achievements[index].icon
+    text.textContent = achievements[index].text
+  }, 3500)
+</script>
       <!-- Title -->
       <h1 class="font-display uppercase origin-left -skew-x-3 leading-[0.86]">
         <span class="block mb-6 text-[clamp(42px,10vw,96px)] tracking-tight">
