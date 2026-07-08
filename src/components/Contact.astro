@@ -149,10 +149,19 @@ const contact_link = [
     <div class="bg-white border border-line p-6 md:p-8 flex flex-col h-full">
       <form
         id="contact-form"
-        action="https://formspree.io/f/YOUR_FORM_ID"
+        name="contact"
         method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
         class="space-y-5 flex-1 flex flex-col"
       >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden">
+          <label>
+            Don't fill this out if you're human:
+            <input name="bot-field" />
+          </label>
+        </p>
         <div>
           <label
             for="name"
@@ -265,6 +274,35 @@ const contact_link = [
 
       <p id="form-status" class="text-sm text-center hidden" role="status"></p>
     </div>
+    <button type="button" id="test-modal" class="mt-4 border px-4 py-2">
+      Test popup
+    </button>
+    <div
+      id="success-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 px-5"
+    >
+      <div class="bg-white max-w-md w-full p-8 text-center border border-line">
+        <div
+          class="mx-auto mb-5 flex h-14 w-14 items-center justify-center bg-brand-100 text-brand-700 text-2xl"
+        >
+          ✓
+        </div>
+
+        <h3 class="text-2xl font-extrabold">Message envoyé !</h3>
+
+        <p class="mt-3 text-sm text-ink-soft">
+          Merci pour votre message. L'équipe Flagmingos revient vers vous
+          rapidement.
+        </p>
+
+        <button
+          id="close-modal"
+          class="mt-6 bg-brand-500 text-white px-6 py-3 font-bold hover:bg-brand-700 transition"
+        >
+          Fermer
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -314,4 +352,44 @@ const contact_link = [
 
     text.textContent = 'Indisponible'
   }
+</script>
+
+<script>
+  const form = document.getElementById('contact-form')
+  const modal = document.getElementById('success-modal')
+  const close = document.getElementById('close-modal')
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(form)
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData).toString(),
+      })
+
+      form.reset()
+
+      modal?.classList.remove('hidden')
+      modal?.classList.add('flex')
+    } catch (error) {
+      console.error(error)
+    }
+  })
+
+  close?.addEventListener('click', () => {
+    modal?.classList.add('hidden')
+    modal?.classList.remove('flex')
+  })
+  const testButton = document.getElementById('test-modal')
+
+  testButton?.addEventListener('click', () => {
+    modal?.classList.remove('hidden')
+    modal?.classList.add('flex')
+  })
 </script>
