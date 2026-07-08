@@ -1,0 +1,619 @@
+---
+// FlagmingosHome.astro
+// GTA VI-style media cards homepage for flagmingos.fr
+// Palette from logo: #C8102E (crimson), #000000 (black), #FFFFFF (white), #F5A623 (gold accent for CTA)
+---
+
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flagmingos – Flag Football Balma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson: #C8102E;
+      --crimson-dark: #8B0A1F;
+      --gold: #F5A623;
+      --bg: #090910;
+      --card-radius: 1.1rem;
+    }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(to bottom, rgba(9,9,16,0.9) 0%, transparent 100%);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: 44px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #000;
+      background: var(--gold);
+      border: none;
+      padding: 0.45em 1.2em;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 92vh;
+      min-height: 520px;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(9,9,16,0.85) 0%,
+        rgba(9,9,16,0.5) 40%,
+        transparent 70%
+      );
+      display: flex;
+      align-items: flex-end;
+      padding: 3.5rem 2.5rem;
+    }
+
+    .hero-body {
+      max-width: 520px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      background: var(--crimson);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.3em 0.8em;
+      border-radius: 999px;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title .accent { color: var(--crimson); }
+
+    .hero-desc {
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      max-width: 38ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── CARDS SECTION ── */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+      padding: 4rem;
+    }
+
+    .card {
+      position: relative;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      aspect-ratio: 16 / 6.5;
+      cursor: pointer;
+    }
+
+    .card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-img { transform: scale(1.08); }
+
+    /* left-side overlay */
+    .card.left .card-overlay {
+      background: linear-gradient(
+        to right,
+        rgba(9,9,16,0.82) 0%,
+        rgba(9,9,16,0.45) 42%,
+        transparent 65%
+      );
+      justify-content: flex-start;
+    }
+
+    /* right-side overlay */
+    .card.right .card-overlay {
+      background: linear-gradient(
+        to left,
+        rgba(9,9,16,0.82) 0%,
+        rgba(9,9,16,0.45) 42%,
+        transparent 65%
+      );
+      justify-content: flex-end;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .card-body {
+      padding: 1.75rem 2rem;
+      max-width: 44%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--crimson);
+    }
+
+    .card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.0;
+      letter-spacing: 0.01em;
+    }
+
+    .card-desc {
+      font-size: clamp(0.78rem, 1.1vw, 0.88rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.5;
+      margin: 0.2rem 0 0.6rem;
+      max-width: 28ch;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+      padding: 0.5em 1.3em;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+      width: fit-content;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.9);
+    }
+
+    .btn-solid {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+      padding: 0.55em 1.4em;
+      border-radius: 999px;
+      border: none;
+      background: var(--crimson);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+      width: fit-content;
+    }
+
+    .btn-solid:hover { background: var(--crimson-dark); }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+      padding: 0.55em 1.4em;
+      border-radius: 999px;
+      border: none;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      width: fit-content;
+    }
+
+    .btn-gold:hover { opacity: 0.85; }
+
+    /* ── CHAMPION BANNER ── */
+    .champion {
+      text-align: center;
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .champion-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .champion-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-logo img { height: 36px; }
+
+    .footer-logo span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem 1.2rem;
+      list-style: none;
+    }
+
+    .footer-nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover { color: #fff; }
+
+    .socials {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .socials a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .socials a:hover { color: var(--crimson); }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { height: 80vh; }
+
+      .hero-overlay {
+        background: linear-gradient(to top, rgba(9,9,16,0.9) 0%, rgba(9,9,16,0.3) 55%, transparent 80%);
+        align-items: flex-end;
+        padding: 2rem 1.25rem;
+      }
+
+      .hero-body { max-width: 100%; }
+
+      .card { aspect-ratio: 4 / 3; border-radius: 0.8rem; }
+
+      .card.left .card-overlay,
+      .card.right .card-overlay {
+        background: linear-gradient(to top, rgba(9,9,16,0.88) 0%, rgba(9,9,16,0.3) 55%, transparent 80%);
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+
+      .card-body { max-width: 90%; padding: 1.25rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card-img { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/logo.png" alt="Flagmingos" />
+      <span>Flagmingos</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/le-club">Le club</a></li>
+      <li><a href="/initiation">Initiation</a></li>
+      <li><a href="/calendrier-1">Calendrier</a></li>
+      <li><a href="/boutique">Boutique</a></li>
+      <li><a href="/team-building">Team Building</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <a href="/adhesion-1" class="nav-cta">Rejoindre</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!--
+      Replace with a real action photo from your team.
+      Suggested: the team bg image from the site
+      https://image.jimcdn.com/app/cms/image/transf/none/path/s1fed39580bf07a19/backgroundarea/i65533a73fada0480/version/1677056962/image.jpg
+    -->
+    <img
+      class="hero-img"
+      src="https://image.jimcdn.com/app/cms/image/transf/none/path/s1fed39580bf07a19/backgroundarea/i65533a73fada0480/version/1677056962/image.jpg"
+      alt="Flagmingos en action"
+    />
+    <div class="hero-overlay">
+      <div class="hero-body">
+        <div class="badge">🏆 Champions de France 2022 – Division 2</div>
+        <h1 class="hero-title">
+          Le <span class="accent">Flag</span><br />des Amis
+        </h1>
+        <p class="hero-desc">
+          L'association sportive les Flagmingos de Balma — sport collectif mixte, sans contact, accessible à tous dès 12 ans. Proche de Toulouse, en Occitanie.
+        </p>
+        <div class="hero-actions">
+          <a href="/initiation" class="btn-solid">▶ Essayer gratuitement</a>
+          <a href="/le-club" class="btn-outline">Le club →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA CARDS -->
+  <section class="cards">
+
+    <!-- Card 1 — Le Club -->
+    <div class="card left">
+      <img
+        class="card-img"
+        src="https://image.jimcdn.com/app/cms/image/transf/dimension=810x10000:format=jpg/path/s1fed39580bf07a19/image/ief957869c8ffe629/version/1739548873/image.jpg"
+        alt="L'équipe Flagmingos"
+      />
+      <div class="card-overlay">
+        <div class="card-body">
+          <span class="eyebrow">Le club</span>
+          <h2 class="card-title">Seulement à Balma</h2>
+          <p class="card-desc">
+            Fondé en 2019 par une bande d'amis. Le côté obscur du sport le plus convivial d'Occitanie.
+          </p>
+          <a href="/le-club" class="btn-outline">Découvrir →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Entraînements -->
+    <div class="card right">
+      <img
+        class="card-img"
+        src="https://image.jimcdn.com/app/cms/image/transf/dimension=810x10000:format=jpg/path/s1fed39580bf07a19/image/i0fb4c5753a172a28/version/1739363860/image.jpg"
+        alt="Entraînement Flag Football"
+      />
+      <div class="card-overlay">
+        <div class="card-body">
+          <span class="eyebrow">Entraînements</span>
+          <h2 class="card-title">Rejoins le terrain</h2>
+          <p class="card-desc">
+            Adultes : mardi & jeudi 20h–22h. Jeunes (9–17 ans) : dimanche 10h–11h30. Complexe Parc de Lagarde, Balma.
+          </p>
+          <a href="/adhesion-1" class="btn-outline">Adhérer →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Team Building -->
+    <div class="card left">
+      <img
+        class="card-img"
+        src="https://image.jimcdn.com/app/cms/image/transf/dimension=810x10000:format=jpg/path/s1fed39580bf07a19/image/ic5e4cdc9ff1ef5b9/version/1739363806/image.jpg"
+        alt="Team Building Flagmingos"
+      />
+      <div class="card-overlay">
+        <div class="card-body">
+          <span class="eyebrow">Entreprises</span>
+          <h2 class="card-title">Team Building</h2>
+          <p class="card-desc">
+            Une activité originale pour souder vos équipes. Séminaires, challenges, initiations sur mesure.
+          </p>
+          <a href="/team-building" class="btn-outline">En savoir plus →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 — Boutique -->
+    <div class="card right">
+      <img
+        class="card-img"
+        src="https://image.jimcdn.com/app/cms/image/transf/dimension=810x10000:format=jpg/path/s1fed39580bf07a19/image/ia202238ae702af0d/version/1739548900/image.jpg"
+        alt="Boutique Flagmingos"
+      />
+      <div class="card-overlay">
+        <div class="card-body">
+          <span class="eyebrow">Boutique</span>
+          <h2 class="card-title">Équipe-toi aux couleurs du club</h2>
+          <p class="card-desc">
+            Maillots, sweats, accessoires — porte les couleurs des Flagmingos avec fierté.
+          </p>
+          <a href="/boutique" class="btn-gold">Voir la boutique →</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CHAMPION BANNER -->
+  <div class="champion">
+    <p class="champion-label">🇫🇷 Palmarès</p>
+    <p class="champion-title">Champions de France 2022 · Division 2 🏆</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="/logo.png" alt="Flagmingos" />
+      <span>Flagmingos · Flag Football</span>
+    </div>
+    <ul class="footer-nav">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/le-club">Le club</a></li>
+      <li><a href="/calendrier-1">Calendrier</a></li>
+      <li><a href="/adhesion-1">Adhésion</a></li>
+      <li><a href="/boutique">Boutique</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <div class="socials">
+      <a href="https://instagram.com/flagmingosflagfootball" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://facebook.com/Flagmingos" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://tiktok.com/@flagmingosflagfootball" target="_blank" rel="noopener">TikTok</a>
+    </div>
+    <p class="footer-copy">© Flagmingos · Balma, Occitanie · Affilié FFFA</p>
+  </footer>
+
+</body>
+</html>

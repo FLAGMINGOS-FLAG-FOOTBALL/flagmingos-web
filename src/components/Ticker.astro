@@ -1,0 +1,26 @@
+---
+const items = [
+  '<i class="text-brand-500">LET\'S GO FLAGMINGOS!</i>',
+  'INSCRIPTIONS OUVERTES POUR LA SAISON 2026/2027',
+  '<i class="text-brand-500">LET\'S GO FLAGMINGOS!</i>',
+  'INSCRIPTIONS OUVERTES POUR LA SAISON 2026/2027',
+  '<i class="text-brand-500">LET\'S GO FLAGMINGOS!</i>',
+  'INSCRIPTIONS OUVERTES POUR LA SAISON 2026/2027',
+]
+const doubled = [...items, ...items]
+---
+
+<div
+  class="bg-ink text-bone overflow-hidden whitespace-nowrap border-b border-white/10"
+>
+  <div class="inline-flex animate-scroll-left py-2.5">
+    {
+      doubled.map((item) => (
+        <span
+          class="font-mono text-[11.5px] font-semibold tracking-wide px-4.5 text-[#D8D4CC]"
+          set:html={item}
+        />
+      ))
+    }
+  </div>
+</div>

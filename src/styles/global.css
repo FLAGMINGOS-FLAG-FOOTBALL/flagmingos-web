@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fdf2f5;
+  --color-brand-100: #f8c1d2;
+  --color-brand-200: #f391af;
+  --color-brand-300: #ee608c;
+  --color-brand-400: #e93069;
+  --color-brand-500: #E50046;
+  --color-brand-600: #b70038;
+  --color-brand-700: #89002a;
+  --color-brand-800: #5b001c;
+  --color-brand-900: #2d000d;
+
+  --color-bg: #F6F4F0;
+  --color-bg-raised: #FFFFFF;
+
+  --color-ink: #100D0E;
+  --color-ink-soft: #59554F;
+
+  --color-line: #E4DFD6;
+
+
+  --color-hover: #cd003e;
+
+  --font-display: "Anton", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --animate-scroll-left: scroll-left 22s linear infinite;
+  --animate-blob: blob 12s ease-in-out infinite;
+  --animate-blob-delayed: blob 12s ease-in-out infinite 6s;
+
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-500);
+    color: #fff;
+  }
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes blob {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(20px, -15px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 10px) scale(.95);
+  }
+
+}
+
+@keyframes shine {
+  from {
+    background-position: -200%;
+  }
+
+  to {
+    background-position: 200%;
+  }
+}
+
+.shine {
+  background: linear-gradient(120deg, #d40036 30%, #ff9fb0 50%, #d40036 70%);
+
+  background-size: 200%;
+  color: transparent;
+  background-clip: text;
+
+  animation: shine 16s linear infinite;
+}

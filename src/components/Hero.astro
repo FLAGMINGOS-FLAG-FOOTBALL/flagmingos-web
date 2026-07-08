@@ -1,0 +1,169 @@
+---
+import Player from '../assets/player.png'
+import Logo from '../assets/logo.png'
+---
+
+<section class="relative overflow-hidden py-12 lg:pt-16">
+  <!-- Grid ackground -->
+  <div
+    class="-z-10 absolute inset-0 bg-[linear-gradient(to_right,#292724_1px,transparent_1px),linear-gradient(to_bottom,#292724_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-5"
+  >
+  </div>
+
+  <!-- Logo -->
+  <div
+    class="absolute -right-20 -top-20 opacity-5 pointer-events-none select-none"
+  >
+    <img
+      alt="Logo Flagmingos"
+      class="w-150 h-auto object-contain"
+      src={Logo.src}
+    />
+  </div>
+  <!-- Blob  -->
+  <div
+    class="absolute top-0 -left-32 w-150 h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob"
+  >
+  </div>
+
+  <div
+    class="absolute top-1/6 -right-32 w-150 h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob-delayed"
+  >
+  </div>
+
+  <div
+    class="relative mx-auto grid max-w-295 grid-cols-1 gap-2 px-5 lg:grid-cols-[1.15fr_.85fr] lg:px-10"
+  >
+    <!-- HERO -->
+    <div class="relative z-50 lg:pb-20">
+      <!-- Ranking -->
+      <div
+        class="mb-5 inline-flex items-center gap-2 bg-ink px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
+      >
+        <span class="bg-brand-500 px-1.5 py-0.5"> #1 </span>
+        ÉQUIPE D'OCCITANIE
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-display uppercase origin-left -skew-x-3 leading-[0.86]">
+        <span class="block mb-6 text-[clamp(42px,10vw,96px)] tracking-tight">
+          Let's Play
+        </span>
+
+        <span class="text-[clamp(46px,15vw,142px)]">
+          <span class="text-brand-500 shine">FLAG</span><span
+            class="text-ink opacity-[0.1]">MINGOS</span
+          >
+        </span>
+
+        <br />
+
+        <span class="block mt-2 text-[clamp(46px,15vw,142px)] text-brand-500">
+          Football
+        </span>
+      </h1>
+
+      <!-- Description -->
+      <p
+        class="mt-5 max-w-130 text-base leading-relaxed text-ink-soft md:mt-7 md:text-lg"
+      >
+        Découvrez le <b>Flag Football</b> à Balma : un sport collectif spectaculaire,
+        dynamique, sans contact physique, où l'agilité, la mixité et la stratégie
+        font toute la différence
+      </p>
+
+      <!-- Buttons -->
+      <div
+        class="mt-8
+        flex
+        flex-col
+        gap-3
+        min-[480px]:flex-row
+        min-[480px]:flex-wrap"
+      >
+        <a
+          href="#rejoindre"
+          class="inline-flex
+            items-center
+            justify-center
+            border-2
+            border-brand-500
+            bg-brand-500
+            px-4
+            py-2.5
+            text-sm
+            font-extrabold
+            text-white!
+            transition
+            hover:-translate-y-0.5
+            hover:border-brand-700
+            hover:bg-brand-700"
+        >
+          Rejoindre l'équipe
+        </a>
+
+        <a
+          href="#calendrier"
+          class="inline-flex
+            items-center
+            justify-center
+            border-2
+            border-ink
+            px-4
+            py-2.5
+            text-sm
+            font-extrabold
+            transition
+            hover:-translate-y-0.5
+            hover:bg-ink
+            hover:text-bg"
+        >
+          Découvrir le sport
+        </a>
+      </div>
+    </div>
+
+    <!-- Visual -->
+    <div
+      class="order-first hidden pointer-events-none select-none
+      lg:flex
+      justify-center
+      lg:order-0
+      lg:items-end
+      lg:justify-end"
+    >
+      <img
+        src={Player.src}
+        class="absolute
+    -right-10
+    -bottom-10
+    w-52
+    lg:right-0
+    lg:-bottom-20
+    lg:w-[clamp(300px,40vw,500px)]"
+      />
+    </div>
+  </div>
+
+</section>
+
+<style>
+  @keyframes shine {
+    from {
+      background-position: -200%;
+    }
+    to {
+      background-position: 200%;
+    }
+  }
+
+  .shine {
+    background: linear-gradient(120deg, #d40036 30%, #ff9fb0 50%, #d40036 70%);
+
+    background-size: 200%;
+    color: transparent;
+    background-clip: text;
+
+    animation: shine 8s linear infinite;
+  }
+</style>

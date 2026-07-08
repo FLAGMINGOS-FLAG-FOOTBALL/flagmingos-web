@@ -1,0 +1,317 @@
+---
+import Mail from '@lucide/astro/icons/mail'
+import MapPin from '@lucide/astro/icons/map-pin'
+import Phone from '@lucide/astro/icons/phone'
+import Smartphone from '@lucide/astro/icons/smartphone'
+import SectionTitle from './ui/SectionTitle.astro'
+import Instagram from './icons/Instagram.astro'
+
+import { email, instagram, phone, adress } from '../params.json'
+
+const contact_options = [
+  { label: "Rejoindre l'équipe", value: 'joining' },
+  { label: 'Partenariat / Sponsoring', value: 'sponsorship' },
+  { label: 'Media / Presse', value: 'media' },
+  { label: 'Autre', value: 'other' },
+]
+
+const team_section = [
+  { label: 'Équipe Loisir (Mixte dès 17 ans)', value: 'loisir' },
+  { label: 'Équipe Compétition (Mixte dès 17 ans)', value: 'competition' },
+  { label: 'Équipe Féminine', value: 'feminine' },
+  { label: 'Équipe Jeunes (8-16 ans)', value: 'youth' },
+]
+
+const contact_link = [
+  { label: 'Adresse mail', value: email, icon: Mail, link: `mailto:${email}` },
+  {
+    label: 'Instagram',
+    value: instagram,
+    icon: Instagram,
+    link: `https://instagram.com/${instagram}`,
+  },
+  //   {
+  //     label: 'Adresse',
+  //     value: adress,
+  //     icon: MapPin,
+  //     link: `https://maps.google.com/?q=${encodeURIComponent(adress)}`,
+  //   },
+]
+---
+
+<section id="contact" class="py-16 md:py-[110px]">
+  <div
+    class="mx-auto max-w-[1180px] px-5 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-9 md:gap-20"
+  >
+    <div>
+      <div class="font-mono text-xs tracking-[0.15em] text-brand-700 mb-4">
+        GET IN TOUCH
+      </div>
+      <SectionTitle title="Contactez-nous" />
+      <p
+        class="text-[15px] md:text-base leading-relaxed text-ink-soft max-w-[420px]"
+      >
+        Une question sur les entraînements, un partenariat, la presse ou juste
+        envie de nous rejoindre — écris-nous, on répond sous 24h.
+      </p>
+
+      <div class="mt-3 space-y-6 p-5 md:p-6">
+        {
+          contact_link.map((link) => (
+            <div class="flex items-start gap-4">
+              <div class="p-3 bg-brand-100 text-brand-700">
+                <link.icon class="w-6 h-6" />
+              </div>
+              <div>
+                <span class="block font-mono text-[11px] uppercase tracking-wide text-soft-ink">
+                  {link.label}
+                </span>
+                <a
+                  href={link.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-md font-semibold text-ink hover:text-brand-500 transition-colors"
+                >
+                  {link.value}
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-3 border border-line bg-white p-5 md:p-6">
+        <div class="flex items-center justify-between mb-5">
+          <span
+            class="font-mono text-[11px] uppercase tracking-widest text-ink-soft"
+          >
+            Permanence téléphonique
+          </span>
+
+          <span
+            id="phone-status"
+            class="inline-flex items-center gap-2 px-3 py-1 text-[11px] font-bold uppercase tracking-widest"
+          >
+            <span class="status-dot w-2 h-2 rounded-full"></span>
+            <span class="status-text"></span>
+          </span>
+        </div>
+
+        <a
+          href={`tel:${phone}`}
+          class="flex items-center gap-3 text-md font-semibold text-ink hover:text-brand-500 transition-colors"
+        >
+          <span
+            class="flex items-center justify-center w-10 h-10 bg-brand-100 text-brand-700"
+          >
+            <Phone class="w-6 h-6" />
+          </span>
+          {phone}
+        </a>
+
+        <div class="mt-4 text-sm text-ink-soft">
+          <p class="text-ink">Du lundi au vendredi de 10h00 à 18h30</p>
+        </div>
+
+        <p
+          class="mt-4 pt-4 border-t border-line text-xs text-ink-soft leading-relaxed"
+        >
+          En dehors de ces horaires, contactez-nous par email ou via nos réseaux
+          sociaux.
+        </p>
+        <!-- <div class="mt-6 space-y-5">
+          {
+            contact_link.map((link) => (
+              <div class="flex items-start gap-4">
+                <div class="p-3 bg-brand-100 text-brand-700">
+                  <link.icon size={20} stroke-width={2} />
+                </div>
+                <div>
+                  <span class="block font-mono text-[11px] uppercase tracking-wide text-soft-ink">
+                    {link.label}
+                  </span>
+                  <a
+                    href={link.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-sm font-semibold text-ink hover:text-brand-500 transition-colors"
+                  >
+                    {link.value}
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div> -->
+      </div>
+    </div>
+
+    <div class="bg-white border border-line p-6 md:p-8 flex flex-col h-full">
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+        class="space-y-5 flex-1 flex flex-col"
+      >
+        <div>
+          <label
+            for="name"
+            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            >Nom complet</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+            placeholder="Jeanne Dupont"
+          />
+        </div>
+
+        <div>
+          <label
+            for="email"
+            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            >Adresse email</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+            placeholder="jeanne.dupont@email.com"
+          />
+        </div>
+
+        <div>
+          <label
+            for="reason"
+            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            >Je me renseigne sur</label
+          >
+          <select
+            id="reason"
+            name="reason"
+            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm bg-white transition-colors"
+          >
+            <option value="" selected disabled>Choisissez un motif</option>
+            {
+              contact_options.map((option) => (
+                <option value={option.value}>{option.label}</option>
+              ))
+            }
+          </select>
+        </div>
+
+        <div id="team-field" class="hidden">
+          <label
+            for="team"
+            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+          >
+            Quelle équipe ?
+          </label>
+
+          <select
+            id="team"
+            name="team"
+            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm bg-white transition-colors"
+          >
+            <option value="" selected disabled>Choisissez une équipe</option>
+
+            {
+              team_section.map((team) => (
+                <option value={team.value}>{team.label}</option>
+              ))
+            }
+          </select>
+        </div>
+
+        <label
+          for="object"
+          class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+          >Objet du message</label
+        >
+        <input
+          type="text"
+          id="object"
+          name="object"
+          class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+          placeholder="Objet du message"
+        />
+
+        <div>
+          <label
+            for="message"
+            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            >Message</label
+          >
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="4"
+            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm resize-none transition-colors"
+            placeholder="Dites-nous en plus..."></textarea>
+        </div>
+      </form>
+      <button
+        type="submit"
+        class="w-full inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-6 py-3.5 hover:bg-brand-700 hover:border-brand-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        <span id="submit-label">Envoyer le message</span>
+      </button>
+
+      <p id="form-status" class="text-sm text-center hidden" role="status"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const reasonSelect = document.getElementById('reason')
+  const teamField = document.getElementById('team-field')
+  const teamSelect = document.getElementById('team')
+
+  function updateTeamField() {
+    const show = reasonSelect.value === 'joining'
+
+    teamField.classList.toggle('hidden', !show)
+
+    if (show) {
+      teamSelect.required = true
+    } else {
+      teamSelect.required = false
+      teamSelect.value = ''
+    }
+  }
+
+  updateTeamField()
+
+  reasonSelect.addEventListener('change', updateTeamField)
+</script>
+<script>
+  const hour = new Date().getHours()
+
+  const day = new Date().getDay()
+
+  const isOpen = day >= 1 && day <= 5 && hour >= 10 && hour < 18.5
+
+  const badge = document.getElementById('phone-status')
+
+  const text = badge.querySelector('.status-text')
+
+  if (isOpen) {
+    badge.classList.add('bg-green-50', 'text-green-700')
+
+    badge.querySelector('.status-dot').classList.add('bg-green-500')
+
+    text.textContent = 'Disponible'
+  } else {
+    badge.classList.add('bg-gray-100', 'text-gray-500')
+
+    badge.querySelector('.status-dot').classList.add('bg-gray-400')
+
+    text.textContent = 'Indisponible'
+  }
+</script>

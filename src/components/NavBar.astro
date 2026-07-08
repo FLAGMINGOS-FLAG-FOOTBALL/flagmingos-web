@@ -1,0 +1,48 @@
+---
+import logo from '../assets/logo.png'
+import ChevronRight from '@lucide/astro/icons/chevron-right'
+---
+
+<header
+  class="sticky top-0 z-100 border-b border-line bg-[rgba(246,244,240,.92)] backdrop-blur-md"
+>
+  <nav
+    class="mx-auto flex h-16 container items-center justify-between px-5 lg:h-19 lg:px-10"
+  >
+    <a
+      class="flex items-center gap-2 font-display text-lg tracking-wide lg:text-2xl"
+      href="/"
+    >
+      <img src={logo.src} alt="" class="w-11 h-11" />
+    <div class="flex flex-col">
+      <div class="flex flex-row gap-2 items-center">
+        <div class="">FLAGMINGOS</div>
+        <span
+          class="hidden bg-brand-100 px-2 py-1 font-mono text-[10px] font-semibold text-ink-soft min-[480px]:inline-block"
+        >
+          EST. 2019
+        </span>
+      </div>
+      <div class="font-mono text-[10px] text-brand-500">FLAGFOOTBALL BALMA</div>
+    </div>
+    </a>
+
+    <div
+      class="hidden items-center gap-9 text-sm font-bold text-ink-soft lg:flex"
+    >
+      <a href="#equipe">ÉQUIPES</a>
+      <a href="#calendrier">CALENDRIER</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+
+    <a
+      href="#rejoindre"
+      class="flex flex-row items-center gap-1 bg-brand-500 text-white px-4 py-2 text-xs font-bold tracking-wider border-2 border-brand-500 transition hover:border-brand-500 hover:text-brand-500 hover:bg-bg lg:text-sm"
+    >
+      REJOINS-NOUS
+      <span class="inline-block">
+        <ChevronRight size={16} stroke-width={4} />
+      </span>
+    </a>
+  </nav>
+</header>
