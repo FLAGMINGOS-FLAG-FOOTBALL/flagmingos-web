@@ -6,7 +6,7 @@ import Smartphone from '@lucide/astro/icons/smartphone'
 import SectionTitle from './ui/SectionTitle.astro'
 import Instagram from './icons/Instagram.astro'
 
-import { email, instagram, phone, adress } from '../params.json'
+import { email, instagram, phone } from '../params.json'
 
 const contact_options = [
   { label: "Rejoindre l'équipe", value: 'joining' },
@@ -29,13 +29,7 @@ const contact_link = [
     value: instagram,
     icon: Instagram,
     link: `https://instagram.com/${instagram}`,
-  },
-  //   {
-  //     label: 'Adresse',
-  //     value: adress,
-  //     icon: MapPin,
-  //     link: `https://maps.google.com/?q=${encodeURIComponent(adress)}`,
-  //   },
+  }
 ]
 ---
 
