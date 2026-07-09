@@ -1,6 +1,9 @@
 ---
 import logo from '../assets/logo.png'
 import ChevronRight from '@lucide/astro/icons/chevron-right'
+import { navigation } from '../params.json'
+
+const navLinks = navigation.filter((link) => link.navbar)
 ---
 
 <header
@@ -14,25 +17,27 @@ import ChevronRight from '@lucide/astro/icons/chevron-right'
       href="/"
     >
       <img src={logo.src} alt="" class="w-11 h-11" />
-    <div class="flex flex-col">
-      <div class="flex flex-row gap-2 items-center">
-        <div class="">FLAGMINGOS</div>
-        <span
-          class="hidden bg-brand-100 px-2 py-1 font-mono text-[10px] font-semibold text-ink-soft min-[480px]:inline-block"
-        >
-          EST. 2019
-        </span>
+      <div class="flex flex-col">
+        <div class="flex flex-row gap-2 items-center">
+          <div class="">FLAGMINGOS</div>
+          <span
+            class="hidden bg-brand-100 px-2 py-1 font-mono text-[10px] font-semibold text-ink-soft min-[480px]:inline-block"
+          >
+            EST. 2019
+          </span>
+        </div>
+        <div class="font-mono text-[10px] text-brand-500">
+          FLAGFOOTBALL BALMA
+        </div>
       </div>
-      <div class="font-mono text-[10px] text-brand-500">FLAGFOOTBALL BALMA</div>
-    </div>
     </a>
 
     <div
       class="hidden items-center gap-9 text-sm font-bold text-ink-soft lg:flex"
     >
-      <a href="#equipe">ÉQUIPES</a>
-      <a href="#calendrier">CALENDRIER</a>
-      <a href="#contact">CONTACT</a>
+      {navLinks.map((link) => (
+        <a href={link.url} class="uppercase">{link.label}</a>
+      ))}
     </div>
 
     <a

@@ -3,25 +3,9 @@ import Logotype from './ui/Logotype.astro'
 import FooterTitle from './ui/FooterTitle.astro'
 import Signature from './ui/Signature.astro'
 import { address, email, phone } from '../params.json'
+import { navigation } from '../params.json'
 
-const navLinks = [
-  {
-    name: 'Accueil',
-    href: '/',
-  },
-  {
-    name: 'Équipes',
-    href: '#equipe',
-  },
-  {
-    name: 'Calendrier',
-    href: '#calendrier',
-  },
-  {
-    name: 'Contact',
-    href: '#contact',
-  },
-]
+const navLinks = navigation.filter((link) => link.footer)
 
 const socials = [
   {
@@ -57,8 +41,8 @@ const socials = [
     >
       {
         navLinks.map((link) => (
-          <a href={link.href} class="hover:text-brand-500 transition-colors">
-            {link.name}
+          <a href={link.url} class="uppercase hover:text-brand-500 transition-colors">
+            {link.label}
           </a>
         ))
       }

@@ -2,5 +2,38 @@
     "email": "contact@flagmingos.fr",
     "instagram": "flagmingosflagfootball",
     "phone": "+33 7 66 46 53 35",
-    "address": "Stade du parc Lagarde, 31130 Balma"
+    "address": "Stade du parc Lagarde, 31130 Balma",
+
+    "navigation": [
+        {
+            "label": "Accueil",
+            "url": "/",
+            "navbar": false,
+            "footer": true
+        },
+        {
+            "label": "Initiation",
+            "url": "/initiation",
+            "navbar": true,
+            "footer": true
+        },
+        {
+            "label": "Équipes",
+            "url": "/#",
+            "navbar": true,
+            "footer": true
+        },
+        {
+            "label": "Calendrier",
+            "url": "/#",
+            "navbar": false,
+            "footer": false
+        },
+        {
+            "label": "Contact",
+            "url": "/#contact",
+            "navbar": true,
+            "footer": true
+        }
+    ]
 }

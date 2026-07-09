@@ -3,10 +3,11 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
 const {
-  title = "Flagmingos — Flag Football Balma"
+  title = "Flagmingos — Flag Football Balma",
 } = Astro.props;
 ---
 
@@ -15,7 +16,6 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-
   <title>{title}</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
