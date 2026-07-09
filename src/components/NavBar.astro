@@ -1,6 +1,8 @@
 ---
 import logo from '../assets/logo.png'
 import ChevronRight from '@lucide/astro/icons/chevron-right'
+import Menu from '@lucide/astro/icons/menu'
+import X from '@lucide/astro/icons/x'
 import { navigation } from '../params.json'
 
 const navLinks = navigation.filter((link) => link.navbar)
@@ -21,7 +23,7 @@ const navLinks = navigation.filter((link) => link.navbar)
         <div class="flex flex-row gap-2 items-center">
           <div class="">FLAGMINGOS</div>
           <span
-            class="hidden bg-brand-100 px-2 py-1 font-mono text-[10px] font-semibold text-ink-soft min-[480px]:inline-block"
+            class="hidden bg-brand-100 px-2 py-1 font-mono text-[10px] font-semibold text-ink-soft lg:inline-block"
           >
             EST. 2019
           </span>
@@ -35,19 +37,99 @@ const navLinks = navigation.filter((link) => link.navbar)
     <div
       class="hidden items-center gap-9 text-sm font-bold text-ink-soft lg:flex"
     >
-      {navLinks.map((link) => (
-        <a href={link.url} class="uppercase">{link.label}</a>
-      ))}
+      {
+        navLinks.map((link) => (
+          <a href={link.url} class="uppercase">
+            {link.label}
+          </a>
+        ))
+      }
     </div>
-
-    <a
-      href="#rejoindre"
-      class="flex flex-row items-center gap-1 bg-brand-500 text-white px-4 py-2 text-xs font-bold tracking-wider border-2 border-brand-500 transition hover:border-brand-500 hover:text-brand-500 hover:bg-bg lg:text-sm"
-    >
-      REJOINS-NOUS
-      <span class="inline-block">
-        <ChevronRight size={16} stroke-width={4} />
-      </span>
-    </a>
+    <div class="flex items-center gap-2">
+      <a
+        href="/initiation"
+        class="hidden lg:flex flex-row items-center gap-1 bg-brand-500 text-white px-4 py-2 text-xs font-bold tracking-wider border-2 border-brand-500 transition hover:border-brand-500 hover:text-brand-500 hover:bg-bg lg:text-sm"
+      >
+        REJOINS-NOUS
+        <span class="inline-block">
+          <ChevronRight size={16} stroke-width={4} />
+        </span>
+      </a>
+      <button
+        id="menu-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 text-ink transition-all duration-300 hover:bg-brand-500 hover:text-bg"
+      >
+        <Menu id="menu-icon" size={25} class="block" />
+        <X id="close-icon" size={25} class="hidden" />
+      </button>
+    </div>
   </nav>
+  <div
+    id="mobile-menu"
+    class="hidden lg:hidden border-t border-line bg-bg z-60 fixed top-16 left-0 w-full overflow-y-auto"
+  >
+    <div class="flex flex-col px-5 py-4">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.url}
+            class="py-2.5 text-sm font-bold text-ink border-b border-line last:border-b-0"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="/initiation"
+        class="sm:hidden mt-3 inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-4 py-2.5"
+      >
+        REJOINS-NOUS
+      </a>
+    </div>
+  </div>
 </header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')
+  const menu = document.getElementById('mobile-menu')
+  const menuIcon = document.getElementById('menu-icon')
+  const closeIcon = document.getElementById('close-icon')
+
+  const closeMenu = () => {
+    menu?.classList.add('hidden')
+    menuIcon?.classList.remove('hidden')
+    closeIcon?.classList.add('hidden')
+    toggle?.setAttribute('aria-expanded', 'false')
+  }
+
+  const openMenu = () => {
+    menu?.classList.remove('hidden')
+    menuIcon?.classList.add('hidden')
+    closeIcon?.classList.remove('hidden')
+    toggle?.setAttribute('aria-expanded', 'true')
+  }
+
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation()
+
+    const isOpen = !menu?.classList.contains('hidden')
+
+    isOpen ? closeMenu() : openMenu()
+  })
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node
+
+    if (!menu?.contains(target) && !toggle?.contains(target)) {
+      closeMenu()
+    }
+  })
+
+  // Close when clicking a link
+  menu?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', closeMenu)
+  })
+</script>

@@ -1,0 +1,67 @@
+<section
+  class="relative z-10 my-[-5%] md:my-[-2%] bg-brand-500 py-11 text-white [clip-path:polygon(0_3%,100%_0,100%_97%,0_100%)] md:py-[70px]"
+>
+  <div class="container mx-auto px-5 text-center">
+    <div class="font-mono text-xs tracking-[0.2em] opacity-80">
+      SEASON OPENER
+    </div>
+
+    <h2
+      class="mt-5 font-display text-[clamp(36px,7vw,72px)] leading-[0.9] uppercase"
+    >
+      PREMIÈRE JOURNÉE
+    </h2>
+
+    <p class="mx-auto mt-4 max-w-xl text-sm md:text-base text-white/80">
+      Le championnat reprend. Les Flagmingos retrouvent les terrains pour une
+      nouvelle saison de compétition.
+    </p>
+
+    <div class="mt-10 flex justify-center gap-3">
+      <div class="min-w-17.5 bg-brand-700/50 px-3 py-3">
+        <div id="cd-d" class="font-mono text-3xl font-bold">00</div>
+        <div class="mt-1 text-[10px] uppercase tracking-wider">Jours</div>
+      </div>
+
+      <div class="min-w-17.5 bg-brand-700/50 px-3 py-3">
+        <div id="cd-h" class="font-mono text-3xl font-bold">00</div>
+        <div class="mt-1 text-[10px] uppercase tracking-wider">Heures</div>
+      </div>
+
+      <div class="min-w-17.5 bg-brand-700/50 px-3 py-3">
+        <div id="cd-m" class="font-mono text-3xl font-bold">00</div>
+        <div class="mt-1 text-[10px] uppercase tracking-wider">Minutes</div>
+      </div>
+    </div>
+
+    <div
+      class="mt-8 inline-flex items-center gap-3 border-2 border-brand-700/50 px-5 py-3 text-sm uppercase tracking-wider"
+    >
+      <span>Dimanche 18 Octobre</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  const target = new Date('2026-10-18T09:00:00')
+
+  function tick() {
+    const now = new Date()
+    let diff = target.getTime() - now.getTime()
+    if (diff < 0) diff = 0
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24))
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24)
+    const m = Math.floor((diff / (1000 * 60)) % 60)
+
+    const dEl = document.getElementById('cd-d')
+    const hEl = document.getElementById('cd-h')
+    const mEl = document.getElementById('cd-m')
+    if (dEl) dEl.textContent = String(d).padStart(2, '0')
+    if (hEl) hEl.textContent = String(h).padStart(2, '0')
+    if (mEl) mEl.textContent = String(m).padStart(2, '0')
+  }
+
+  tick()
+  setInterval(tick, 1000 * 30)
+</script>

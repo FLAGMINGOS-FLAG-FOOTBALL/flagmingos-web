@@ -1,0 +1,67 @@
+---
+import ArrowRight from '@lucide/astro/icons/arrow-right'
+import team from '../assets/team.jpg'
+import Button from './ui/Button.astro'
+import SectionTitle from './ui/SectionTitle.astro'
+import Paragraph from './ui/Paragraph.astro'
+---
+
+<section>
+  <div class="mx-auto max-w-295 px-5 md:px-10 grid lg:grid-cols-2">
+    <!-- Image -->
+    <div class="relative min-h-92 overflow-hidden">
+      <img
+        src={team.src}
+        alt="Les Flagmingos"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="flex flex-col justify-center px-6 py-20 lg:px-16">
+      <SectionTitle
+        title=`WE ARE
+        <span class="text-brand-500">FLAGMINGOS</span>`
+        tagline="ONE CLUB. ONE FLOCK."
+        skew={true}
+      />
+      <Paragraph>
+        Depuis 2019, nous développons le flag football à Balma et Toulouse.
+        Débutants, compétiteurs, jeunes ou adultes, chacun trouve sa place dans
+        une équipe où l'on joue vite, progresse ensemble et partage la même
+        passion.
+      </Paragraph>
+
+      <Button href="/club" variant="text" class="mt-3" size="text">
+        Découvrir le club
+        <ArrowRight class="w-4 h-4" />
+      </Button>
+
+      <!-- <div
+        class="mt-14 grid grid-cols-3 border-t border-line pt-8"
+      >
+        <div>
+          <div class="font-display text-4xl text-brand-500">5</div>
+          <div class="font-mono text-xs uppercase text-ink-soft">
+            Équipes
+          </div>
+        </div>
+
+        <div>
+          <div class="font-display text-4xl text-brand-500">100%</div>
+          <div class="font-mono text-xs uppercase text-ink-soft">
+            Inclusif
+          </div>
+        </div>
+
+        <div>
+          <div class="font-display text-4xl text-brand-500">FFFA</div>
+          <div class="font-mono text-xs uppercase text-ink-soft">
+            Affilié
+          </div>
+        </div>
+
+      </div> -->
+    </div>
+  </div>
+</section>

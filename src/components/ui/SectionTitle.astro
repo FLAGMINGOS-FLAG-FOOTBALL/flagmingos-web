@@ -1,4 +1,21 @@
 ---
-const { title } = Astro.props;
+interface Props {
+  title: string
+  tagline?: string
+  skew?: boolean
+}
+
+const { title, tagline, skew } = Astro.props
 ---
-<h2 class="font-display uppercase text-[clamp(26px,7vw,48px)]" set:html={title}/>
+
+<div class="mb-6">
+  <div
+    class="font-mono text-xs tracking-[0.15em] text-brand-700 uppercase mb-2"
+  >
+    {tagline}
+  </div>
+  <div
+    class={`font-display uppercase text-[clamp(26px,7vw,48px)] ${skew ? ' -skew-x-3' : ''}`}
+    set:html={title}
+  />
+</div>

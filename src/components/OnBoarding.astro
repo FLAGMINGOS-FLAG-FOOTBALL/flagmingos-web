@@ -1,0 +1,173 @@
+---
+interface Props {
+  current?: 1 | 2 | 3
+  dark?: boolean
+}
+const { current, dark = false } = Astro.props as Props
+
+// const steps = [
+//   {
+//     n: 1,
+//     tag: 'DISCOVER',
+//     title: 'Le Club',
+//     desc: 'Notre histoire, nos entraînements, notre palmarès.',
+//     href: '/le-club',
+//     cta: 'Découvrir',
+//   },
+//   {
+//     n: 2,
+//     tag: 'TRY',
+//     title: 'Initiation',
+//     desc: 'Une séance découverte gratuite, sans engagement.',
+//     href: '/initiation',
+//     cta: 'Réserver',
+//   },
+//   {
+//     n: 3,
+//     tag: 'JOIN',
+//     title: 'Adhésion',
+//     desc: 'Prends ta licence et rejoins la saison.',
+//     href: '/adhesion',
+//     cta: 'Adhérer',
+//   },
+// ]
+
+const steps = [
+  {
+    n: 1,
+    tag: 'DISCOVER',
+    title: 'Le Club',
+    desc: "Découvre l'univers Flagmingos et notre façon de vivre le flag football.",
+    bullets: [
+      'Club mixte ouvert à tous',
+      'Entraînements toute l’année',
+      'Compétition & loisir',
+    ],
+    href: '/le-club',
+    cta: 'Découvrir le club',
+  },
+  {
+    n: 2,
+    tag: 'TRY',
+    title: 'Initiation',
+    desc: 'Teste gratuitement le flag football lors d’une séance découverte sans engagement.',
+    bullets: ['2h de découverte', 'Matériel prêté', 'Débutants bienvenus'],
+    badge: 'Gratuit',
+    href: '/initiation',
+    cta: 'Réserver ma séance',
+  },
+  {
+    n: 3,
+    tag: 'JOIN',
+    title: 'Adhésion',
+    desc: 'Prends ta licence et rejoins une équipe pour toute la saison.',
+    bullets: [
+      'Licence FFFA',
+      'Championnat national',
+      'Tournois et événements spéciaux',
+    ],
+    href: '/adhesion',
+    cta: "S'inscrire",
+  },
+]
+
+const next = current ? current + 1 : 1
+---
+
+<section
+  class={dark ? 'bg-brand-800 text-white py-14 md:py-20' : 'py-14 md:py-20'}
+>
+  <div class="mx-auto max-w-295 px-5 md:px-10">
+    <div class="text-center mb-10 md:mb-12">
+      <div
+        class={`font-mono text-xs tracking-[0.15em] mb-3 ${dark ? 'text-brand-500' : 'text-brand-700'}`}
+      >
+        JOIN THE FLOCK
+      </div>
+      <h2
+        class="font-display uppercase text-[clamp(32px,6vw,56px)] leading-none"
+      >
+        Deviens un Flagmingo
+      </h2>
+      <p
+        class={`mt-4 max-w-xl mx-auto text-base ${dark ? 'text-brand-50/80' : 'text-ink-soft'}`}
+      >
+        Trois étapes suffisent pour rejoindre l'équipe. Découvre le club, viens
+        essayer gratuitement et prends ta licence pour la saison.
+      </p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-[1fr_1.2fr_1fr]">
+      <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"> -->
+      {
+        steps.map((s) => {
+          const isCurrent = s.n === current
+          const isNext = s.n === next && s.n !== current
+          const borderClass = dark ? 'border-white/15' : 'border-line'
+          return (
+            <div
+              class={`relative border-2 p-6 md:p-7 flex flex-col ${isCurrent ? 'border-brand-500' : borderClass} overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-brand-500 hover:shadow-2xl`}
+            >
+              {/* {isCurrent && (
+                <span class="absolute -top-3 left-6 bg-brand-500 text-white font-mono text-[10px] font-bold uppercase tracking-wide px-2.5 py-1">
+                  Tu es ici
+                </span>
+              )} */}
+              {/* <div
+                class={`font-mono text-3xl font-bold mb-3 ${dark ? 'text-white/15' : 'text-ink/10'}`}
+              >
+                0{s.n}
+              </div> */}
+              <div class="absolute -right-4 -top-4 font-display text-[120px] leading-none opacity-5 pointer-events-none select-none -skew-x-6">
+                0{s.n}
+              </div>
+              <div
+                class={`font-mono text-[11px] font-bold tracking-wide mb-2 ${dark ? 'text-brand-500' : 'text-brand-700'}`}
+              >
+                {s.tag}
+              </div>
+              <div class="font-display uppercase text-2xl mb-2">{s.title}</div>
+              <p
+                class={`text-sm leading-relaxed mb-5 flex-1 ${dark ? 'text-brand-50/80' : 'text-ink-soft'}`}
+              >
+                {s.desc}
+              </p>
+              <ul class="space-y-2 mb-8">
+                {s.bullets.map((item) => (
+                  <li class="text-sm opacity-80 flex gap-2">
+                    <span class="text-brand-500">•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={s.href}
+                class={`inline-flex items-center gap-1.5 text-sm font-bold ${dark ? 'hover:text-brand-500' : 'hover:text-brand-700'} transition-colors w-fit`}
+              >
+                {s.cta} {<span aria-hidden="true">&rarr;</span>}
+              </a>
+              {/* {isCurrent ? (
+                <span
+                  class={`text-sm font-bold ${dark ? 'text-[#7A756E]' : 'text-ink-soft/60'}`}
+                >
+                  Page actuelle
+                </span>
+              ) : (
+                <a
+                  href={s.href}
+                  class={
+                    isNext
+                      ? 'inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-5 py-3 hover:bg-brand-700 hover:border-brand-700 transition-all w-fit'
+                      : `inline-flex items-center gap-1.5 text-sm font-bold ${dark ? 'hover:text-brand-500' : 'hover:text-brand-700'} transition-colors w-fit`
+                  }
+                >
+                  {s.cta} {!isNext && <span aria-hidden="true">&rarr;</span>}
+                </a>
+              )} */}
+            </div>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>

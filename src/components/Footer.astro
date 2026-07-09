@@ -1,4 +1,5 @@
 ---
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
 import Logotype from './ui/Logotype.astro'
 import FooterTitle from './ui/FooterTitle.astro'
 import Signature from './ui/Signature.astro'
@@ -32,7 +33,9 @@ const socials = [
     <div
       class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-7 md:pb-8 border-b border-brand-50/50"
     >
-      <div class="font-display uppercase text-4xl md:text-5xl leading-tight tracking-wide -skew-x-6 py-2 ">
+      <div
+        class="font-display uppercase text-4xl md:text-5xl leading-tight tracking-wide -skew-x-6 py-2"
+      >
         TOGETHER WE FLY HIGH
       </div>
     </div>
@@ -41,7 +44,10 @@ const socials = [
     >
       {
         navLinks.map((link) => (
-          <a href={link.url} class="uppercase hover:text-brand-500 transition-colors">
+          <a
+            href={link.url}
+            class="uppercase hover:text-brand-500 transition-colors"
+          >
             {link.label}
           </a>
         ))
@@ -79,13 +85,17 @@ const socials = [
         />
         <a
           href="https://maps.apple.com/?q=Flagmingos%20Flag%20Football"
-          class="text-brand-50/80 hover:text-brand-400 transition-colors text-sm"
-          >Apple Plans &#8599;</a
+          class="text-brand-50/80 hover:text-brand-400 transition-colors text-sm inline-flex items-center gap-1.5"
+          >Apple Plans <span aria-hidden="true"
+            ><ArrowUpRight size={16} stroke-width={3} /></span
+          ></a
         >
         <a
           href="https://goo.gl/maps/?q=Flagmingos%20Flag%20Football"
-          class="text-brand-50/80 hover:text-brand-400 transition-colors text-sm"
-          >Google Maps &#8599;</a
+          class="text-brand-50/80 hover:text-brand-400 transition-colors text-sm inline-flex items-center gap-1.5"
+          >Google Maps <span aria-hidden="true"
+            ><ArrowUpRight size={16} stroke-width={3} /></span
+          ></a
         >
       </div>
       <div>
@@ -100,7 +110,10 @@ const socials = [
                   href={s.href}
                   class="inline-flex items-center gap-1.5 text-brand-50/80 text-sm hover:text-brand-500 transition-colors"
                 >
-                  {s.name} <span aria-hidden="true">&#8599;</span>
+                  {s.name}{' '}
+                  <span aria-hidden="true">
+                    <ArrowUpRight size={16} stroke-width={3} />
+                  </span>
                 </a>
               </li>
             ))
@@ -115,8 +128,9 @@ const socials = [
         © {new Date().getFullYear()} Flagmingos. Tous droits réservés.
       </div>
       <div class="flex gap-6">
-        <a href="#" class="hover:text-brand-50 transition-colors"
-          >Mentions légales</a
+        <a
+          href="/mentions-legales"
+          class="hover:text-brand-50 transition-colors">Mentions légales</a
         >
       </div>
     </div>

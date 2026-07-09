@@ -1,6 +1,7 @@
 ---
 import Player from '../assets/player.png'
 import Logo from '../assets/logo.png'
+import Button from './ui/Button.astro'
 ---
 
 <section class="relative overflow-hidden py-12 lg:pt-16">
@@ -22,12 +23,12 @@ import Logo from '../assets/logo.png'
   </div>
   <!-- Blob  -->
   <div
-    class="absolute top-0 -left-32 w-150 h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob"
+    class="absolute top-0 -left-32 w-50 h-50 lg:w-150 lg:h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob"
   >
   </div>
 
   <div
-    class="absolute top-1/6 -right-32 w-150 h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob-delayed"
+    class="absolute top-1/6 -right-32  w-50 h-50 lg:w-150 lg:h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob-delayed"
   >
   </div>
 
@@ -43,42 +44,40 @@ import Logo from '../assets/logo.png'
         <span class="bg-brand-500 px-1.5 py-0.5"> #1 </span>
         ÉQUIPE D'OCCITANIE
       </div> -->
-<div
-  class="mb-5 inline-flex items-center gap-2 bg-ink px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
->
-  <span class="bg-brand-500 px-1.5 py-0.5">
-    <span id="achievement-icon">#1</span>
-  </span>
+      <div
+        class="mb-5 inline-flex items-center gap-2 bg-ink px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
+      >
+        <span class="bg-brand-500 px-1.5 py-0.5">
+          <span id="achievement-icon">#1</span>
+        </span>
 
-  <span id="achievement-text">
-    ÉQUIPE D'OCCITANIE
-  </span>
-</div>
+        <span id="achievement-text"> ÉQUIPE D'OCCITANIE </span>
+      </div>
 
-<script>
-  const achievements = [
-    {
-      icon: "#1",
-      text: "ÉQUIPE D'OCCITANIE",
-    },
-    {
-      icon: "#1",
-      text: "CHAMPION DE FRANCE D2 2022",
-    },
-  ]
+      <script>
+        const achievements = [
+          {
+            icon: '#1',
+            text: "ÉQUIPE D'OCCITANIE",
+          },
+          {
+            icon: '#1',
+            text: 'CHAMPION DE FRANCE D2 2022',
+          },
+        ]
 
-  let index = 0
+        let index = 0
 
-  const icon = document.querySelector("#achievement-icon")
-  const text = document.querySelector("#achievement-text")
+        const icon = document.querySelector('#achievement-icon')
+        const text = document.querySelector('#achievement-text')
 
-  setInterval(() => {
-    index = (index + 1) % achievements.length
+        setInterval(() => {
+          index = (index + 1) % achievements.length
 
-    icon.textContent = achievements[index].icon
-    text.textContent = achievements[index].text
-  }, 3500)
-</script>
+          icon.textContent = achievements[index].icon
+          text.textContent = achievements[index].text
+        }, 3500)
+      </script>
       <!-- Title -->
       <h1 class="font-display uppercase origin-left -skew-x-3 leading-[0.86]">
         <span class="block mb-6 text-[clamp(42px,10vw,96px)] tracking-tight">
@@ -86,7 +85,7 @@ import Logo from '../assets/logo.png'
         </span>
 
         <span class="text-[clamp(46px,15vw,142px)]">
-          <span class="text-brand-500 shine">FLAG</span><span
+          <span class="text-brand-500">FLAG</span><span
             class="text-ink opacity-[0.1]">MINGOS</span
           >
         </span>
@@ -116,45 +115,12 @@ import Logo from '../assets/logo.png'
         min-[480px]:flex-row
         min-[480px]:flex-wrap"
       >
-        <a
-          href="#rejoindre"
-          class="inline-flex
-            items-center
-            justify-center
-            border-2
-            border-brand-500
-            bg-brand-500
-            px-4
-            py-2.5
-            text-sm
-            font-extrabold
-            text-white!
-            transition
-            hover:-translate-y-0.5
-            hover:border-brand-700
-            hover:bg-brand-700"
-        >
+        <Button href="#rejoindre" variant="primary" size="medium">
           Rejoindre l'équipe
-        </a>
-
-        <a
-          href="#calendrier"
-          class="inline-flex
-            items-center
-            justify-center
-            border-2
-            border-ink
-            px-4
-            py-2.5
-            text-sm
-            font-extrabold
-            transition
-            hover:-translate-y-0.5
-            hover:bg-ink
-            hover:text-bg"
-        >
+        </Button>
+        <Button href="#calendrier" variant="secondary" size="medium">
           Découvrir le sport
-        </a>
+        </Button>
       </div>
     </div>
 
@@ -179,7 +145,6 @@ import Logo from '../assets/logo.png'
       />
     </div>
   </div>
-
 </section>
 
 <style>

@@ -30,6 +30,12 @@
             "footer": false
         },
         {
+            "label": "Team Building",
+            "url": "/team-building",
+            "navbar": true,
+            "footer": true
+        },
+        {
             "label": "Contact",
             "url": "/#contact",
             "navbar": true,

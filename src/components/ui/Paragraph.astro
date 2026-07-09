@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props as Props
+---
+
+<p
+  class={`text-sm md:text-base text-ink-soft leading-relaxed ${className || ''} mb-4`}
+>
+  <slot />
+</p>

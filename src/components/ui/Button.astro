@@ -1,0 +1,35 @@
+---
+interface ButtonProps {
+  href?: string
+  variant?: 'primary' | 'secondary' | 'text'
+  size?: 'small' | 'medium' | 'large'
+  class?: string
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'medium',
+  class: className,
+} = Astro.props as ButtonProps
+
+const baseClasses = 'inline-flex items-center justify-center font-bold gap-1.5 items-center'
+const variantClasses = {
+  primary:
+    'bg-brand-500 text-white border-2 border-brand-500 border-brand-500 transition-colors hover:border-brand-500 hover:text-brand-500 hover:bg-bg',
+  secondary:
+    'bg-white text-ink border-2 border-ink hover:text-white hover:border-ink transition-colors hover:bg-ink',
+  text: 'text-brand-700 hover:text-brand-500 transition-colors',
+}
+const sizeClasses = {
+  small: 'px-3 py-1.5 text-sm',
+  medium: 'px-4 py-2 text-base',
+  large: 'px-6 py-3 text-lg',
+  text: 'px-0 py-0 text-sm',
+}
+const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className || ''}`
+---
+
+<div>
+  <a href={href} class={classes}><slot /></a>
+</div>
