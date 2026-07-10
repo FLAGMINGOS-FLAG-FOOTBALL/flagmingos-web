@@ -1,12 +1,21 @@
 ---
 interface Props {
   noBackground?: boolean
+  margin?: 'small' | 'medium' | 'large'
 }
+const { noBackground = false, margin = 'medium' } = Astro.props as Props
+
+const marginClasses = {
+  small: 'py-6 md:py-10',
+  medium: 'py-14 md:py-20',
+  large: 'py-20 md:py-28',
+}
+
 ---
 
 <section
   class={`
-  ${Astro.props.noBackground ? 'bg-bg' : 'bg-white'} py-14 md:py-20
+  ${noBackground ? 'bg-bg' : 'bg-white'} ${marginClasses[margin]}
 `}
 >
   <div class="mx-auto max-w-295 p-6">

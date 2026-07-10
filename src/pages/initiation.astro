@@ -2,6 +2,7 @@
 import Page from '../layouts/Page.astro'
 import PageHeader from '../components/PageHeader.astro'
 import PageContent from '../components/ui/PageContent.astro'
+import SectionTitle from '../components/ui/SectionTitle.astro'
 import Booking from '../components/Booking.astro'
 ---
 
@@ -15,7 +16,15 @@ import Booking from '../components/Booking.astro'
     tags={['Dès 9 ans', 'Encadrement diplomé', 'Inscription gratuite', 'Mixte']}
     cta=`Une question ? <a href="/#contact" class="underline hover:text-brand-700 transition-colors">Contactez-nous</a> directement.`
   />
-  <PageContent>
+  <PageContent margin="small">
+    <SectionTitle
+      title="Inscris-toi à une"
+      highlight="SÉANCE D'INITIATION"
+      tagline="STEP ON THE FIELD"
+      size="small"
+      center={true}
+    />
+    <div class="h-4 md:h-8"/>
     <Booking />
   </PageContent>
 </Page>

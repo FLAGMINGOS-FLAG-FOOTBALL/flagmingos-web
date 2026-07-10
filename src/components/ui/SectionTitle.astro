@@ -5,9 +5,10 @@ interface Props {
   tagline?: string
   skew?: boolean
   size?: 'small' | 'medium' | 'large'
+  center?: boolean
 }
 
-const { title, highlight, tagline, skew = false, size = 'medium' } = Astro.props as Props
+const { title, highlight, tagline, skew = false, size = 'medium', center = false } = Astro.props as Props
 
 const sizeClasses = {
   small: 'text-[clamp(20px,5vw,32px)]',
@@ -31,10 +32,10 @@ const sizeClasses = {
 </div>
 
  -->
-<div class="mb-6">
+<div class={`mb-6 ${center ? 'text-center' : ''}`}>
   {
     tagline && (
-      <div class="font-mono text-xs tracking-[0.15em] text-brand-700 uppercase mb-2">
+      <div class="font-mono text-xs tracking-[0.15em] text-brand-700 uppercase mb-4">
         {tagline}
       </div>
     )
