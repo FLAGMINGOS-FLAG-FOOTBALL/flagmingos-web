@@ -1,12 +1,15 @@
 ---
 import Page from '../layouts/Page.astro'
-import PageHeader from '../components/PageHeader.astro'
+import Football from '../components/icons/Football.astro'
+import Button from '../components/ui/Button.astro'
 ---
 
 <Page title="404 - Page introuvable">
   <section class="overflow-hidden bg-white py-20 md:py-32 text-center">
     <div class="relative mx-auto max-w-160 px-5 md:px-10">
-      <div class="text-6xl md:text-7xl mb-6" aria-hidden="true">🏈</div>
+      <div class="text-6xl md:text-7xl mb-6" aria-hidden="true">
+        <Football class="mx-auto w-20 h-20 md:w-24 md:h-24 text-brand-800" />
+      </div>
 
       <div
         class="font-display uppercase leading-[0.85] text-[clamp(64px,16vw,160px)] text-brand-500"
@@ -26,12 +29,7 @@ import PageHeader from '../components/PageHeader.astro'
       </p>
 
       <div class="flex flex-col sm:flex-row justify-center gap-3">
-        <a
-          href="/"
-          class="inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-6 py-3.5 hover:bg-brand-700 hover:border-brand-700 hover:-translate-y-0.5 transition-all"
-        >
-          Retour à l'accueil
-        </a>
+        <Button href="/" variant="primary" class="w-full sm:w-auto">Retour à l'accueil</Button>
       </div>
     </div>
   </section>

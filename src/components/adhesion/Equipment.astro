@@ -1,0 +1,60 @@
+---
+import ChevronRight from '@lucide/astro/icons/chevron-right'
+import { gear } from '../../data/adhesion'
+---
+
+<section class="bg-brand-800 text-white py-14 md:py-20">
+  <div class="mx-auto max-w-295 px-5 md:px-10">
+    <!-- HEADER -->
+
+    <div class="mb-10 md:mb-14 text-center">
+      <div
+        class="font-mono text-xs tracking-[0.2em] text-brand-500 uppercase mb-3"
+      >
+        GEAR UP
+      </div>
+
+      <h2
+        class="font-display uppercase text-[clamp(32px,6vw,56px)] leading-[0.9]"
+      >
+        Équipement Indispensable
+      </h2>
+
+      <p class="mt-5 text-sm md:text-base text-white/70 leading-relaxed">
+        Pour pratiquer le flag football dans de bonnes conditions, il est
+        nécessaire de se munir d’un minimum d’équipement.
+      </p>
+    </div>
+
+    <!-- LIST -->
+
+    <div class="grid gap-px
+      border border-white/10
+      bg-white/10">
+      {
+        gear.map((item, i) => (
+          <div
+            class="
+              flex items-center gap-4
+              bg-brand-800
+              px-5 py-5
+            "
+          >
+            <span
+              class="
+                font-mono text-xs
+                text-brand-500
+              "
+            >
+              0{i + 1}
+            </span>
+
+            <ChevronRight class="w-4 h-4 text-brand-500 shrink-0" />
+
+            <span class="text-sm">{item}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

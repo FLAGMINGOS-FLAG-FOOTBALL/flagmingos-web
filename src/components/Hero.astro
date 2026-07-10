@@ -3,6 +3,8 @@ import Player from '../assets/player.png'
 import Logo from '../assets/logo.png'
 import Button from './ui/Button.astro'
 import Play from '@lucide/astro/icons/play'
+import BookOpen from '@lucide/astro/icons/book-open-text'
+import UserRoundPlus from '@lucide/astro/icons/user-round-plus'
 ---
 
 <section class="relative overflow-hidden py-12 lg:pt-16">
@@ -117,10 +119,11 @@ import Play from '@lucide/astro/icons/play'
         min-[480px]:flex-wrap"
       >
         <Button href="#rejoindre" variant="primary" size="small">
+          <UserRoundPlus class="w-5 h-5" />
           Rejoindre l'équipe
         </Button>
         <Button href="/flag-football" variant="secondary" size="small">
-          <Play class="w-4 h-4" />
+          <BookOpen class="w-5 h-5" />
           Découvrir le sport
         </Button>
       </div>

@@ -1,0 +1,58 @@
+---
+import Button from '../ui/Button.astro'
+import SectionTitle from '../ui/SectionTitle.astro'
+import { HELLOASSO_URL } from '../../data/adhesion'
+---
+<section>
+  <div class="mx-auto max-w-180 text-center">
+    <SectionTitle
+      title="Prêt à rejoindre
+      les Flagmingos ?"
+      tagline="JOIN THE FLOCK"
+    />
+
+    <p class="text-md leading-relaxed text-ink-soft mx-auto">
+      Ton inscription se fait simplement en ligne via HelloAsso. En seulement
+      quelques étapes et les documents nécessaires, tu es prêt à fouler le
+      terrain.
+    </p>
+
+    <!-- DOCUMENTS -->
+
+    <div
+      class="inline-block text-left bg-brand-50 border border-brand-100 px-6 py-5 mt-7"
+    >
+      <p
+        class="font-mono text-[11px]
+          uppercase tracking-wide
+          text-brand-700
+          mb-4"
+      >
+        Documents nécessaires
+      </p>
+
+      <ul class="space-y-3 text-sm text-ink-soft">
+        <li class="flex gap-3">
+          <span class="text-brand-500 font-bold">01</span>
+          <span>
+            Certificat médical mentionnant « pas de contre-indication à la
+            pratique du Flag Football en compétition »
+          </span>
+        </li>
+
+        <li class="flex gap-3">
+          <span class="text-brand-500 font-bold">02</span>
+          <span> Photo d'identité récente </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CTA -->
+
+    <div class="mt-8">
+      <Button href={HELLOASSO_URL}> Prendre ma licence </Button>
+    </div>
+
+    <p class="mt-4 text-xs text-ink-soft">Paiement sécurisé via HelloAsso</p>
+  </div>
+</section>

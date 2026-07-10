@@ -12,8 +12,20 @@
             "footer": true
         },
         {
-            "label": "Le Flag Football",
+            "label": "Le Flag",
             "url": "/flag-football",
+            "navbar": true,
+            "footer": true
+        },
+        {
+            "label": "Club",
+            "url": "/le-club",
+            "navbar": true,
+            "footer": true
+        },
+        {
+            "label": "Adhésion",
+            "url": "/adhesion",
             "navbar": true,
             "footer": true
         },

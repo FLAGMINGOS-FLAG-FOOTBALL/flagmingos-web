@@ -1,0 +1,14 @@
+---
+interface TaglineProps {
+  text: string
+  class?: string
+}
+
+const { text, class: className } = Astro.props as TaglineProps
+---
+
+<div
+  class={`font-mono text-xs tracking-[0.15em] text-brand-700 uppercase mb-2 ${className || ''}`}
+>
+  {text}
+</div>

@@ -1,13 +1,23 @@
 ---
 interface Props {
   title: string
+  highlight?: string
   tagline?: string
   skew?: boolean
+  size?: 'small' | 'medium' | 'large'
 }
 
-const { title, tagline, skew } = Astro.props
+const { title, highlight, tagline, skew = false, size = 'medium' } = Astro.props as Props
+
+const sizeClasses = {
+  small: 'text-[clamp(20px,5vw,32px)]',
+  medium: 'text-[clamp(26px,7vw,48px)]',
+  large: 'text-[clamp(32px,9vw,64px)]',
+}
+
 ---
 
+<!-- 
 <div class="mb-6">
   <div
     class="font-mono text-xs tracking-[0.15em] text-brand-700 uppercase mb-2"
@@ -18,4 +28,27 @@ const { title, tagline, skew } = Astro.props
     class={`font-display uppercase text-[clamp(26px,7vw,48px)] ${skew ? ' -skew-x-3' : ''}`}
     set:html={title}
   />
+</div>
+
+ -->
+<div class="mb-6">
+  {
+    tagline && (
+      <div class="font-mono text-xs tracking-[0.15em] text-brand-700 uppercase mb-2">
+        {tagline}
+      </div>
+    )
+  }
+
+  <h2
+    class={`
+      font-display uppercase
+      ${sizeClasses[size]}
+      leading-[0.9]
+      ${skew ? '-skew-x-3' : ''}
+    `}
+  >
+    {title}
+    {highlight && <span class="text-brand-500">{highlight}</span>}
+  </h2>
 </div>
