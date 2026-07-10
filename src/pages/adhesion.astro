@@ -6,6 +6,7 @@ import SectionTitle from '../components/ui/SectionTitle.astro'
 import Paragraph from '../components/ui/Paragraph.astro'
 import LicenceCards from '../components/adhesion/LicenceCards.astro'
 import Equipment from '../components/adhesion/Equipment.astro'
+import Engagement from '../components/adhesion/Engagement.astro'
 import CtaHelloasso from '../components/adhesion/CtaHelloasso.astro'
 ---
 
@@ -32,6 +33,18 @@ import CtaHelloasso from '../components/adhesion/CtaHelloasso.astro'
     <LicenceCards />
   </PageContent>
   <Equipment />
+  <PageContent>
+    <SectionTitle
+      title="IMPLIQUE TOI,"
+      highlight="ÉCONOMISE"
+      tagline="Club benefits"
+      size="medium"
+    />
+    <Paragraph>
+        Aux Flagmingos, ton engagement dans la vie du club est valorisé.
+    </Paragraph>
+    <Engagement />
+  </PageContent>
   <PageContent noBackground={true}>
     <CtaHelloasso />
   </PageContent>
