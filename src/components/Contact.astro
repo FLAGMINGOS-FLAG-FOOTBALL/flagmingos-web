@@ -6,6 +6,9 @@ import Smartphone from '@lucide/astro/icons/smartphone'
 import SectionTitle from './ui/SectionTitle.astro'
 import Instagram from './icons/Instagram.astro'
 
+import ButtonForm from './ui/ButtonForm.astro'
+import ModalForm from './ui/ModalForm.astro'
+
 import Paragraph from './ui/Paragraph.astro'
 import { email, instagram, phone } from '../params.json'
 
@@ -156,7 +159,7 @@ const contact_link = [
           <label
             for="name"
             class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-            >Nom complet *</label
+            >Nom complet</label
           >
           <input
             type="text"
@@ -172,7 +175,7 @@ const contact_link = [
           <label
             for="email"
             class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-            >Adresse email *</label
+            >Adresse email</label
           >
           <input
             type="email"
@@ -188,7 +191,7 @@ const contact_link = [
           <label
             for="reason"
             class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-            >Je me renseigne sur *</label
+            >Je me renseigne sur</label
           >
           <select
             id="reason"
@@ -245,7 +248,7 @@ const contact_link = [
           <label
             for="message"
             class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-            >Message *</label
+            >Message</label
           >
           <textarea
             id="message"
@@ -255,15 +258,45 @@ const contact_link = [
             class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm resize-none transition-colors"
             placeholder="Dites-nous en plus..."></textarea>
         </div>
-        <p class="font-mono text-[11px] text-ink-soft">* Champs obligatoires</p>
+        <!-- <p class="font-mono text-[11px] text-ink-soft">
+          En envoyant ce formulaire, vous acceptez que vos données soient
+          utilisées uniquement pour répondre à votre demande.
+        </p> -->
+        <label class="flex items-start gap-2.5 text-sm cursor-pointer">
+          <input
+            type="checkbox"
+            name="privacy-consent"
+            required
+            class="mt-1 accent-brand-500"
+          />
+
+          <span>
+            J'accepte que mes données soient utilisées uniquement afin de
+            répondre à ma demande.
+            <a
+              href="/mentions-legales#donnees-personnelles"
+              class="underline hover:text-brand-700"
+            >
+              En savoir plus</a
+            >.
+          </span>
+        </label>
 
         <div data-netlify-recaptcha="true"></div>
-        <button
+        <ButtonForm
+          type="submit"
+          class="w-full"
+          id="submit-button"
+          icon="arrow-right"
+        >
+          Envoyer ma demande
+        </ButtonForm>
+        <!-- <button
           type="submit"
           class="w-full inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-6 py-3.5 hover:bg-brand-700 hover:border-brand-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <span id="submit-label">Envoyer le message</span>
-        </button>
+        </button> -->
       </form>
 
       <p id="form-status" class="text-sm text-center hidden" role="status"></p>
@@ -271,7 +304,8 @@ const contact_link = [
     <!-- <button type="button" id="test-modal" class="mt-4 border px-4 py-2">
       Test popup
     </button> -->
-    <div
+
+    <!-- <div
       id="success-modal"
       class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 px-5"
     >
@@ -295,95 +329,140 @@ const contact_link = [
         >
           Fermer
         </button>
-      </div>
-    </div>
+      </div> -->
+    <!-- <ModalForm
+      id="success-modal"
+      football={true}
+      title="PASS COMPLETE"
+      description="Message envoyé !"
+    >
+      Votre message est dans nos mains. <br />On revient vers vous rapidement.
+    </ModalForm> -->
+    <ModalForm id="success-modal" football>
+      Votre message est dans nos mains. <br />On revient vers vous rapidement.
+    </ModalForm>
   </div>
-</section>
 
-<script>
-  const reasonSelect = document.getElementById('reason')
-  const teamField = document.getElementById('team-field')
-  const teamSelect = document.getElementById('team')
+  <script>
+    const reasonSelect = document.getElementById('reason')
+    const teamField = document.getElementById('team-field')
+    const teamSelect = document.getElementById('team')
 
-  function updateTeamField() {
-    const show = reasonSelect.value === 'joining'
+    function updateTeamField() {
+      const show = reasonSelect.value === 'joining'
 
-    teamField.classList.toggle('hidden', !show)
+      teamField.classList.toggle('hidden', !show)
 
-    if (show) {
-      teamSelect.required = true
+      if (show) {
+        teamSelect.required = true
+      } else {
+        teamSelect.required = false
+        teamSelect.value = ''
+      }
+    }
+
+    updateTeamField()
+
+    reasonSelect.addEventListener('change', updateTeamField)
+  </script>
+  <script>
+    const hour = new Date().getHours()
+
+    const day = new Date().getDay()
+
+    const isOpen = day >= 1 && day <= 5 && hour >= 10 && hour < 18.5
+
+    const badge = document.getElementById('phone-status')
+
+    const text = badge.querySelector('.status-text')
+
+    if (isOpen) {
+      badge.classList.add('bg-green-50', 'text-green-700')
+
+      badge.querySelector('.status-dot').classList.add('bg-green-500')
+
+      text.textContent = 'Disponible'
     } else {
-      teamSelect.required = false
-      teamSelect.value = ''
+      badge.classList.add('bg-gray-100', 'text-gray-500')
+
+      badge.querySelector('.status-dot').classList.add('bg-gray-400')
+
+      text.textContent = 'Indisponible'
     }
-  }
+  </script>
 
-  updateTeamField()
+  <script>
+    const form = document.getElementById('contact-form')
+    const modal = document.getElementById('success-modal')
+    const close = document.querySelector('[data-modal-close="success-modal"]')
 
-  reasonSelect.addEventListener('change', updateTeamField)
-</script>
-<script>
-  const hour = new Date().getHours()
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault()
 
-  const day = new Date().getDay()
+      const formData = new FormData(form)
 
-  const isOpen = day >= 1 && day <= 5 && hour >= 10 && hour < 18.5
+      try {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams(formData as any).toString(),
+        })
 
-  const badge = document.getElementById('phone-status')
+        if (!response.ok) {
+          throw new Error('Form submission failed')
+        }
 
-  const text = badge.querySelector('.status-text')
+        form.reset()
 
-  if (isOpen) {
-    badge.classList.add('bg-green-50', 'text-green-700')
+        modal?.classList.remove('hidden', 'opacity-0')
+        modal?.classList.add('flex', 'opacity-100')
+      } catch (error) {
+        console.error(error)
+      }
+    })
 
-    badge.querySelector('.status-dot').classList.add('bg-green-500')
+    close?.addEventListener('click', () => {
+      modal?.classList.add('hidden')
+      modal?.classList.remove('flex')
+    })
+  </script>
+  <script>
+    const modal = document.getElementById('success-modal')
+    const close = document.getElementById('success-modal-close')
+    const testButton = document.getElementById('test-modal')
 
-    text.textContent = 'Disponible'
-  } else {
-    badge.classList.add('bg-gray-100', 'text-gray-500')
-
-    badge.querySelector('.status-dot').classList.add('bg-gray-400')
-
-    text.textContent = 'Indisponible'
-  }
-</script>
-
-<script>
-  const form = document.getElementById('contact-form')
-  const modal = document.getElementById('success-modal')
-  const close = document.getElementById('close-modal')
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault()
-
-    const formData = new FormData(form)
-
-    try {
-      await fetch('/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(formData).toString(),
-      })
-
-      form.reset()
-
-      modal?.classList.remove('hidden')
-      modal?.classList.add('flex')
-    } catch (error) {
-      console.error(error)
+    function openModal() {
+      modal?.classList.remove('hidden', 'opacity-0')
+      modal?.classList.add('flex', 'opacity-100')
     }
-  })
 
-  close?.addEventListener('click', () => {
-    modal?.classList.add('hidden')
-    modal?.classList.remove('flex')
-  })
-  const testButton = document.getElementById('test-modal')
+    function closeModal() {
+      modal?.classList.add('hidden', 'opacity-0')
+      modal?.classList.remove('flex', 'opacity-100')
+    }
 
-  testButton?.addEventListener('click', () => {
-    modal?.classList.remove('hidden')
-    modal?.classList.add('flex')
-  })
-</script>
+    testButton?.addEventListener('click', () => {
+      openModal()
+    })
+
+    close?.addEventListener('click', () => {
+      closeModal()
+    })
+
+    // Fermer avec Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal()
+      }
+    })
+
+    // Fermer en cliquant sur le fond
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal()
+      }
+    })
+  </script>
+</section>

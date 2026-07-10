@@ -1,0 +1,105 @@
+---
+import Football from '../icons/Football.astro'
+import Check from '@lucide/astro/icons/check'
+import X from '@lucide/astro/icons/x'
+
+interface Props {
+  id: string
+  variant?: 'success' | 'error' | 'info'
+  eyebrow?: string
+  title?: string
+  description?: string
+  football?: boolean
+  button?: string
+}
+
+const {
+  id,
+  variant = 'success',
+  eyebrow,
+  title,
+  description,
+  football = false,
+  button = 'Fermer',
+} = Astro.props as Props
+
+const contentId = `${id}-content`
+const titleId = `${id}-title`
+
+const variants = {
+  success: {
+    icon: 'check',
+    color: 'text-brand-500',
+    bg: 'bg-brand-500',
+    defaultEyebrow: 'PASS COMPLETE',
+    defaultTitle: 'Message envoyé !',
+  },
+  error: {
+    icon: 'x',
+    color: 'text-red-500',
+    bg: 'bg-red-500',
+    defaultEyebrow: 'PLAY FAILED',
+    defaultTitle: 'Une erreur est survenue',
+  },
+  info: {
+    icon: 'check',
+    color: 'text-brand-500',
+    bg: 'bg-brand-500',
+    defaultEyebrow: 'HUDDLE UPDATE',
+    defaultTitle: 'Information',
+  },
+}
+
+const current = variants[variant]
+---
+
+<div
+  id={id}
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 px-5 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={titleId}
+  aria-describedby={contentId}
+>
+  <div
+    class="relative w-full max-w-md overflow-hidden border-2 border-line bg-bg p-8 text-center shadow-2xl scale-95 transition-transform duration-300"
+  >
+    {
+      football && variant === 'success' ? (
+        <Football class={`mx-auto mb-6 w-12 h-12 ${current.color}`} />
+      ) : (
+        <div
+          class={`mx-auto mb-6 flex h-16 w-16 items-center justify-center ${current.bg} text-white`}
+        >
+          {variant === 'error' ? (
+            <X class="w-8 h-8" />
+          ) : (
+            <Check class="w-8 h-8" />
+          )}
+        </div>
+      )
+    }
+
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-700 mb-3">
+      {eyebrow || current.defaultEyebrow}
+    </p>
+
+    <h3
+      id={titleId}
+      class="font-display uppercase text-3xl leading-none text-ink"
+    >
+      {title || current.defaultTitle}
+    </h3>
+
+    <p id={contentId} class="mt-4 text-sm leading-relaxed text-ink-soft">
+      <slot />
+    </p>
+
+    <button
+      data-modal-close={id}
+      class="group mt-8 inline-flex items-center justify-center gap-2 border-2 border-brand-500 bg-brand-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-all hover:bg-bg hover:text-brand-500"
+    >
+      {button}
+    </button>
+  </div>
+</div>

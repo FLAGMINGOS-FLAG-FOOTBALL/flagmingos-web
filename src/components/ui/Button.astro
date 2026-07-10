@@ -1,4 +1,4 @@
-19---
+---
 interface ButtonProps {
   href?: string
   variant?: 'primary' | 'secondary' | 'text'
@@ -13,10 +13,10 @@ const {
   class: className,
 } = Astro.props as ButtonProps
 
-const baseClasses = 'inline-flex items-center justify-center font-bold gap-1.5 items-center'
+const baseClasses = 'inline-flex items-center justify-center font-bold gap-1.5'
 const variantClasses = {
   primary:
-    'bg-brand-500 text-white border-2 border-brand-500 border-brand-500 transition-colors hover:border-brand-500 hover:text-brand-500 hover:bg-bg',
+    'bg-brand-500 text-white border-2 border-brand-500 transition-colors hover:border-brand-500 hover:text-brand-500 hover:bg-bg',
   secondary:
     'text-ink border-2 border-ink hover:text-white hover:border-ink transition-colors hover:bg-ink',
   text: 'text-brand-700 hover:text-brand-500 transition-colors',

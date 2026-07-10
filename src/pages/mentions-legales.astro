@@ -1,6 +1,111 @@
 ---
 import Page from '../layouts/Page.astro'
 import PageHeader from '../components/PageHeader.astro'
+import PageContent from '../components/ui/PageContent.astro'
+
+const legal = [
+  {
+    title: 'Éditeur du site',
+    content: `
+      Association Flagmingos Flag Football
+      Association sportive régie par la loi du 1er juillet 1901
+
+      Numéro RNA : W313032734
+
+      Responsable de publication :
+      Nicolas Leveau, président de l'association
+
+      Contact :
+      contact@flagmingos.fr
+`,
+  },
+  {
+    title: 'Hébergement',
+    content: `
+      Netlify, Inc.
+
+      44 Montgomery Street, Suite 300
+      San Francisco, California 94104
+      États-Unis
+
+      Site :
+      https://www.netlify.com
+`,
+  },
+  {
+    title: 'Propriété intellectuelle',
+    content: `
+      L'ensemble des contenus présents sur ce site (textes, images, logos, éléments graphiques, vidéos et contenus multimédias) sont la propriété de l'association Flagmingos ou sont utilisés avec l'autorisation de leurs propriétaires.
+
+      Toute reproduction, représentation, modification ou exploitation, totale ou partielle, des contenus du site sans autorisation préalable est interdite.
+    `,
+  },
+  {
+    title: 'Responsabilité',
+    content: `
+      L'association Flagmingos s'efforce de fournir des informations fiables et régulièrement mises à jour. Toutefois, elle ne peut garantir l'exactitude, la complétude ou l'actualité des informations diffusées sur le site.
+
+      L'association ne pourra être tenue responsable des dommages directs ou indirects résultant de l'utilisation du site.
+    `,
+  },
+  {
+    title: 'Liens externes',
+    content:
+      "Le site peut contenir des liens vers des sites externes. L'association Flagmingos n'exerce aucun contrôle sur ces sites et décline toute responsabilité concernant leur contenu ou leur politique de confidentialité.",
+  },
+  {
+    title: 'Données personnelles',
+    content: `
+    Le site www.flagmingos.fr collecte des données personnelles uniquement lorsque l'utilisateur utilise volontairement les formulaires proposés sur le site.
+
+    Les données collectées et leurs finalités sont les suivantes :
+
+    Formulaire de contact :
+    - Nom ;
+    - Adresse email ;
+    - Objet de la demande ;
+    - Message.
+
+    Ces informations sont utilisées uniquement afin de répondre aux demandes adressées à l'association Flagmingos.
+
+    Formulaire d'inscription à une séance découverte :
+    - Nom et prénom ;
+    - Date de naissance ;
+    - Adresse email ;
+    - Numéro de téléphone.
+
+    Ces informations permettent de gérer les inscriptions aux séances d'initiation, d'organiser l'accueil des participants et de communiquer les informations nécessaires au bon déroulement de l'activité.
+
+    Formulaire de demande de team building :
+    - Nom de l'entreprise ou organisme ;
+    - Adresse email ;
+    - Nombre de participants ;
+    - Message.
+
+    Ces informations sont utilisées uniquement afin de traiter les demandes commerciales liées aux activités de team building proposées par l'association.
+
+    Les données transmises via les formulaires sont traitées par l'intermédiaire du service Netlify Forms, fourni par Netlify, Inc., utilisé pour la réception et la gestion technique des soumissions.
+
+    Les données personnelles collectées ne sont ni vendues, ni louées, ni utilisées à des fins publicitaires.
+
+    Les données sont conservées uniquement pendant la durée nécessaire au traitement de la demande et au suivi des échanges associés.
+
+    Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, chaque utilisateur dispose d'un droit d'accès, de rectification, d'effacement, de limitation du traitement et d'opposition concernant ses données personnelles.
+
+    Pour exercer ces droits : contact@flagmingos.fr
+  `,
+  },
+  {
+    title: 'Cookies',
+    content: `
+    Le site www.flagmingos.fr n'utilise pas de cookies de suivi publicitaire ou de mesure d'audience.
+
+    Aucun outil d'analyse comportementale n'est utilisé sur le site.
+
+    Le service d'hébergement Netlify peut toutefois utiliser des mécanismes techniques nécessaires au fonctionnement, à la sécurité et à la maintenance du service.
+  `,
+  },
+]
 ---
 
 <Page title="Mentions Légales">
@@ -11,5 +116,35 @@ import PageHeader from '../components/PageHeader.astro'
     break={false}
     subtitle="Informations légales concernant l'utilisation du site et des services proposés par Flagmingos."
   />
-  <div class="h-96"></div>
+
+  <PageContent>
+    <div class="space-y-10">
+      <p class="text-ink-soft leading-relaxed">
+        En vertu de l’article 6 de la loi n° 2004-575 du 21 juin 2004 pour la
+        confiance dans l’économie numérique, il est précisé aux utilisateurs du
+        site www.flagmingos.fr l’identité des différents intervenants dans le
+        cadre de sa réalisation et de son suivi.
+      </p>
+
+      {
+        legal.map((item, index) => (
+          <section class="scroll-mt-24 border-l-2 border-brand-500 bg-bg-soft p-6 md:p-8 bg-white transition-colors hover:border-brand-500"  id={item.title.toLowerCase().replaceAll(' ', '-')}>
+            <div class="flex items-start gap-4 mb-5">
+              <span class="font-mono text-xs text-brand-500 mt-1">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+
+              <h3 class="font-display uppercase text-xl md:text-2xl text-ink leading-none">
+                {item.title}
+              </h3>
+            </div>
+
+            <p class="text-ink-soft whitespace-pre-line leading-relaxed text-sm md:text-base pl-8">
+              {item.content.trim()}
+            </p>
+          </section>
+        ))
+      }
+    </div>
+  </PageContent>
 </Page>
