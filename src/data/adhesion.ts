@@ -13,19 +13,6 @@ export const sections = [
     ],
     trainings: [
       {
-        group: 'U15 - U18',
-        sessions: [
-          {
-            day: 'Mardi',
-            time: '18h30 - 20h00',
-          },
-          {
-            day: 'Dimanche',
-            time: '11h00 - 12h00',
-          },
-        ],
-      },
-      {
         group: 'U7 - U13',
         sessions: [
           {
@@ -38,39 +25,23 @@ export const sections = [
           },
         ],
       },
-    ],
-  },
-
-  {
-    tag: 'LOISIR',
-    title: 'Section Loisir',
-    highlight: 'Jouer sans pression',
-    description:
-      "Découvrir le flag football, progresser à son rythme et partager une expérience sportive conviviale.",
-    price: 100,
-    public: 'Dès 17 ans',
-    details: [
-        "Accès à tout les entraînements",
-        "Pas de compétition, juste le plaisir de jouer",
-    ],
-    trainings: [
-      {
-        group: 'Mixte',
+            {
+        group: 'U15 - U18',
         sessions: [
           {
             day: 'Mardi',
-            time: '20h00 - 22h00',
+            time: '18h30 - 20h00',
           },
           {
-            day: 'Jeudi',
-            time: '20h00 - 22h00',
+            day: 'Dimanche',
+            time: '11h00 - 12h00',
           },
         ],
       },
     ],
   },
-
-  {
+{
+    primary: true,
     tag: 'COMPÉTITION',
     title: 'Section Compétition',
     highlight: 'Représenter l’équipe',
@@ -80,7 +51,8 @@ export const sections = [
     femalePrice: 130,
     public: 'Dès 17 ans',
     details: [
-        "Accès à l'ensemble des compétitions régionales et nationales"
+        "Accès à l'ensemble des compétitions régionales et nationales",
+        "Objectif de performance et de progression individuelle",
     ],
     trainings: [
       {
@@ -116,6 +88,34 @@ export const sections = [
       },
     ],
   },
+  {
+    tag: 'LOISIR',
+    title: 'Section Loisir',
+    highlight: 'Jouer sans pression',
+    description:
+      "Découvrir le flag football, progresser à son rythme et partager une expérience sportive conviviale.",
+    price: 100,
+    public: 'Dès 17 ans',
+    details: [
+        "Accès à tout les entraînements",
+        "Pas de compétition, juste le plaisir de jouer",
+    ],
+    trainings: [
+      {
+        group: 'Mixte',
+        sessions: [
+          {
+            day: 'Mardi',
+            time: '20h00 - 22h00',
+          },
+          {
+            day: 'Jeudi',
+            time: '20h00 - 22h00',
+          },
+        ],
+      },
+    ],
+  }
 ]
 
 export const HELLOASSO_URL = 'https://www.helloasso.com/associations/flagmingos-flag-football/adhesions/adhesion-2026-2027'
