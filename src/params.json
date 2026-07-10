@@ -12,6 +12,12 @@
             "footer": true
         },
         {
+            "label": "Le Flag Football",
+            "url": "/flag-football",
+            "navbar": true,
+            "footer": true
+        },
+        {
             "label": "Initiation",
             "url": "/initiation",
             "navbar": true,
@@ -20,8 +26,8 @@
         {
             "label": "Équipes",
             "url": "/#",
-            "navbar": true,
-            "footer": true
+            "navbar": false,
+            "footer": false
         },
         {
             "label": "Calendrier",

@@ -1,0 +1,38 @@
+---
+import Page from '../layouts/Page.astro'
+import PageHeader from '../components/PageHeader.astro'
+---
+
+<Page title="404 - Page introuvable">
+  <section class="overflow-hidden bg-white py-20 md:py-32 text-center">
+    <div class="relative mx-auto max-w-160 px-5 md:px-10">
+      <div class="text-6xl md:text-7xl mb-6" aria-hidden="true">🏈</div>
+
+      <div
+        class="font-display uppercase leading-[0.85] text-[clamp(64px,16vw,160px)] text-brand-500"
+      >
+        404
+      </div>
+
+      <h1 class="font-display uppercase text-2xl md:text-4xl mt-4 mb-4">
+        Le ballon n'a pas trouvé<br />l'end zone.
+      </h1>
+
+      <p
+        class="text-sm md:text-base text-ink-soft leading-relaxed max-w-110 mx-auto mb-9"
+      >
+        Cette page a peut-être été interceptée, ou elle n'a jamais existé.
+        Repartons de la ligne de départ.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-3">
+        <a
+          href="/"
+          class="inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-6 py-3.5 hover:bg-brand-700 hover:border-brand-700 hover:-translate-y-0.5 transition-all"
+        >
+          Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </section>
+</Page>

@@ -1,4 +1,5 @@
 ---
+import Button from './ui/Button.astro'
 import logo from '../assets/logo.png'
 import ChevronRight from '@lucide/astro/icons/chevron-right'
 import Menu from '@lucide/astro/icons/menu'
@@ -39,22 +40,23 @@ const navLinks = navigation.filter((link) => link.navbar)
     >
       {
         navLinks.map((link) => (
-          <a href={link.url} class="uppercase">
+          <a
+            href={link.url}
+            class="group relative uppercase transition-colors hover:text-brand-500"
+          >
             {link.label}
+            <span class="absolute left-0 -bottom-1 h-[2px] w-0 bg-brand-500 transition-all duration-300 group-hover:w-full" />
           </a>
         ))
       }
     </div>
     <div class="flex items-center gap-2">
-      <a
-        href="/initiation"
-        class="hidden lg:flex flex-row items-center gap-1 bg-brand-500 text-white px-4 py-2 text-xs font-bold tracking-wider border-2 border-brand-500 transition hover:border-brand-500 hover:text-brand-500 hover:bg-bg lg:text-sm"
-      >
-        REJOINS-NOUS
-        <span class="inline-block">
+      <div class="hidden lg:block">
+        <Button href="#rejoindre" variant="primary" size="small">
+          REJOINS-NOUS
           <ChevronRight size={16} stroke-width={4} />
-        </span>
-      </a>
+        </Button>
+      </div>
       <button
         id="menu-toggle"
         aria-label="Open menu"
@@ -68,25 +70,30 @@ const navLinks = navigation.filter((link) => link.navbar)
   </nav>
   <div
     id="mobile-menu"
-    class="hidden lg:hidden border-t border-line  bg-[rgba(246,244,240,1)] backdrop-blur-md shadow-xl z-60 fixed top-16 left-0 w-full overflow-y-auto"
+    class="hidden lg:hidden border-t border-line bg-[rgba(246,244,240,1)] backdrop-blur-md shadow-xl z-60 fixed top-16 left-0 w-full overflow-y-auto"
   >
     <div class="flex flex-col px-5 py-4">
       {
-        navLinks.map((link) => (
+        navLinks.map((link, i) => (
           <a
             href={link.url}
-            class="py-2.5 text-sm font-bold text-ink border-b border-line last:border-b-0"
+            class="group flex items-center gap-4 py-4 text-lg uppercase origin-left -skew-x-3 leading-[0.86] text-ink transition-all hover:text-brand-500"
           >
+            <span class="font-mono text-xs text-ink-soft transition-all duration-200 group-hover:text-brand-500">
+              0{i + 1}
+            </span>{' '}
             {link.label}
           </a>
         ))
       }
-      <a
-        href="/initiation"
-        class="sm:hidden mt-3 inline-flex justify-center items-center gap-2 border-2 border-brand-500 bg-brand-500 text-white font-extrabold text-sm px-4 py-2.5"
+      <Button
+        href="#rejoindre"
+        variant="primary"
+        size="medium"
+        class="mt-3 w-full justify-center"
       >
         REJOINS-NOUS
-      </a>
+      </Button>
     </div>
   </div>
 </header>

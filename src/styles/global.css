@@ -35,8 +35,10 @@
 
 @layer base {
   body {
-    background-color: var(--color-bone);
+    background-color: var(--color-bg);
     color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {

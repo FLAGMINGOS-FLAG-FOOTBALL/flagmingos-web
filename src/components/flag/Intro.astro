@@ -1,0 +1,126 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro'
+import football from '../../assets/football-on-field.jpeg'
+
+const offense = [
+  {
+    pos: 'Quarterback',
+    desc: "Le meneur de jeu. Il réceptionne l'engagement et décide de la passe ou de la course.",
+  },
+  {
+    pos: 'Wide Receiver',
+    desc: "Le réceptionneur. Il se démarque pour capter les passes et avancer vers l'en-but.",
+  },
+  {
+    pos: 'Center',
+    desc: 'Il engage chaque action en transmettant le ballon au quarterback.',
+  },
+]
+const defense = [
+  {
+    pos: 'Rusher',
+    desc: 'Le défenseur chargé de presser le quarterback adverse pour perturber la passe.',
+  },
+  {
+    pos: 'Defensive Back',
+    desc: "Il couvre les receveurs et retire leur flag avant qu'ils n'avancent.",
+  },
+  {
+    pos: 'Safety',
+    desc: 'Le dernier rempart de la défense. Il intervient pour stopper les courses et les passes longues.',
+  },
+]
+const groups = [
+  {
+    title: 'Offense',
+    subtitle: 'Créer l’action, trouver l’espace, marquer',
+    positions: offense,
+  },
+  {
+    title: 'Defense',
+    subtitle: 'Lire le jeu, couvrir, retirer les flags',
+    positions: defense,
+  },
+]
+---
+
+<div class="flex flex-col lg:flex-row gap-8 items-stretch mb-10">
+  <div class="flex-1">
+    <p class="text-[15px] md:text-base leading-relaxed text-ink-soft">
+      Une variante du football américain, mais sans plaquage : au lieu de
+      bloquer le porteur du ballon, on lui retire un flag accroché à sa
+      ceinture. Résultat : un sport aussi stratégique et rapide que le foot US,
+      ouvert à toutes et tous, où chacun joue ensemble sur le même terrain, sans
+      contact.
+    </p>
+
+    <p class="mt-4 text-[15px] md:text-base leading-relaxed text-ink-soft">
+      On joue à 5 contre 5 sur un terrain réduit. L'objectif : faire progresser
+      le ballon jusqu'à l'en-but adverse, par la passe ou la course, avant que
+      la défense ne retire le flag du porteur.
+    </p>
+  </div>
+
+  <div class="lg:w-2/5">
+    <img
+      src={football.src}
+      alt="Ballon de football américain sur un terrain de flag football"
+      class="aspect-video w-full object-cover object-[50%_80%]"
+    />
+  </div>
+</div>
+<SectionTitle
+  title="Les positions clés"
+  tagline="Chaque joueur a un rôle précis sur le terrain."
+/>
+<!-- <div
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line"
+>
+  {
+    positions.map((p) => (
+      <div class="bg-white p-6">
+        <div class="font-display uppercase text-lg mb-2">{p.pos}</div>
+        <p class="text-sm text-ink-soft leading-relaxed">{p.desc}</p>
+      </div>
+    ))
+  }
+</div> -->
+<div class="space-y-10">
+  {
+    groups.map((group) => (
+      <section>
+        <div class="mb-5">
+          <div class="flex items-center gap-3">
+            <span class="h-px flex-1 bg-line"></span>
+
+            <h3 class="font-display uppercase text-2xl text-brand-500">
+              {group.title}
+            </h3>
+
+            <span class="h-px flex-1 bg-line"></span>
+          </div>
+
+          <p class="mt-2 text-center text-sm uppercase tracking-wider text-ink-soft">
+            {group.subtitle}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-px bg-line border border-line">
+          {
+            group.positions.map((p) => (
+              <div class="bg-white p-6">
+                <div class="font-display uppercase text-lg mb-2">
+                  {p.pos}
+                </div>
+
+                <p class="text-sm text-ink-soft leading-relaxed">
+                  {p.desc}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+    ))
+  }
+</div>

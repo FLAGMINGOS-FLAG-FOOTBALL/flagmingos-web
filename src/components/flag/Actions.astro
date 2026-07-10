@@ -1,0 +1,58 @@
+---
+const steps = [
+  {
+    n: '01',
+    title: "L'engagement",
+    desc: "Le center transmet le ballon au quarterback pour lancer l'action. Pas de coup de pied, juste une passe au sol.",
+  },
+  {
+    n: '02',
+    title: 'La progression',
+    desc: "L'équipe attaquante dispose de plusieurs tentatives pour franchir les zones du terrain, par la passe ou la course.",
+  },
+  {
+    n: '03',
+    title: 'Le retrait du flag',
+    desc: "Dès que la défense retire le flag du porteur, l'action s'arrête immédiatement — comme un tacle, mais sans contact.",
+  },
+  {
+    n: '04',
+    title: 'Le score',
+    desc: 'Un touchdown rapporte 6 points, avec la possibilité de tenter un point supplémentaire juste après.',
+  },
+]
+---
+
+<section class="bg-brand-800 text-white py-14 md:py-20">
+  <div class="mx-auto max-w-295 px-5 md:px-10">
+    <div class="text-center mb-10 md:mb-12">
+      <div class="font-mono text-xs tracking-[0.15em] text-brand-500 mb-3">
+        HOW IT WORKS
+      </div>
+      <h2
+        class="font-display uppercase text-[clamp(28px,6vw,44px)] leading-none"
+      >
+        Le déroulé d'une action
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        steps.map((s) => (
+          <div class="relative p-6 border-white/15 border-2 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-brand-500 hover:shadow-2xl">
+            <div class="absolute -right-4 -top-4 font-display text-[120px] leading-none opacity-5 pointer-events-none select-none -skew-x-6">
+              {s.n}
+            </div>
+            <div class="font-display uppercase text-2xl mb-2">{s.title}</div>
+            <p class="text-sm text-[#B9B5AE] leading-relaxed">{s.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- <p class="text-center text-xs text-brand-50/80 mt-8 max-w-[520px] mx-auto">
+      Format de match, durée et nombre de tentatives varient selon la
+      compétition — les entraîneurs expliquent tout ça dès la première séance.
+    </p> -->
+  </div>
+</section>

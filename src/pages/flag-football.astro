@@ -1,6 +1,10 @@
 ---
 import Page from '../layouts/Page.astro'
 import PageHeader from '../components/PageHeader.astro'
+import PageContent from '../components/ui/PageContent.astro'
+import Intro from '../components/flag/Intro.astro'
+import Action from '../components/flag/Actions.astro'
+import CtaInitiation from '../components/CtaInitiation.astro'
 ---
 
 <Page title="Flag Football">
@@ -11,5 +15,11 @@ import PageHeader from '../components/PageHeader.astro'
     break={false}
     subtitle="Découvrez le Flag Football, un sport collectif sans contact, stratégique et accessible à tous. Que vous soyez débutant ou joueur confirmé, venez vivre l'expérience Flagmingos."
   />
-  <div class="h-96"></div>
+  <PageContent>
+    <Intro />
+  </PageContent>
+  <Action />
+  <PageContent>
+    <CtaInitiation />
+  </PageContent>
 </Page>

@@ -1,36 +1,10 @@
 ---
+import RightArrow from '@lucide/astro/icons/arrow-right'
 interface Props {
   current?: 1 | 2 | 3
   dark?: boolean
 }
 const { current, dark = false } = Astro.props as Props
-
-// const steps = [
-//   {
-//     n: 1,
-//     tag: 'DISCOVER',
-//     title: 'Le Club',
-//     desc: 'Notre histoire, nos entraînements, notre palmarès.',
-//     href: '/le-club',
-//     cta: 'Découvrir',
-//   },
-//   {
-//     n: 2,
-//     tag: 'TRY',
-//     title: 'Initiation',
-//     desc: 'Une séance découverte gratuite, sans engagement.',
-//     href: '/initiation',
-//     cta: 'Réserver',
-//   },
-//   {
-//     n: 3,
-//     tag: 'JOIN',
-//     title: 'Adhésion',
-//     desc: 'Prends ta licence et rejoins la saison.',
-//     href: '/adhesion',
-//     cta: 'Adhérer',
-//   },
-// ]
 
 const steps = [
   {
@@ -144,7 +118,7 @@ const next = current ? current + 1 : 1
                 href={s.href}
                 class={`inline-flex items-center gap-1.5 text-sm font-bold ${dark ? 'hover:text-brand-500' : 'hover:text-brand-700'} transition-colors w-fit`}
               >
-                {s.cta} {<span aria-hidden="true">&rarr;</span>}
+                {s.cta} {<RightArrow class="w-4 h-4" />}
               </a>
               {/* {isCurrent ? (
                 <span
