@@ -35,32 +35,30 @@ const contact_link = [
 ]
 ---
 
-<section id="contact" class="py-16 md:py-[110px]">
-  <div
-    class="mx-auto max-w-[1180px] px-5 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-9 md:gap-20"
-  >
+<section id="contact" class="py-16 md:py-27.5">
+  <div class="mx-auto grid max-w-295 grid-cols-1 gap-9 px-5 md:grid-cols-2 md:gap-20 md:px-10">
     <div>
       <SectionTitle title="Contactez-nous" tagline="Get in touch" />
       <Paragraph class="max-w-105">
-        Une question sur les entraînements, un partenariat, la presse ou juste
-        envie de nous rejoindre — écris-nous, on répond sous 24h.
+        Une question sur les entraînements, un partenariat, la presse ou juste envie de nous
+        rejoindre — écris-nous, on répond sous 24h.
       </Paragraph>
       <div class="mt-3 space-y-6 p-5 md:p-6">
         {
           contact_link.map((link) => (
             <div class="flex items-start gap-4">
-              <div class="p-3 bg-brand-100 text-brand-700">
-                <link.icon class="w-6 h-6" />
+              <div class="bg-brand-100 text-brand-700 p-3">
+                <link.icon class="h-6 w-6" />
               </div>
               <div>
-                <span class="block font-mono text-[11px] uppercase tracking-wide text-soft-ink">
+                <span class="text-soft-ink block font-mono text-[11px] tracking-wide uppercase">
                   {link.label}
                 </span>
                 <a
                   href={link.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-md font-semibold text-ink hover:text-brand-500 transition-colors"
+                  class="text-md text-ink hover:text-brand-500 font-semibold transition-colors"
                 >
                   {link.value}
                 </a>
@@ -70,73 +68,42 @@ const contact_link = [
         }
       </div>
 
-      <div class="mt-3 border border-line bg-white p-5 md:p-6">
-        <div class="flex items-center justify-between mb-5">
-          <span
-            class="font-mono text-[11px] uppercase tracking-widest text-ink-soft"
-          >
+      <div id="phone-card" class="status-bg border-line mt-3 border p-5 md:p-6">
+        <div class="mb-5 flex items-center justify-between">
+          <span class="text-ink-soft font-mono text-[11px] tracking-widest uppercase">
             Permanence téléphonique
           </span>
 
           <span
             id="phone-status"
-            class="inline-flex items-center gap-2 px-3 py-1 text-[11px] font-bold uppercase tracking-widest"
+            class="inline-flex items-center gap-2 px-3 py-1 text-[11px] font-bold tracking-widest uppercase"
           >
-            <span class="status-dot w-2 h-2 rounded-full"></span>
+            <span class="status-dot h-2 w-2 rounded-full"></span>
             <span class="status-text"></span>
           </span>
         </div>
 
         <a
           href={`tel:${phone}`}
-          class="flex items-center gap-3 text-md font-semibold text-ink hover:text-brand-500 transition-colors"
+          class="text-md text-ink hover:text-brand-500 flex items-center gap-3 font-semibold transition-colors"
         >
-          <span
-            class="flex items-center justify-center p-3 bg-brand-100 text-brand-700"
-          >
-            <Phone class="w-6 h-6" />
+          <span class="bg-brand-100 text-brand-700 flex items-center justify-center p-3">
+            <Phone class="h-6 w-6" />
           </span>
           {phone}
         </a>
 
-        <div class="mt-4 text-sm text-ink-soft">
+        <div class="text-ink-soft mt-4 text-sm">
           <p class="text-ink">Du lundi au vendredi de 10h00 à 18h30</p>
         </div>
 
-        <p
-          class="mt-4 pt-4 border-t border-line text-xs text-ink-soft leading-relaxed"
-        >
-          En dehors de ces horaires, contactez-nous par email ou via nos réseaux
-          sociaux.
+        <p class="border-line text-ink-soft mt-4 border-t pt-4 text-xs leading-relaxed">
+          En dehors de ces horaires, contactez-nous par email ou via nos réseaux sociaux.
         </p>
-        <!-- <div class="mt-6 space-y-5">
-          {
-            contact_link.map((link) => (
-              <div class="flex items-start gap-4">
-                <div class="p-3 bg-brand-100 text-brand-700">
-                  <link.icon size={20} stroke-width={2} />
-                </div>
-                <div>
-                  <span class="block font-mono text-[11px] uppercase tracking-wide text-soft-ink">
-                    {link.label}
-                  </span>
-                  <a
-                    href={link.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-sm font-semibold text-ink hover:text-brand-500 transition-colors"
-                  >
-                    {link.value}
-                  </a>
-                </div>
-              </div>
-            ))
-          }
-        </div> -->
       </div>
     </div>
 
-    <div class="bg-white border border-line p-6 md:p-8 flex flex-col h-full">
+    <div class="border-line flex h-full flex-col border bg-white p-6 md:p-8">
       <form
         id="contact-form"
         name="contact"
@@ -144,7 +111,7 @@ const contact_link = [
         data-netlify="true"
         data-netlify-recaptcha="true"
         netlify-honeypot="bot-field"
-        class="space-y-5 flex-1 flex flex-col"
+        class="flex flex-1 flex-col space-y-5"
       >
         <input type="hidden" name="form-name" value="contact" />
         <p class="hidden">
@@ -156,7 +123,7 @@ const contact_link = [
         <div>
           <label
             for="name"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >Nom complet</label
           >
           <input
@@ -164,7 +131,7 @@ const contact_link = [
             id="name"
             name="name"
             required
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+            class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
             placeholder="Jeanne Dupont"
           />
         </div>
@@ -172,7 +139,7 @@ const contact_link = [
         <div>
           <label
             for="email"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >Adresse email</label
           >
           <input
@@ -180,7 +147,7 @@ const contact_link = [
             id="email"
             name="email"
             required
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+            class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
             placeholder="jeanne.dupont@email.com"
           />
         </div>
@@ -188,28 +155,24 @@ const contact_link = [
         <div>
           <label
             for="reason"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >Je me renseigne sur</label
           >
           <select
             id="reason"
             name="reason"
             required
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm bg-white transition-colors"
+            class="border-line focus:border-brand-500 w-full border-2 bg-white px-3.5 py-2.5 text-sm transition-colors outline-none"
           >
             <option value="" selected disabled>Choisissez un motif</option>
-            {
-              contact_options.map((option) => (
-                <option value={option.value}>{option.label}</option>
-              ))
-            }
+            {contact_options.map((option) => <option value={option.value}>{option.label}</option>)}
           </select>
         </div>
 
         <div id="team-field" class="hidden">
           <label
             for="team"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
           >
             Quelle équipe ?
           </label>
@@ -217,35 +180,31 @@ const contact_link = [
           <select
             id="team"
             name="team"
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm bg-white transition-colors"
+            class="border-line focus:border-brand-500 w-full border-2 bg-white px-3.5 py-2.5 text-sm transition-colors outline-none"
           >
             <option value="" selected disabled>Choisissez une équipe</option>
 
-            {
-              team_section.map((team) => (
-                <option value={team.value}>{team.label}</option>
-              ))
-            }
+            {team_section.map((team) => <option value={team.value}>{team.label}</option>)}
           </select>
         </div>
 
         <label
           for="object"
-          class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+          class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
           >Objet du message</label
         >
         <input
           type="text"
           id="object"
           name="object"
-          class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+          class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
           placeholder="Objet du message"
         />
 
         <div>
           <label
             for="message"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >Message</label
           >
           <textarea
@@ -253,40 +212,26 @@ const contact_link = [
             name="message"
             required
             rows="4"
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm resize-none transition-colors"
+            class="border-line focus:border-brand-500 w-full resize-none border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
             placeholder="Dites-nous en plus..."></textarea>
         </div>
         <!-- <p class="font-mono text-[11px] text-ink-soft">
           En envoyant ce formulaire, vous acceptez que vos données soient
           utilisées uniquement pour répondre à votre demande.
         </p> -->
-        <label class="flex items-start gap-2.5 text-sm cursor-pointer">
-          <input
-            type="checkbox"
-            name="privacy-consent"
-            required
-            class="mt-1 accent-brand-500"
-          />
+        <label class="flex cursor-pointer items-start gap-2.5 text-sm">
+          <input type="checkbox" name="privacy-consent" required class="accent-brand-500 mt-1" />
 
           <span>
-            J'accepte que mes données soient utilisées uniquement afin de
-            répondre à ma demande.
-            <a
-              href="/mentions-legales#donnees-personnelles"
-              class="underline hover:text-brand-700"
-            >
+            J'accepte que mes données soient utilisées uniquement afin de répondre à ma demande.
+            <a href="/mentions-legales#donnees-personnelles" class="hover:text-brand-700 underline">
               En savoir plus</a
             >.
           </span>
         </label>
 
         <div data-netlify-recaptcha="true"></div>
-        <ButtonForm
-          type="submit"
-          class="w-full"
-          id="submit-button"
-          icon="arrow-right"
-        >
+        <ButtonForm type="submit" class="w-full" id="submit-button" icon="arrow-right">
           Envoyer ma demande
         </ButtonForm>
         <!-- <button
@@ -297,7 +242,7 @@ const contact_link = [
         </button> -->
       </form>
 
-      <p id="form-status" class="text-sm text-center hidden" role="status"></p>
+      <p id="form-status" class="hidden text-center text-sm" role="status"></p>
     </div>
     <!-- <button type="button" id="test-modal" class="mt-4 border px-4 py-2">
       Test popup
@@ -363,6 +308,7 @@ const contact_link = [
 
     reasonSelect.addEventListener('change', updateTeamField)
   </script>
+
   <script>
     const hour = new Date().getHours()
 
@@ -370,22 +316,20 @@ const contact_link = [
 
     const isOpen = day >= 1 && day <= 5 && hour >= 10 && hour < 18.5
 
+    const card = document.getElementById('phone-card')
     const badge = document.getElementById('phone-status')
-
-    const text = badge.querySelector('.status-text')
+    const text = badge?.querySelector('.status-text')
 
     if (isOpen) {
-      badge.classList.add('bg-green-50', 'text-green-700')
-
-      badge.querySelector('.status-dot').classList.add('bg-green-500')
-
-      text.textContent = 'Disponible'
+      badge?.classList.add('bg-green-50', 'text-green-700')
+      badge?.querySelector('.status-dot')?.classList.add('bg-green-500')
+      card?.classList.add('bg-white')
+      if (text) text.textContent = 'Disponible'
     } else {
-      badge.classList.add('bg-gray-100', 'text-gray-500')
-
-      badge.querySelector('.status-dot').classList.add('bg-gray-400')
-
-      text.textContent = 'Indisponible'
+      badge?.classList.add('bg-gray-100', 'text-gray-500')
+      badge?.querySelector('.status-dot')?.classList.add('bg-gray-400')
+      card?.classList.add('bg-bg')
+      if (text) text.textContent = 'Indisponible'
     }
   </script>
 
