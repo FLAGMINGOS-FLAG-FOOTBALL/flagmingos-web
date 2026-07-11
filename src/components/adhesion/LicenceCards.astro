@@ -4,363 +4,203 @@ import Button from '../ui/Button.astro'
 import { sections } from '../../data/adhesion'
 import Plus from '@lucide/astro/icons/plus'
 
-let view = 1.5
+let view = 2
 ---
 
-<div class="grid items-stretch gap-8 mt-12 lg:grid-cols-[1fr_1.2fr_1fr]">
-
+<div class="mt-12 grid items-stretch gap-8 lg:grid-cols-[1fr_1.2fr_1fr]">
   {
-
     sections.map((section) => (
-
       <article
-
-        class={`
-
-          relative flex h-full flex-col border-2
-
-          ${
-
-            section.primary
-
-              ? 'border-brand-500 bg-brand-50 shadow-xl lg:-translate-y-4 p-8'
-
-              : 'border-line bg-white p-6'
-
-          }
-
-        `}
-
+        class={`relative flex h-full flex-col border-2 ${
+          section.primary
+            ? 'border-brand-500 bg-brand-50 p-8 shadow-xl lg:-translate-y-4'
+            : 'border-line bg-white p-6'
+        } `}
       >
+        {section.primary && (
+          <div class="bg-brand-500 absolute top-6 right-6 px-3 py-1 text-xs font-bold text-white uppercase">
+            Objectif performance
+          </div>
+        )}
+        {/* Header */}
 
-     {
+        <Tagline text={section.tag} />
 
-  section.primary && (
+        <h3 class="font-display text-ink mt-4 text-3xl leading-none uppercase">{section.title}</h3>
 
-    <div class="absolute right-6 top-6 bg-brand-500 px-3 py-1 text-xs font-bold uppercase text-white">
+        {/* Prix */}
 
-      Objectif performance
+        {view === 1.5 && (
+          <>
+            {section.femalePrice && (
+              <div class="border-brand-200 bg-brand-50 mt-6 flex items-center justify-between border p-4">
+                <div>
+                  <p class="text-brand-700 text-xs uppercase">Tarif développement</p>
+                  <p class="mt-1 text-sm font-semibold">Féminines & étudiants*</p>
+                </div>
+                <span class="font-display text-brand-500 text-6xl">{section.femalePrice}€</span>
+              </div>
+            )}
+            <div class="mt-6 flex items-end gap-3">
+              <span class="font-display text-ink text-6xl leading-none">{section.price}€</span>
 
-    </div>
+              <span class="text-ink-soft pb-2 text-sm tracking-wide uppercase">/ saison</span>
+            </div>
+          </>
+        )}
 
-  )
+        {view == 2 && (
+          <div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-stretch">
+            <div class="flex-1">
+              <p class="text-ink-soft font-mono text-xs tracking-[0.18em] uppercase">Adhésion</p>
 
-}
-  <!-- Header -->
-
-  <Tagline text={section.tag} />
-
-
-  <h3 class="mt-4 font-display text-3xl uppercase leading-none text-ink">
-    {section.title}
-  </h3>
-
-  <!-- Prix -->
-  {view === 1 && (
-  <>
-  <div class="mt-6 flex items-end gap-3">
-
-    <span class="font-display text-6xl leading-none text-ink">
-      {section.price}€
-    </span>
-
-    <span class="pb-2 text-sm uppercase tracking-wide text-ink-soft">
-      / saison
-    </span>
-
-  </div>
-
-  <!-- Tarif féminin Propositon 1 -->
-    {section.femalePrice && (
-    <div class="mt-6 flex items-center justify-between border border-brand-200 bg-brand-50 p-4">
-      <div>
-        <p class="text-xs uppercase text-brand-700">
-          Tarif développement
-        </p>
-        <p class="mt-1 text-sm font-semibold">
-          Féminines & étudiants*
-        </p>
-      </div>
-      <span class="font-display text-6xl text-brand-500">
-        {section.femalePrice}€
-      </span>
-    </div>
-    )}
-
-  </>
-  )}
-
-  {view === 1.5 && (
-  <>
-  
-  <!-- Tarif féminin Propositon 1 -->
-    {section.femalePrice && (
-    <div class="mt-6 flex items-center justify-between border border-brand-200 bg-brand-50 p-4">
-      <div>
-        <p class="text-xs uppercase text-brand-700">
-          Tarif développement
-        </p>
-        <p class="mt-1 text-sm font-semibold">
-          Féminines & étudiants*
-        </p>
-      </div>
-      <span class="font-display text-6xl text-brand-500">
-        {section.femalePrice}€
-      </span>
-    </div>
-    )}
-<div class="mt-6 flex items-end gap-3">
-
-    <span class="font-display text-6xl leading-none text-ink">
-      {section.price}€
-    </span>
-
-    <span class="pb-2 text-sm uppercase tracking-wide text-ink-soft">
-      / saison
-    </span>
-
-  </div>
-
-  </>
-  )}
-  
-    {view == 2 && (
-      <div class="mt-6 flex items-center gap-6">
-        <div>
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
-      Licence
-    </p>
-
-    <div class="mt-3 flex items-end gap-2">
-      <span class="font-display text-6xl leading-none text-ink">
-        {section.price}€
-      </span>
-    </div>
-
-    <p class="mt-2 text-xs uppercase tracking-wide text-ink-soft">
-      Tarif général
-    </p>
-  </div>
-
-{section.femalePrice && (
-  <div>
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-brand-700">
-      Tarif adapté
-    </p>
-
-    <div class="mt-3 flex items-end gap-2">
-      <span class="font-display text-6xl leading-none text-brand-500">
-        {section.femalePrice}€
-      </span>
-    </div>
-
-    <p class="mt-2 text-xs uppercase tracking-wide text-brand-700">
-      Féminines & étudiants*
-    </p>
-  </div>)}
-      </div>
-    )}
-  
-
-</div>
-
-  {/* {section.femalePrice && (
-    <div
-      class="mt-3 inline-flex w-fit bg-brand-100 px-3 py-1 text-sm font-semibold text-brand-700"
-    >
-      {section.femalePrice}€  Féminines & Étudiants*
-    </div>
-  )} */}
-
-  <!-- Description -->
-
-  <div class="mt-8">
-
-    <p class="text-sm font-semibold text-brand-700">
-      {section.highlight}
-    </p>
-
-    <p class="mt-4 leading-relaxed text-ink-soft text-sm">
-      {section.description}
-    </p>
-
-  </div>
-
-  <!-- Infos -->
-
-<div class="mt-7 space-y-7 flex-1">
-    <!-- Public -->
-
-    <section class="border-t border-line pt-5">
-
-  <div class="flex items-center justify-between">
-
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
-
-      Public
-
-    </p>
-
-    <p class="text-sm font-semibold text-ink">
-
-      {section.public}
-
-    </p>
-
-  </div>
-
-</section>
-
-    <!-- Entraînements -->
-
-    {section.trainings && (
-
-      <section class="border-t border-line pt-6">
-
-        <div class="flex items-center gap-2 mb-6">
-
-          <p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
-            Entraînements
-          </p>
-
-        </div>
-
-        <div class="space-y-6">
-
-          {section.trainings.map((training) => (
-
-            <div>
-
-              <p class="mb-3 font-semibold text-ink text-sm">
-                {training.group}
-              </p>
-
-              <div class="space-y-2">
-
-                {training.sessions?.map((session) => (
-
-                  <div
-                    class="flex items-center justify-between border border-line bg-neutral-50 px-4 py-3"
-                  >
-
-                    <span class="font-medium text-ink text-sm">
-                      {session.day}
-                    </span>
-
-                    <span class="font-mono text-sm text-ink-soft ">
-                      {session.time}
-                    </span>
-
-                  </div>
-
-                ))}
-
+              <div class="mt-3 flex items-end gap-2">
+                <span class="font-display text-ink text-6xl leading-none">{section.price}</span>
+                <span class="font-display text-ink pb-1 text-4xl leading-none">€</span>
               </div>
 
+              <p class="text-ink-soft mt-2 text-xs tracking-wide uppercase">Tarif général</p>
             </div>
 
-          ))}
+            {section.femalePrice && (
+              <>
+                <div class="bg-ink/10 hidden w-px sm:block" />
 
+                <div class="flex-1">
+                  <p class="text-brand-500 font-mono text-xs tracking-[0.18em] uppercase">
+                    Tarif réduit
+                  </p>
+
+                  <div class="mt-3 flex items-end gap-2">
+                    <span class="font-display text-brand-500 text-6xl leading-none">
+                      {section.femalePrice}
+                    </span>
+                    <span class="font-display text-brand-500 pb-1 text-4xl leading-none">€</span>
+                  </div>
+
+                  <p class="text-brand-700 mt-2 text-xs tracking-wide uppercase">
+                    Féminines & étudiants*
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Description */}
+
+        <div class="mt-8">
+          <p class="text-brand-700 text-sm font-semibold">{section.highlight}</p>
+          <p class="text-ink-soft mt-4 text-sm leading-relaxed">{section.description}</p>
         </div>
 
-      </section>
+        {/* Infos */}
 
-    )}
+        <div class="mt-7 flex-1 space-y-7">
+          {/* Public */}
+          <section class="border-line border-t pt-5">
+            <div class="flex items-center justify-between">
+              <p class="text-ink-soft font-mono text-xs tracking-[0.18em] uppercase">Public</p>
+              <p class="text-ink text-sm font-semibold">{section.public}</p>
+            </div>
+          </section>
 
-    <!-- Inclus -->
+          {/* Entraînements */}
+          {section.trainings && (
+            <section class="border-line border-t pt-6">
+              <div class="mb-6 flex items-center gap-2">
+                <p class="text-ink-soft font-mono text-xs tracking-[0.18em] uppercase">
+                  Entraînements
+                </p>
+              </div>
 
-    {section.details && (
+              <div class="space-y-6">
+                {section.trainings.map((training) => (
+                  <div>
+                    <p class="text-ink mb-3 text-sm font-semibold">{training.group}</p>
+                    <div class="space-y-2">
+                      {training.sessions?.map((session) => (
+                        <div class="border-line flex items-center justify-between border bg-neutral-50 px-4 py-3">
+                          <span class="text-ink text-sm font-medium">{session.day}</span>
+                          <span class="text-ink-soft font-mono text-sm">{session.time}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-      <section class="border-t border-line pt-6">
+          {/* Inclus */}
 
-        <div class="flex items-center gap-2 mb-5">
+          {section.details && (
+            <section class="border-line border-t pt-6">
+              <div class="mb-5 flex items-center gap-2">
+                <p class="text-ink-soft font-mono text-xs tracking-[0.18em] uppercase">Inclus</p>
+              </div>
+              {section.details && (
+                <ul class="space-y-2">
+                  {section.details.map((detail) => (
+                    <li class="text-ink-soft text-sm">
+                      <span class="text-brand-500 font-bold">+</span> {detail}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          )}
+        </div>
 
-
-          <p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
-            Inclus
+        {section.femalePrice && (
+          <p class="border-line text-ink-soft mt-8 border-t pt-4 text-[11px] leading-relaxed">
+            * Le tarif étudiant est accordé sur présentation d'un justificatif valide.
           </p>
-
-
-
-        </div>
-          {
-          section.details && (
-            <ul class="space-y-2">
-              {
-                section.details.map((detail) => (
-                  <li class="text-sm text-ink-soft">
-                    <span class="text-brand-500 font-bold">+</span> {detail}
-                  </li>
-                ))
-              }
-            </ul>
-          )
-        }
-
-
-      </section>
-
-    )}
-
-
-  </div>
-
-
-
-{section.femalePrice && (
-
-  <p class="mt-8 border-t border-line pt-4 text-[11px] leading-relaxed text-ink-soft">
-    * Le tarif étudiant est accordé sur présentation d'un justificatif valide.
-  </p>
-)}
-</article>
+        )}
+      </article>
     ))
   }
 </div>
 
 <div class="mt-12 grid gap-6 md:grid-cols-2">
+  <div class="border-line border-2 bg-white p-6">
+    <div class="text-brand-700 mb-4 font-mono text-xs tracking-[0.15em] uppercase">À SAVOIR</div>
 
-    <div class="border-2 border-line bg-white p-6">
-        <div
-        class="font-mono text-xs uppercase tracking-[0.15em] text-brand-700 mb-4"
-        >
-          À SAVOIR
-        </div>
+    <div class="text-ink-soft space-y-4 text-sm leading-relaxed">
+      <p>
+        <strong class="text-ink">U7 à U18 :</strong>
+        <br />
+        Les inscriptions sont validées par les entraîneurs afin de garantir un accueil adapté.
+      </p>
 
-        <div class="space-y-4 text-sm text-ink-soft leading-relaxed">
-          <p>
-            <strong class="text-ink">U7 à U18 :</strong>
-
-            <br />
-
-            Les inscriptions sont validées par les entraîneurs afin de garantir
-            un accueil adapté.
-          </p>
-          
-          <p>
-              <strong class="text-ink">Surclassement :</strong>
-
-              <br />
-
-              Les joueurs nés en {new Date().getFullYear() - 17} souhaitant évoluer en catégorie séniors
-            doivent obtenir une validation préalable.
-          </p>
-        </div>
+      <p>
+        <strong class="text-ink">Surclassement :</strong>
+        <br />
+        Les joueurs nés en {new Date().getFullYear() - 17} souhaitant évoluer en catégorie séniors doivent
+        obtenir une validation préalable.
+      </p>
     </div>
-    <div class="border-2 border-line bg-white p-6">
-        <div
-        class="font-mono text-xs uppercase tracking-[0.15em] text-brand-700 mb-4"
-        >
-        AIDE FINANCIÈRE
-        </div>
-
-        <div class="space-y-4 text-sm text-ink-soft leading-relaxed">
-            <div class="text-ink font-display uppercase leading-none text-2xl">LE PASS'SPORT</div>
-          <p>Une aide financière de l'État pour la pratique sportive, déductible directement de votre cotisation.</p>
-          <Button variant="secondary" size="small" href="https://www.sports.gouv.fr/pass-sport-une-aide-financiere-la-pratique-sportive-295" target="_blank" rel="noopener noreferrer">
-            En savoir plus
-          </Button>
-          
-        </div>
+  </div>
+  <div class="border-line border-2 bg-white p-6">
+    <div class="text-brand-700 mb-4 font-mono text-xs tracking-[0.15em] uppercase">
+      AIDE FINANCIÈRE
     </div>
+
+    <div class="text-ink-soft space-y-4 text-sm leading-relaxed">
+      <div class="text-ink font-display text-2xl leading-none uppercase">LE PASS'SPORT</div>
+      <p>
+        Une aide financière de l'État pour la pratique sportive, déductible directement de votre
+        cotisation.
+      </p>
+      <Button
+        variant="secondary"
+        size="small"
+        href="https://www.sports.gouv.fr/pass-sport-une-aide-financiere-la-pratique-sportive-295"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        En savoir plus
+      </Button>
+    </div>
+  </div>
 </div>
