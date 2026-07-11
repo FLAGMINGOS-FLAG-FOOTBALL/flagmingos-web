@@ -3,6 +3,8 @@ import Tagline from '../ui/Tagline.astro'
 import Button from '../ui/Button.astro'
 import { sections } from '../../data/adhesion'
 import Plus from '@lucide/astro/icons/plus'
+
+let view = 1.5
 ---
 
 <div class="grid items-stretch gap-8 mt-12 lg:grid-cols-[1fr_1.2fr_1fr]">
@@ -54,7 +56,8 @@ import Plus from '@lucide/astro/icons/plus'
   </h3>
 
   <!-- Prix -->
-
+  {view === 1 && (
+  <>
   <div class="mt-6 flex items-end gap-3">
 
     <span class="font-display text-6xl leading-none text-ink">
@@ -67,13 +70,107 @@ import Plus from '@lucide/astro/icons/plus'
 
   </div>
 
-  {section.femalePrice && (
+  <!-- Tarif féminin Propositon 1 -->
+    {section.femalePrice && (
+    <div class="mt-6 flex items-center justify-between border border-brand-200 bg-brand-50 p-4">
+      <div>
+        <p class="text-xs uppercase text-brand-700">
+          Tarif développement
+        </p>
+        <p class="mt-1 text-sm font-semibold">
+          Féminines & étudiants*
+        </p>
+      </div>
+      <span class="font-display text-6xl text-brand-500">
+        {section.femalePrice}€
+      </span>
+    </div>
+    )}
+
+  </>
+  )}
+
+  {view === 1.5 && (
+  <>
+  
+  <!-- Tarif féminin Propositon 1 -->
+    {section.femalePrice && (
+    <div class="mt-6 flex items-center justify-between border border-brand-200 bg-brand-50 p-4">
+      <div>
+        <p class="text-xs uppercase text-brand-700">
+          Tarif développement
+        </p>
+        <p class="mt-1 text-sm font-semibold">
+          Féminines & étudiants*
+        </p>
+      </div>
+      <span class="font-display text-6xl text-brand-500">
+        {section.femalePrice}€
+      </span>
+    </div>
+    )}
+<div class="mt-6 flex items-end gap-3">
+
+    <span class="font-display text-6xl leading-none text-ink">
+      {section.price}€
+    </span>
+
+    <span class="pb-2 text-sm uppercase tracking-wide text-ink-soft">
+      / saison
+    </span>
+
+  </div>
+
+  </>
+  )}
+  
+    {view == 2 && (
+      <div class="mt-6 flex items-center gap-6">
+        <div>
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
+      Licence
+    </p>
+
+    <div class="mt-3 flex items-end gap-2">
+      <span class="font-display text-6xl leading-none text-ink">
+        {section.price}€
+      </span>
+    </div>
+
+    <p class="mt-2 text-xs uppercase tracking-wide text-ink-soft">
+      Tarif général
+    </p>
+  </div>
+
+{section.femalePrice && (
+  <div>
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-brand-700">
+      Tarif adapté
+    </p>
+
+    <div class="mt-3 flex items-end gap-2">
+      <span class="font-display text-6xl leading-none text-brand-500">
+        {section.femalePrice}€
+      </span>
+    </div>
+
+    <p class="mt-2 text-xs uppercase tracking-wide text-brand-700">
+      Féminines & étudiants*
+    </p>
+  </div>)}
+      </div>
+    )}
+  
+
+</div>
+
+  {/* {section.femalePrice && (
     <div
       class="mt-3 inline-flex w-fit bg-brand-100 px-3 py-1 text-sm font-semibold text-brand-700"
     >
       {section.femalePrice}€  Féminines & Étudiants*
     </div>
-  )}
+  )} */}
 
   <!-- Description -->
 

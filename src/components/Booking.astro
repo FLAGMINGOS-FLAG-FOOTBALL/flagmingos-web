@@ -1,17 +1,28 @@
 ---
+import CalendarCheck from '@lucide/astro/icons/calendar-check'
+import Calendar from '@lucide/astro/icons/calendar'
 import ButtonForm from './ui/ButtonForm.astro'
+
 // Séances à venir — à tenir à jour manuellement ou brancher sur une source de données.
-const sessions = [
+const sessionsArr = [
   'Mardi 30 juin 2026 — 19h-22h — Parc de Lagarde (Adultes, mixte)',
   'Jeudi 2 juillet 2026 — 20h-22h — Parc de Lagarde (Adultes, mixte)',
   'Mardi 7 juillet 2026 — 19h-22h — Parc de Lagarde (Adultes, mixte)',
   'Jeudi 9 juillet 2026 — 20h-22h — Parc de Lagarde (Adultes, mixte)',
 ]
+
+interface props {
+  sessions: Event[]
+}
+
+const { sessions = sessionsArr } = Astro.props as props
+
+import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/calendar'
 ---
 
 <section>
   <div class="mx-auto max-w-180 px-5 md:px-10">
-    <div class="bg-white border border-line p-6 md:p-9">
+    <div class="border-line border bg-white p-6 md:p-9">
       <form
         id="booking-form"
         name="initiation"
@@ -27,51 +38,65 @@ const sessions = [
             <input name="bot-field" />
           </label>
         </p>
-        <div>
-          <label
-            for="session"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-          >
-            Séance choisie
-          </label>
-          <select
-            id="session"
-            name="session"
-            required
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm bg-white transition-colors"
-          >
-            <option value="" disabled selected>Choisir une date</option>
-            {sessions.map((s) => <option value={s}>{s}</option>)}
-          </select>
-        </div>
+        <label
+          for="session"
+          class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
+        >
+          Séance choisie
+        </label>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {
+            sessions.slice(0, 4).map((s) => (
+              <label class="group border-line has-checked:border-brand-500 has-checked:bg-brand-50 flex items-center justify-between border-2 bg-white p-5 transition">
+                <input
+                  type="radio"
+                  name="session"
+                  class="peer sr-only"
+                  value={formatDate(s.startDate)}
+                />
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <p class="text-ink font-semibold">{formatDateDisplay(s.startDate)}</p>
+
+                  <p class="text-ink-soft mt-2 font-mono text-sm">
+                    {formatTime(s.startDate)} — {formatTime(s.endDate)}
+                  </p>
+                </div>
+                <Calendar class="text-line 00 h-6 w-6 transition group-has-checked:hidden" />
+                <CalendarCheck class="text-line group-has-checked:text-brand-500 hidden h-6 w-6 transition group-has-checked:block" />
+              </label>
+            ))
+          }
+        </div>
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label
               for="lastname"
-              class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-              >Nom</label
+              class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >
+              Nom
+            </label>
             <input
               type="text"
               id="lastname"
               name="lastname"
               required
-              class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+              class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
             />
           </div>
           <div>
             <label
               for="firstname"
-              class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-              >Prénom</label
+              class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >
+              Prénom
+            </label>
             <input
               type="text"
               id="firstname"
               name="firstname"
               required
-              class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+              class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
             />
           </div>
         </div>
@@ -79,140 +104,128 @@ const sessions = [
         <div>
           <label
             for="birthdate"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-            >Date de naissance</label
+            class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
           >
+            Date de naissance
+          </label>
           <input
             type="date"
             id="birthdate"
             name="birthdate"
             required
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+            class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
           />
         </div>
 
         <div id="parent-field" class="hidden">
           <label
             for="parentname"
-            class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
+            class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
           >
-            Nom / Prénom du parent <span
-              class="normal-case font-sans text-ink-soft"
-              >(obligatoire pour les 9-17 ans)</span
-            >
+            Nom / Prénom du parent{' '}
+            <span class="text-ink-soft font-sans normal-case">
+              (obligatoire pour les 9-17 ans)
+            </span>
           </label>
           <input
             type="text"
             id="parentname"
             name="parentname"
             required
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+            class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
           />
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label
               for="phone"
-              class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-              >Téléphone</label
+              class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >
+              Téléphone
+            </label>
             <input
               type="tel"
               id="phone"
               name="phone"
               required
-              class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+              class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
             />
           </div>
           <div>
             <label
               for="email"
-              class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5"
-              >E-mail</label
+              class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
             >
+              E-mail
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               required
-              class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
+              class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
             />
           </div>
         </div>
 
-        <!-- <div>
+        {
+          /*<div>
           <label for="address" class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5">Adresse</label>
           <input
             type="text" id="address" name="address"
             class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
           />
-        </div> -->
+        </div>*/
+        }
 
-        <fieldset class="border-2 border-line p-4">
-          <legend
-            class="font-mono text-[11px] uppercase tracking-wide text-ink-soft px-1"
-            >Communication du club</legend
-          >
-          <label class="flex items-start gap-2.5 text-sm cursor-pointer">
+        <fieldset class="border-line border-2 p-4">
+          <legend class="text-ink-soft px-1 font-mono text-[11px] tracking-wide uppercase">
+            Communication du club
+          </legend>
+          <label class="flex cursor-pointer items-start gap-2.5 text-sm">
             <input
               type="radio"
               name="communication"
               value="accepte"
-              class="mt-1 accent-brand-500"
+              class="accent-brand-500 mt-1"
               checked
             />
-            J'accepte de recevoir les communications du club (actualités, initiations,
-            promotions...) par e-mail et/ou SMS.
+            J'accepte de recevoir les communications du club (actualités, initiations, promotions...)
+            par e-mail et/ou SMS.
           </label>
-          <label class="flex items-start gap-2.5 text-sm mt-2.5 cursor-pointer">
-            <input
-              type="radio"
-              name="communication"
-              value="refuse"
-              class="mt-1 accent-brand-500"
-            />
+          <label class="mt-2.5 flex cursor-pointer items-start gap-2.5 text-sm">
+            <input type="radio" name="communication" value="refuse" class="accent-brand-500 mt-1" />
             Je n'accepte pas de recevoir les communications du club.
           </label>
         </fieldset>
 
-        <label class="flex items-start gap-2.5 text-sm cursor-pointer">
-          <input
-            type="checkbox"
-            name="privacy-consent"
-            required
-            class="mt-1 accent-brand-500"
-          />
+        <label class="flex cursor-pointer items-start gap-2.5 text-sm">
+          <input type="checkbox" name="privacy-consent" required class="accent-brand-500 mt-1" />
 
           <span>
-            J'accepte que mes données soient utilisées uniquement pour gérer mon
-            inscription à la séance d'initiation.
-
-            <a
-              href="/mentions-legales#donnees-personnelles"
-              class="underline hover:text-brand-700"
-            >
-              En savoir plus</a>.
+            J'accepte que mes données soient utilisées uniquement pour gérer mon inscription à la
+            séance d'initiation.
+            <a href="/mentions-legales#donnees-personnelles" class="hover:text-brand-700 underline">
+              En savoir plus
+            </a>
+            .
           </span>
         </label>
 
-        <!-- <p class="font-mono text-[11px] text-ink-soft">
+        {
+          /* <!-- <p class="font-mono text-[11px] text-ink-soft">
           Les informations recueillies sont nécessaires à l’organisation de
           votre séance d'initiation et ne seront utilisées que dans ce cadre.
-        </p> -->
+        </p> --> */
+        }
         <div data-netlify-recaptcha="true"></div>
 
-        <ButtonForm
-          type="submit"
-          class="w-full"
-          id="booking-submit-button"
-          icon="arrow-right"
-        >
+        <ButtonForm type="submit" class="w-full" id="booking-submit-button" icon="arrow-right">
           Je découvre le flag
         </ButtonForm>
 
-        <p id="booking-status" class="text-sm text-center hidden" role="status">
-        </p>
+        <p id="booking-status" class="hidden text-center text-sm" role="status"></p>
       </form>
     </div>
   </div>
@@ -222,16 +235,10 @@ const sessions = [
   const form = document.getElementById('booking-form') as HTMLFormElement | null
   const status = document.getElementById('booking-status')
   const submitLabel = document.getElementById('booking-submit-label')
-  const button = form?.querySelector(
-    'button[type="submit"]',
-  ) as HTMLButtonElement | null
-  const birthdate = document.getElementById(
-    'birthdate',
-  ) as HTMLInputElement | null
+  const button = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null
+  const birthdate = document.getElementById('birthdate') as HTMLInputElement | null
   const parentField = document.getElementById('parent-field')
-  const parentInput = document.getElementById(
-    'parentname',
-  ) as HTMLInputElement | null
+  const parentInput = document.getElementById('parentname') as HTMLInputElement | null
 
   function toggleParentField() {
     if (!birthdate?.value || !parentField) return
@@ -267,15 +274,13 @@ const sessions = [
       if (response.ok) {
         form.reset()
         parentField?.classList.add('hidden')
-        status.textContent =
-          'Inscription envoyée ! On revient vers vous rapidement.'
+        status.textContent = 'Inscription envoyée ! On revient vers vous rapidement.'
         status.className = 'text-sm text-center text-win'
       } else {
         throw new Error('Request failed')
       }
     } catch {
-      status.textContent =
-        'Un souci est survenu. Contactez-nous directement en attendant.'
+      status.textContent = 'Un souci est survenu. Contactez-nous directement en attendant.'
       status.className = 'text-sm text-center text-brand-700'
     } finally {
       status.classList.remove('hidden')
