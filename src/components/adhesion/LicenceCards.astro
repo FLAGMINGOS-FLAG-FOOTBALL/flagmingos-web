@@ -142,8 +142,10 @@ let view = 2
               {section.details && (
                 <ul class="space-y-2">
                   {section.details.map((detail) => (
-                    <li class="text-ink-soft text-sm">
-                      <span class="text-brand-500 font-bold">+</span> {detail}
+                    <li class="text-ink-soft text-sm flex items-start gap-2">
+                      <span class="text-brand-500 font-bold mt-0.5">
+                        <Plus class="w-4 h-4"/>
+                      </span> {detail}
                     </li>
                   ))}
                 </ul>
