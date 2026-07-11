@@ -9,43 +9,32 @@ import { navigation } from '../params.json'
 const navLinks = navigation.filter((link) => link.navbar)
 ---
 
-<header
-  class="sticky top-0 z-100 border-b border-line bg-[rgba(246,244,240,.92)] backdrop-blur-md"
->
-  <nav
-    class="mx-auto flex h-16 container items-center justify-between px-5 lg:h-19 lg:px-10"
-  >
-    <a
-      class="flex items-center gap-2 font-display text-lg tracking-wide lg:text-2xl"
-      href="/"
-    >
-      <img src={logo.src} alt="" class="w-11 h-11" />
+<header class="border-line sticky top-0 z-100 border-b bg-[rgba(246,244,240,.92)] backdrop-blur-md">
+  <nav class="container mx-auto flex h-16 items-center justify-between px-5 lg:h-19 lg:px-10">
+    <a class="font-display flex items-center gap-2 text-lg tracking-wide lg:text-2xl" href="/">
+      <img src={logo.src} alt="" class="h-11 w-11" />
       <div class="flex flex-col">
-        <div class="flex flex-row gap-2 items-center">
+        <div class="flex flex-row items-center gap-2">
           <div class="">FLAGMINGOS</div>
           <span
-            class="hidden bg-brand-100 px-2 py-1 font-mono text-[10px] font-semibold text-ink-soft lg:inline-block"
+            class="bg-brand-100 text-ink-soft hidden px-2 py-1 font-mono text-[10px] font-semibold lg:inline-block"
           >
             EST. 2019
           </span>
         </div>
-        <div class="font-mono text-[10px] text-brand-500">
-          FLAGFOOTBALL BALMA
-        </div>
+        <div class="text-brand-500 font-mono text-[10px]">FLAGFOOTBALL BALMA</div>
       </div>
     </a>
 
-    <div
-      class="hidden items-center gap-9 text-sm font-bold text-ink-soft lg:flex"
-    >
+    <div class="text-ink-soft hidden items-center gap-9 text-sm font-bold lg:flex">
       {
         navLinks.map((link) => (
           <a
             href={link.url}
-            class="group relative uppercase transition-colors hover:text-brand-500"
+            class="group hover:text-brand-500 relative uppercase transition-colors"
           >
             {link.label}
-            <span class="absolute left-0 -bottom-1 h-[2px] w-0 bg-brand-500 transition-all duration-300 group-hover:w-full" />
+            <span class="bg-brand-500 absolute -bottom-1 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full" />
           </a>
         ))
       }
@@ -61,7 +50,7 @@ const navLinks = navigation.filter((link) => link.navbar)
         id="menu-toggle"
         aria-label="Open menu"
         aria-expanded="false"
-        class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 text-ink transition-all duration-300 hover:bg-brand-500 hover:text-bg"
+        class="text-ink hover:bg-brand-500 hover:text-bg flex h-10 w-10 flex-col items-center justify-center gap-1.5 transition-all duration-300 lg:hidden"
       >
         <Menu id="menu-icon" size={25} class="block" />
         <X id="close-icon" size={25} class="hidden" />
@@ -70,28 +59,25 @@ const navLinks = navigation.filter((link) => link.navbar)
   </nav>
   <div
     id="mobile-menu"
-    class="hidden lg:hidden border-t border-line bg-[rgba(246,244,240,1)] backdrop-blur-md shadow-xl z-60 fixed top-16 left-0 w-full overflow-y-auto"
+    class="border-line fixed top-16 left-0 z-60 hidden w-full overflow-y-auto border-t bg-[rgba(246,244,240,1)] shadow-xl backdrop-blur-md lg:hidden"
   >
-    <div class="flex flex-col px-5 py-4">
+    <div class="divide-line divide-y px-5 py-4">
       {
         navLinks.map((link, i) => (
           <a
             href={link.url}
-            class="group flex items-center gap-4 py-4 text-lg uppercase origin-left -skew-x-3 leading-[0.86] text-ink transition-all hover:text-brand-500"
+            class="group text-ink hover:text-brand-500 flex items-center gap-4 py-4 text-sm font-bold transition-all"
           >
-            <span class="font-mono text-xs text-ink-soft transition-all duration-200 group-hover:text-brand-500">
+            <span class="text-brand-700 group-hover:text-brand-500 font-mono text-xs transition-all duration-200">
               0{i + 1}
             </span>{' '}
             {link.label}
           </a>
         ))
       }
-      <Button
-        href="#rejoindre"
-        variant="primary"
-        size="medium"
-        class="mt-3 w-full justify-center"
-      >
+    </div>
+    <div class="px-5 pb-4">
+      <Button href="#rejoindre" variant="primary" size="medium" class="w-full justify-center">
         REJOINS-NOUS
       </Button>
     </div>
