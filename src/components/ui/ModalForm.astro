@@ -11,6 +11,7 @@ interface Props {
   description?: string
   football?: boolean
   button?: string
+  debug?: boolean
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   description,
   football = false,
   button = 'Fermer',
+  debug = false,
 } = Astro.props as Props
 
 const contentId = `${id}-content`
@@ -55,51 +57,58 @@ const current = variants[variant]
 
 <div
   id={id}
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 px-5 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+  class={`fixed inset-0 z-50 ${debug ? 'flex opacity-100' : 'hidden opacity-0'} items-center justify-center bg-black/60 px-5 backdrop-blur-sm transition-opacity duration-300`}
   role="dialog"
   aria-modal="true"
   aria-labelledby={titleId}
   aria-describedby={contentId}
 >
   <div
-    class="relative w-full max-w-md overflow-hidden border-2 border-line bg-bg p-8 text-center shadow-2xl scale-95 transition-transform duration-300"
+    class="bg-bg relative w-full max-w-md scale-95 overflow-hidden text-center transition-transform duration-300"
   >
-    {
-      football && variant === 'success' ? (
-        <Football class={`mx-auto mb-6 w-12 h-12 ${current.color}`} />
-      ) : (
-        <div
-          class={`mx-auto mb-6 flex h-16 w-16 items-center justify-center ${current.bg} text-white`}
-        >
-          {variant === 'error' ? (
-            <X class="w-8 h-8" />
-          ) : (
-            <Check class="w-8 h-8" />
-          )}
-        </div>
-      )
-    }
-
-    <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-700 mb-3">
-      {eyebrow || current.defaultEyebrow}
-    </p>
-
-    <h3
-      id={titleId}
-      class="font-display uppercase text-3xl leading-none text-ink"
+    <!-- decorative wordmark, same treatment as footer -->
+    <div
+      class="font-display text-brand-500/10 pointer-events-none absolute inset-x-0 bottom-0 z-0 translate-y-[28%] -skew-x-6 text-center leading-[0.8] uppercase select-none text-8xl"
+      aria-hidden="true"
     >
-      {title || current.defaultTitle}
-    </h3>
+      FLAGMINGOS
+    </div>
 
-    <p id={contentId} class="mt-4 text-sm leading-relaxed text-ink-soft">
-      <slot />
-    </p>
+    <div class="relative z-10 p-6 pt-8 sm:p-8 sm:pt-10">
+      <!-- {
+        football && variant === 'success' ? (
+          <Football class={`mx-auto mb-6 h-12 w-12 ${current.color}`} />
+        ) : (
+          <div
+            class={`mx-auto mb-6 flex h-16 w-16 items-center justify-center ${current.bg} text-white`}
+          >
+            {variant === 'error' ? <X class="h-8 w-8" /> : <Check class="h-8 w-8" />}
+          </div>
+        )
+      } -->
 
-    <button
-      data-modal-close={id}
-      class="group mt-8 inline-flex items-center justify-center gap-2 border-2 border-brand-500 bg-brand-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-all hover:bg-bg hover:text-brand-500"
-    >
-      {button}
-    </button>
+      <p
+        class="text-brand-500 mb-3 flex items-center justify-center gap-2 font-mono text-xs tracking-[0.2em] uppercase"
+      >
+        <span class="bg-brand-500/50 h-px w-4" aria-hidden="true"></span>
+        {eyebrow || current.defaultEyebrow}
+        <span class="bg-brand-500/50 h-px w-4" aria-hidden="true"></span>
+      </p>
+
+      <h3 id={titleId} class="font-display text-ink text-3xl leading-none uppercase">
+        {title || current.defaultTitle}
+      </h3>
+
+      <p id={contentId} class="text-ink-soft mt-4 text-sm leading-relaxed">
+        <slot />
+      </p>
+
+      <button
+        data-modal-close={id}
+        class="group border-brand-500 bg-brand-500 hover:bg-bg hover:text-brand-500 mt-8 inline-flex items-center justify-center gap-2 border-2 px-8 py-3.5 text-sm font-bold tracking-wide text-white uppercase transition-all"
+      >
+        {button}
+      </button>
+    </div>
   </div>
 </div>
