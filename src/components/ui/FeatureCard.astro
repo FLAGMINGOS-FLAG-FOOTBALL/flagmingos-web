@@ -1,0 +1,31 @@
+---
+interface FeatureCardProps {
+  feature: {
+    icon?: any
+    title: string
+    text: string
+  }
+  dark?: boolean
+}
+const { feature, dark } = Astro.props as FeatureCardProps
+
+const cardClasses = dark
+  ? 'bg-brand-800 text-white border-white/15'
+  : 'bg-white text-ink-soft border-line'
+
+const iconClasses = dark ? 'text-brand-500' : 'text-brand-500'
+const titleClasses = dark ? 'text-white' : 'text-ink'
+const textClasses = dark ? 'text-brand-50/80' : 'text-ink-soft'
+---
+
+<div
+  class={`${cardClasses} p-6 border-b-2 lg:border-b-0 lg:border-r-2 last:border-r-0 last:border-b-0`}
+>
+  <div class={`${titleClasses} font-display mt-4 flex items-center gap-2 text-lg uppercase`}>
+    <span class="inline-flex items-center justify-center">
+      {feature.icon && <feature.icon class={`${iconClasses} h-6 w-6`} />}
+    </span>
+    {feature.title}
+  </div>
+  <p class={`${textClasses} mt-2 text-sm leading-relaxed`}>{feature.text}</p>
+</div>

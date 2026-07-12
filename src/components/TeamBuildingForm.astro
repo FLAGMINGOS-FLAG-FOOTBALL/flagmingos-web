@@ -1,0 +1,93 @@
+---
+import ButtonForm from '../components/ui/ButtonForm.astro'
+---
+
+<div class="mx-auto max-w-180 px-5 md:px-10">
+  <div class="border-line border bg-white p-6 md:p-9">
+    <form
+      id="teambuilding"
+      name="teambuilding"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      class="space-y-5"
+    >
+      <input type="hidden" name="form-name" value="teambuilding" />
+      <p class="hidden">
+        <label>
+          Don't fill this out if you're human:
+          <input name="bot-field" />
+        </label>
+      </p>
+      <label
+        for="society"
+        class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
+      >
+        Société / Établissement
+      </label>
+      <input
+        type="text"
+        id="society"
+        name="society"
+        required
+        class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
+      />
+      <label
+        for="email"
+        class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
+      >
+        E-mail
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
+      />
+      <label
+        for="participants"
+        class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
+      >
+        Nombre de participants
+      </label>
+      <select
+        name="participants"
+        class="border-line focus:border-brand-500 w-full border-2 bg-white px-3.5 py-2.5 text-sm transition-colors outline-none"
+        required
+      >
+        <option value="" selected disabled>Taille du groupe</option>
+        <option>5-10</option>
+        <option>10-25</option>
+        <option>25-50</option>
+        <option>50+</option>
+      </select>
+      <label
+        for="message"
+        class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
+      >
+        Message
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        required
+        rows="4"
+        class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
+        placeholder="Date envisagée, durée, contraintes particulières..."></textarea>
+      <label class="flex cursor-pointer items-start gap-2.5 text-sm">
+        <input type="checkbox" name="privacy-consent" required class="accent-brand-500 mt-1" />
+
+        <span>
+          J'accepte que mes données soient utilisées uniquement afin de répondre à ma demande.
+          <a href="/mentions-legales#donnees-personnelles" class="hover:text-brand-700 underline">
+            En savoir plus</a
+          >.
+        </span>
+      </label>
+      <ButtonForm type="submit" class="w-full" id="submit-button" icon="arrow-right">
+        Envoyer ma demande
+      </ButtonForm>
+    </form>
+  </div>
+</div>

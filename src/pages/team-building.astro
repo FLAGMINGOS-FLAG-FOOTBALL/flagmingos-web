@@ -1,16 +1,55 @@
 ---
 import Page from '../layouts/Page.astro'
 import PageHeader from '../components/PageHeader.astro'
-import Booking from '../components/Booking.astro'
+import PageContent from '../components/ui/PageContent.astro'
+import SectionTitle from '../components/ui/SectionTitle.astro'
+import Paragraph from '../components/ui/Paragraph.astro'
+import FeatureCard from '../components/ui/FeatureCard.astro'
+import TeamBuildingForm from '../components/TeamBuildingForm.astro'
+import { teamBuilding } from '../data/teamBuilding'
+import LogoTeamBuilding from '../assets/teambuilding.png'
 ---
 
-<Page title="Team Building">
+<Page title={teamBuilding.pageTitle}>
   <PageHeader
-    eyebrow="CORPORATE EVENTS"
-    title="TEAM"
-    highlight="BUILDING"
+    eyebrow={teamBuilding.pageHeader.eybrow}
+    title={teamBuilding.pageHeader.title}
+    highlight={teamBuilding.pageHeader.hightlight}
+    subtitle={teamBuilding.pageHeader.subtitle}
     break={false}
-    subtitle="Une immersion complète dans un sport collectif, stratégique et sans contact - pour souder vos équipes autrement."
   />
-  <div class="h-96"></div>
+
+  <div class="bg-brand-800 mt-20 h-38 lg:h-48">
+    <img
+      src={LogoTeamBuilding.src}
+      class="relative mx-auto w-full max-w-64 translate-y-[-50%] object-contain lg:max-w-72"
+    />
+  </div>
+
+  <div class="bg-brand-800 px-6">
+    <div class="mx-auto max-w-295 pb-10">
+      <div class="grid grid-cols-1 lg:grid-cols-3">
+        {teamBuilding.features.map((feature) => <FeatureCard feature={feature} dark={true} />)}
+      </div>
+    </div>
+  </div>
+
+  <PageContent margin="small">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 items-center">
+      <div>
+        {teamBuilding.description.map((paragraph) => <Paragraph>{paragraph}</Paragraph>)}
+      </div>
+
+      <div>
+        <SectionTitle
+          title={teamBuilding.sectionTitle.title}
+          highlight={teamBuilding.sectionTitle.highlight}
+          tagline={teamBuilding.sectionTitle.tagline}
+          size="small"
+          center
+        />
+        <TeamBuildingForm />
+      </div>
+    </div>
+  </PageContent>
 </Page>
