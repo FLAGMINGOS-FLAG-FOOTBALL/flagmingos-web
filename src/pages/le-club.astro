@@ -1,0 +1,88 @@
+---
+import Page from '../layouts/Page.astro'
+import PageHeader from '../components/PageHeader.astro'
+import PageContent from '../components/ui/PageContent.astro'
+import SectionTitle from '../components/ui/SectionTitle.astro'
+import Paragraph from '../components/ui/Paragraph.astro'
+
+import Button from '../components/ui/Button.astro'
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
+---
+
+<Page title="Le Club - Flagmingos">
+  <PageHeader
+    eyebrow="SINCE 2019"
+    title="LE"
+    highlight="CLUB"
+    break={false}
+    subtitle="Une bande d'ami(e)s réunie autour du flag football à Balma, devenue championne de France Division 2."
+  />
+  <PageContent>
+    <SectionTitle title="POURQUOI" highlight="FLAGMINGOS?" tagline="Our Story" />
+    <Paragraph>
+      Flamingos, le flamant rose en anglais — un clin d'œil à la brique rose de Toulouse. Une espèce
+      grégaire, qui vit en groupe, à l'image de notre collectif. Et puis il y a une seconde lecture
+      : « Flamingos » contient « amigos », les amis en espagnol. Associé à notre sport, ça donne Fla<strong
+        class="text-brand-700">g</strong
+      >mingos — le flag des amis.
+    </Paragraph>
+    <Paragraph>
+      Le club est né en 2019 d'une bande d'ami(e)s et de joueurs(ses) qui évoluaient depuis
+      plusieurs années dans différentes structures, réunis autour d'un projet commun.
+    </Paragraph>
+  </PageContent>
+  <PageContent noBackground={true}>
+    <SectionTitle title="LE FLAG POUR" highlight="TOUS" tagline="BEYOND THE FIELD" />
+    <div class="grid gap-6 md:grid-cols-2">
+      <article class="border-line border-2 bg-white p-8">
+        <p class="text-ink-soft font-mono text-xs tracking-[0.18em] uppercase">Écoles & jeunesse</p>
+        <h3 class="font-display text-ink mt-4 text-2xl leading-none uppercase">
+          Flag pour les plus jeunes
+        </h3>
+        <p class="text-ink-soft mt-4 text-sm leading-relaxed">
+          Initiations et démonstrations dans les écoles, centres aérés et structures accueillant
+          enfants et adolescents. Ils nous font confiance : le CA Balma Athlétisme, l'ETB, le
+          collège J. Rostand de Balma, l'ALSH Calvel de Balma, le SESSAD de Bruguières…
+        </p>
+        <Button href="/#contact" variant="text" size="text" class="mt-5">
+          Nous contacter
+          <ArrowUpRight class="h-4 w-4" />
+        </Button>
+      </article>
+
+      <article class="border-line border-2 bg-white p-8">
+        <p class="text-ink-soft font-mono text-xs tracking-[0.18em] uppercase">Entreprises</p>
+        <h3 class="font-display text-ink mt-4 text-2xl leading-none uppercase">
+          Flag pour les entreprises
+        </h3>
+        <p class="text-ink-soft mt-4 text-sm leading-relaxed">
+          Une activité originale pour souder une équipe, casser la routine ou challenger vos
+          collaborateurs, sous forme de séminaire ou de team building.
+        </p>
+        <Button href="/team-building" variant="text" size="text" class="mt-5">
+          Découvrir le Team Building
+          <ArrowUpRight class="h-4 w-4" />
+        </Button>
+      </article>
+    </div>
+  </PageContent>
+  <PageContent>
+    <SectionTitle title="NOS" highlight="ÉQUIPES" tagline="LE CLUB" size="large" />
+    <Paragraph>
+      Le club des Flagmingos propose plusieurs équipes pour différents niveaux et catégories d'âge.
+      Que vous soyez un jeune joueur débutant ou un adulte expérimenté, nous avons une équipe qui
+      correspond à vos compétences et à vos ambitions. Rejoignez-nous pour vivre l'expérience du
+      flag football dans un environnement stimulant et convivial.
+    </Paragraph>
+  </PageContent>
+  <PageContent>
+    <SectionTitle title="NOS" highlight="ENTRAÎNEURS" tagline="LE CLUB" size="large" />
+    <Paragraph>
+      Nos entraîneurs sont des passionnés de flag football, dévoués à aider chaque joueur à
+      atteindre son plein potentiel. Ils apportent leur expertise et leur expérience pour créer des
+      séances d'entraînement engageantes et efficaces, adaptées aux besoins de chaque équipe et de
+      chaque joueur. Leur objectif est de favoriser le développement des compétences, la confiance
+      en soi et l'esprit d'équipe au sein du club
+    </Paragraph>
+  </PageContent>
+</Page>

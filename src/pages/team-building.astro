@@ -8,6 +8,7 @@ import FeatureCard from '../components/ui/FeatureCard.astro'
 import TeamBuildingForm from '../components/TeamBuildingForm.astro'
 import { teamBuilding } from '../data/teamBuilding'
 import LogoTeamBuilding from '../assets/teambuilding.png'
+import AssetTeamBuilding from '../assets/teambuilding-asset.jpg'
 ---
 
 <Page title={teamBuilding.pageTitle}>
@@ -35,9 +36,10 @@ import LogoTeamBuilding from '../assets/teambuilding.png'
   </div>
 
   <PageContent margin="small">
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 items-center">
-      <div>
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-2 items-center mb-10">
+      <div class="grid grid-cols-1 lg:gap-6">
         {teamBuilding.description.map((paragraph) => <Paragraph>{paragraph}</Paragraph>)}
+        <img src={AssetTeamBuilding.src} class="mt-6 w-full object-cover" />
       </div>
 
       <div>
