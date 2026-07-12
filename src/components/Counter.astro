@@ -1,0 +1,81 @@
+---
+import SectionTitle from './ui/SectionTitle.astro'
+const targetDate = '2026-08-25T20:00:00'
+---
+
+<div
+  id="season-countdown"
+  class="bg-brand-500 relative overflow-hidden px-5 py-10 text-white md:px-10"
+>
+  <div class="pointer-events-none absolute inset-0 opacity-[0.08]"></div>
+
+  <div class="relative flex flex-col lg:flex-row justify-around">
+    <div class="pb-10 text-center mx-auto lg:text-left lg:pb-0 lg:max-w-[50%]">
+      <div class={`font-mono text-sm tracking-[0.15em] mb-3  text-brand-800`}>SAISON 2026-2027</div>
+      <h2 class="font-display text-white/90 -skew-x-6 text-[clamp(32px,6vw,56px)] leading-none uppercase">
+        BACK TO FLAG
+      </h2>
+      <p class={`mt-4 max-w-xl text-base text-white`}>
+        La saison 2026-2027 commence le 25 août. Rejoins-nous pour ton premier
+        entraînement.
+        Portes Ouvertes du 25 août au 13 septembre
+      </p>
+    </div>
+
+    <div class="flex items-center justify-center gap-2.5 text-center md:gap-4">
+      <div
+        class="bg-brand-600 border-brand-800/20 min-w-20 -skew-x-3 border-2 px-4 py-3 md:min-w-24 md:px-6 md:py-4"
+      >
+        <div id="cd-days" class="font-mono text-3xl font-extrabold md:text-5xl">00</div>
+        <div class="mt-1 text-[10px] tracking-wide text-white/70 uppercase md:text-xs">Jours</div>
+      </div>
+      <div
+        class="bg-brand-600 border-brand-800/20 min-w-20 -skew-x-3 border-2 px-4 py-3 md:min-w-24 md:px-6 md:py-4"
+      >
+        <div id="cd-hours" class="font-mono text-3xl font-extrabold md:text-5xl">00</div>
+        <div class="mt-1 text-[10px] tracking-wide text-white/70 uppercase md:text-xs">Heures</div>
+      </div>
+      <div
+        class="bg-brand-600 border-brand-800/20 min-w-20 -skew-x-3 border-2 px-4 py-3 md:min-w-24 md:px-6 md:py-4"
+      >
+        <div id="cd-minutes" class="font-mono text-3xl font-extrabold md:text-5xl">00</div>
+        <div class="mt-1 text-[10px] tracking-wide text-white/70 uppercase md:text-xs">Min</div>
+      </div>
+      <div
+        class="bg-brand-600 border-brand-800/20 min-w-20 -skew-x-3 border-2 px-4 py-3 md:min-w-24 md:px-6 md:py-4"
+      >
+        <div id="cd-seconds" class="font-mono text-3xl font-extrabold md:text-5xl">00</div>
+        <div class="mt-1 text-[10px] tracking-wide text-white/70 uppercase md:text-xs">Sec</div>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ targetDate }}>
+    const target = new Date(targetDate).getTime()
+
+    function tick() {
+      const now = Date.now()
+      const diff = Math.max(0, target - now)
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+      const minutes = Math.floor((diff / (1000 * 60)) % 60)
+      const seconds = Math.floor((diff / 1000) % 60)
+
+      const set = (id, value) => {
+        const el = document.getElementById(id)
+        if (el) el.textContent = String(value).padStart(2, '0')
+      }
+
+      set('cd-days', days)
+      set('cd-hours', hours)
+      set('cd-minutes', minutes)
+      set('cd-seconds', seconds)
+
+      if (diff <= 0) clearInterval(interval)
+    }
+
+    tick()
+    const interval = setInterval(tick, 1000)
+  </script>
+</div>
