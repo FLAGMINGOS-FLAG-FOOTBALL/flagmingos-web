@@ -1,15 +1,29 @@
 ---
 import logo from '../../assets/logo.png'
+
+interface Props {
+  href?: string
+  brandColor?: 'primary' | 'black' | 'white'
+  subtitleColor?: 'primary' | 'black' | 'white'
+}
+
+const { brandColor = 'primary', subtitleColor = 'primary', href = '/' } = Astro.props
+
+const colors = {
+  primary: 'text-brand-500',
+  black: 'text-ink',
+  white: 'text-white',
+}
 ---
 
-<a class="flex items-center gap-2" href="/">
-  <img src={logo.src} alt="" class="w-11 h-11" />
+<a class="flex items-center gap-2" href={href}>
+  <img src={logo.src} alt="logo" class="h-11 w-11" />
   <div class="flex flex-col">
-    <div class="flex flex-row gap-2 items-center">
-      <div class="font-display text-lg tracking-wide lg:text-2xl">
+    <div class="flex flex-row items-center gap-2">
+      <div class={`font-display text-lg tracking-wide lg:text-2xl -skew-x-6 ${colors[brandColor]}`}>
         FLAGMINGOS
       </div>
     </div>
-    <div class="font-mono text-[10px]">FLAGFOOTBALL BALMA</div>
+    <div class={`font-mono text-[10px] font-sem ${colors[subtitleColor]}`}>FLAG FOOTBALL BALMA</div>
   </div>
 </a>

@@ -1,6 +1,7 @@
 ---
 import Button from './ui/Button.astro'
 import logo from '../assets/logo.png'
+import Logotype from './ui/Logotype.astro'
 import ChevronRight from '@lucide/astro/icons/chevron-right'
 import Menu from '@lucide/astro/icons/menu'
 import X from '@lucide/astro/icons/x'
@@ -11,20 +12,12 @@ const navLinks = navigation.filter((link) => link.navbar)
 
 <header class="border-line sticky top-0 z-100 border-b bg-[rgba(246,244,240,.92)] backdrop-blur-md">
   <nav class="container mx-auto flex h-16 items-center justify-between px-5 lg:h-19 lg:px-10">
-    <a class="font-display flex items-center gap-2 text-lg tracking-wide lg:text-2xl" href="/">
-      <img src={logo.src} alt="" class="h-11 w-11" />
-      <div class="flex flex-col">
-        <div class="flex flex-row items-center gap-2">
-          <div class="">FLAGMINGOS</div>
-          <span
-            class="bg-brand-100 text-ink-soft hidden px-2 py-1 font-mono text-[10px] font-semibold lg:inline-block"
-          >
-            EST. 2019
-          </span>
-        </div>
-        <div class="text-brand-500 font-mono text-[10px]">FLAGFOOTBALL BALMA</div>
-      </div>
-    </a>
+    <div class="flex gap-2">
+      <Logotype brandColor="black" subtitleColor="primary" />
+      <span class="text-ink-soft hidden px-2 font-mono text-[10px] font-semibold lg:inline-block mt-0.5">
+        SINCE 2019
+      </span>
+    </div>
 
     <div class="text-ink-soft hidden items-center gap-9 text-sm font-bold lg:flex">
       {
