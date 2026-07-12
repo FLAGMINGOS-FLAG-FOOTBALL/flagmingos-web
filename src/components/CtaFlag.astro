@@ -3,42 +3,64 @@ import SectionTitle from './ui/SectionTitle.astro'
 import RightArrow from '@lucide/astro/icons/arrow-right'
 import Button from './ui/Button.astro'
 import Paragraph from './ui/Paragraph.astro'
-
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
+import Shield from '@lucide/astro/icons/shield'
+import Users from '@lucide/astro/icons/users'
+import Brain from '@lucide/astro/icons/brain'
+import Sparkles from '@lucide/astro/icons/sparkles'
 const facts = [
   { n: '5v5', l: 'Format' },
   { n: '0', l: 'Contact' },
   { n: '100%', l: 'Mixte' },
   { n: '7 ans', l: 'Âge min.' },
 ]
+
+const atouts = [
+  {
+    icon: Shield,
+    title: 'Sans contact',
+    text: 'On retire un flag à la ceinture plutôt que de plaquer — l\u2019intensité du foot US, sans le risque de blessure.',
+  },
+  {
+    icon: Users,
+    title: '100% mixte',
+    text: 'Hommes et femmes jouent ensemble, sur le même terrain, dans la même équipe.',
+  },
+  {
+    icon: Brain,
+    title: 'Stratégique',
+    text: 'Un temps mort entre chaque action pour construire son jeu — la tactique compte autant que l\u2019athlétisme.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Accessible dès 7 ans',
+    text: 'Aucune expérience requise. La majorité des licenciés découvrent le flag en arrivant au club.',
+  },
+]
 ---
 
-<section class="py-10 md:py-12 border-b border-t border-line bg-bg">
+<!-- 
+<section class="border-line bg-bg border-t border-b py-10 md:py-12">
   <div class="mx-auto max-w-295 px-5 md:px-10">
-    <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+    <div class="flex flex-col gap-6 md:flex-row md:items-center md:gap-10">
       <div class="flex-1">
-        <SectionTitle
-          title="Premier pas"
-          tagline="Découvre le futur sport olympiquef"
-        />
+        <SectionTitle title="Premier pas" tagline="Découvre le futur sport olympique" />
         <Paragraph class="max-w-130">
-          Une variante du football américain, mais sans plaquage : on retire un
-          flag à la ceinture au lieu de bloquer le porteur. Rapide, stratégique,
-          et accessible à toutes et tous.
+          Une variante du football américain, mais sans plaquage : on retire un flag à la ceinture
+          au lieu de bloquer le porteur. Rapide, stratégique, et accessible à toutes et tous.
         </Paragraph>
         <Button href="/flag-football" variant="text" class="mt-3" size="text">
           Découvrir les règles
-          <RightArrow class="w-4 h-4" />
+          <RightArrow class="h-4 w-4" />
         </Button>
       </div>
 
-      <div class="grid grid-cols-4 gap-4 md:gap-6 shrink-0">
+      <div class="grid shrink-0 grid-cols-4 gap-4 md:gap-6">
         {
           facts.map((f) => (
             <div class="text-center">
-              <div class="font-mono text-2xl md:text-3xl font-bold text-brand-500">
-                {f.n}
-              </div>
-              <div class="text-[10px] md:text-[11px] uppercase tracking-wide text-ink-soft mt-1">
+              <div class="text-brand-500 font-mono text-2xl font-bold md:text-3xl">{f.n}</div>
+              <div class="text-ink-soft mt-1 text-[10px] tracking-wide uppercase md:text-[11px]">
                 {f.l}
               </div>
             </div>
@@ -46,5 +68,36 @@ const facts = [
         }
       </div>
     </div>
+  </div>
+</section> -->
+<section class="bg-white text-ink border-line scroll-mt-32 border-t border-b py-14 md:py-20">
+  <div class="mx-auto max-w-295 px-5 md:px-10">
+    <SectionTitle title="PREMIERS PAS" tagline="Découvre le futur sport olympique" />
+    <p class="text-ink-soft max-w-180 text-sm leading-relaxed md:text-base">
+      Le flag football est une variante du football américain, mais sans plaquage : on retire un
+      flag à la ceinture au lieu de bloquer le porteur du ballon. Résultat : un sport rapide et
+      stratégique, ouvert à toutes et tous.
+    </p>
+
+    <div class="bg-line mt-10 grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
+      {
+        atouts.map((a) => (
+          <div class="bg-white p-6">
+            <div class="font-display mt-4 flex items-center gap-2 text-lg uppercase">
+              <span class="inline-flex items-center justify-center">
+                <a.icon class="text-brand-500 h-6 w-6" />
+              </span>
+              {a.title}
+            </div>
+            <p class="text-ink-soft mt-2 text-sm leading-relaxed">{a.text}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <Button href="/flag-football" variant="text" class="mt-3" size="text">
+      Découvrir le flag football
+      <RightArrow class="h-4 w-4" />
+    </Button>
   </div>
 </section>
