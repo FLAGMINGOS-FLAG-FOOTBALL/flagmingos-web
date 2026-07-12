@@ -1,5 +1,6 @@
 ---
 import ButtonForm from '../components/ui/ButtonForm.astro'
+import ModalForm from '../components/ui/ModalForm.astro'
 ---
 
 <div class="mx-auto max-w-180 px-5 md:px-10">
@@ -85,9 +86,74 @@ import ButtonForm from '../components/ui/ButtonForm.astro'
           >.
         </span>
       </label>
+      <div data-netlify-recaptcha="true"></div>
       <ButtonForm type="submit" class="w-full" id="submit-button" icon="arrow-right">
         Envoyer ma demande
       </ButtonForm>
     </form>
+    <button id="test-button" class="block" type="button"> Test modal </button>
   </div>
+  <ModalForm id="success-modal-teambuilding" football debug={true}>
+    Votre message est dans nos mains. <br />On revient vers vous rapidement.
+  </ModalForm>
 </div>
+
+<script>
+  const form = document.getElementById('teambuilding')
+  const modal = document.getElementById('success-modal-teambuilding')
+  const close = document.querySelector('[data-modal-close="success-modal-teambuilding"]')
+  const testButton = document.getElementById('test-button')
+
+  function openModal() {
+    modal?.classList.remove('hidden', 'opacity-0')
+    modal?.classList.add('flex', 'opacity-100')
+  }
+
+  function closeModal() {
+    modal?.classList.add('hidden', 'opacity-0')
+    modal?.classList.remove('flex', 'opacity-100')
+  }
+
+  testButton?.addEventListener('click', () => {
+    openModal()
+  })
+
+  close?.addEventListener('click', () => {
+    closeModal()
+  })
+
+  // Fermer avec Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal()
+    }
+  })
+
+  // Fermer en cliquant sur le fond
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal()
+    }
+  })
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(form as HTMLFormElement)
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+      .then(() => {
+        modal?.classList.remove('hidden')
+        form?.reset()
+      })
+      .catch((error) => console.error(error))
+  })
+  close?.addEventListener('click', () => {
+    modal?.classList.add('hidden')
+    modal?.classList.remove('flex')
+  })
+</script>
