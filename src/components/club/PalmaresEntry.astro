@@ -1,0 +1,33 @@
+---
+import Trophy from '@lucide/astro/icons/trophy'
+import Medal from '@lucide/astro/icons/medal'
+import CircleStar from '@lucide/astro/icons/circle-star'
+
+import type { PalmaresEntry } from '../../data/palmares'
+
+interface Props {
+  entry: PalmaresEntry
+}
+const { entry } = Astro.props as Props
+---
+
+<div class="border-line flex items-center justify-between border-b pb-3 text-sm">
+  <span class="text-ink font-semibold">{entry.team || entry.name}</span>
+
+  <span class={`${entry.highlight ? 'text-brand-500 font-semibold' : 'text-ink-soft'} text-right`}>
+    {
+      entry.achievement && (
+        <span class="mr-1 inline-block align-middle">
+          {entry.achievement === 'title' ? (
+            <Trophy class="h-4 w-4" />
+          ) : entry.achievement === 'podium' ? (
+            <Medal class="h-4 w-4 text-brand-500" />
+          ) : (
+            <CircleStar class="h-4 w-4" />
+          )}
+        </span>
+      )
+    }
+    {entry.result}</span
+  >
+</div>

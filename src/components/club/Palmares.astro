@@ -1,0 +1,86 @@
+---
+import PalmaresEntry from './PalmaresEntry.astro'
+import { palmares } from '../../data/palmares'
+---
+
+<div class="space-y-16">
+  {
+    palmares.map((season) => (
+      <section>
+        <!-- Year -->
+
+        <div class="mb-8 flex items-center gap-5">
+          <div class="h-px flex-1 bg-line" />
+          <h3 class="font-display text-6xl leading-none text-brand-500">
+            {season.year}
+          </h3>
+
+        </div>
+
+        <div class="space-y-10">
+            {/* ---------------- Championnat ---------------- */}
+              <div class="mb-5 flex items-center gap-3">
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-brand-700">
+                  Compétitions officielles
+                </span>
+
+                <div class="h-px flex-1 bg-brand-200" />
+              </div>
+            <div class={`${season.championship && season.cup ? 'grid grid-cols-1 gap-10 md:grid-cols-2' : ''}`}>
+
+          {season.championship && (
+              <div>
+
+              <h4 class="font-display text-2xl uppercase text-ink">
+                Championnat de France
+              </h4>
+
+              <div class="mt-5 space-y-3">
+                {season.championship.map((entry) => (
+                    <PalmaresEntry entry={entry} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ---------------- Coupe ---------------- */}
+
+          {season.cup && (
+              <div>
+              <h4 class="font-display text-2xl uppercase text-ink">
+                Coupe de France
+              </h4>
+
+              <div class="mt-5 space-y-3">
+                {season.cup.map((entry) => (
+                  <PalmaresEntry entry={entry} />
+                ))}
+              </div>
+            </div>
+          )}
+          </div>
+
+          {/* ---------------- Tournois ---------------- */}
+
+          {season.tournaments && (
+            <div>
+              <div class="mb-5 flex items-center gap-3">
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
+                  Tournois & circuits
+                </span>
+
+                <div class="h-px flex-1 bg-line" />
+              </div>
+
+              <div class="space-y-3">
+                {season.tournaments.map((tournament) => (
+                  <PalmaresEntry entry={tournament} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    ))
+  }
+</div>

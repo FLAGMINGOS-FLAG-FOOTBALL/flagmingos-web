@@ -5,8 +5,13 @@ import PageContent from '../components/ui/PageContent.astro'
 import SectionTitle from '../components/ui/SectionTitle.astro'
 import Paragraph from '../components/ui/Paragraph.astro'
 
+import Palmares from '../components/club/Palmares.astro'
+import StaffSection from '../components/club/StaffSection.astro'
+
 import Button from '../components/ui/Button.astro'
 import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
+
+import winners from '../assets/winners.jpg'
 ---
 
 <Page title="Le Club - Flagmingos">
@@ -76,6 +81,9 @@ import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
     </Paragraph>
   </PageContent>
   <PageContent>
+    <StaffSection />
+  </PageContent>
+  <PageContent>
     <SectionTitle title="NOS" highlight="ENTRAÎNEURS" tagline="LE CLUB" size="large" />
     <Paragraph>
       Nos entraîneurs sont des passionnés de flag football, dévoués à aider chaque joueur à
@@ -84,5 +92,26 @@ import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
       chaque joueur. Leur objectif est de favoriser le développement des compétences, la confiance
       en soi et l'esprit d'équipe au sein du club
     </Paragraph>
+  </PageContent>
+  <PageContent>
+    <SectionTitle title="NOS" highlight="PERFORMANCES" tagline="FEAR THE FOCK" size="large"/>
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-[1fr_1.3fr] md:items-start">
+      <div>
+        <Paragraph>
+          Depuis {new Date().getFullYear() - 2019} saisons, les Flagmingos ont su se démarquer sur le
+          terrain, remportant plusieurs titres et distinctions. Leur détermination, leur travail d'équipe
+          et leur passion pour le flag football les ont propulsés vers des performances exceptionnelles,
+          faisant d'eux une équipe redoutable et respectée dans le championnat. Chaque match est une opportunité
+          de montrer leur talent et de continuer à écrire l'histoire du club avec fierté et ambition.
+        </Paragraph>
+        <Paragraph>
+          Découvrez le palmarès du club, retraçant les moments forts et les succès qui ont
+          marqué notre parcours depuis nos débuts. Chaque trophée et chaque victoire est le fruit de
+          l'engagement et de la passion de nos joueurs, entraîneurs et supporters.
+        </Paragraph>
+        <img src={winners.src} alt="Palmarès du club" class="border-line mt-6 w-full" />
+      </div>
+      <Palmares />
+    </div>
   </PageContent>
 </Page>
