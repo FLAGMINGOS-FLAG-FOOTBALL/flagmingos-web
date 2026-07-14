@@ -2,20 +2,12 @@
 import CalendarCheck from '@lucide/astro/icons/calendar-check'
 import Calendar from '@lucide/astro/icons/calendar'
 import ButtonForm from './ui/ButtonForm.astro'
-
-// Séances à venir — à tenir à jour manuellement ou brancher sur une source de données.
-const sessionsArr = [
-  'Mardi 30 juin 2026 — 19h-22h — Parc de Lagarde (Adultes, mixte)',
-  'Jeudi 2 juillet 2026 — 20h-22h — Parc de Lagarde (Adultes, mixte)',
-  'Mardi 7 juillet 2026 — 19h-22h — Parc de Lagarde (Adultes, mixte)',
-  'Jeudi 9 juillet 2026 — 20h-22h — Parc de Lagarde (Adultes, mixte)',
-]
-
+import ModalForm from './ui/ModalForm.astro'
 interface props {
   sessions: Event[]
 }
 
-const { sessions = sessionsArr } = Astro.props as props
+const { sessions } = Astro.props as props
 
 import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/calendar'
 ---
@@ -229,63 +221,69 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
       </form>
     </div>
   </div>
+  <!-- <button id="test-button" class="block" type="button"> Test modal </button> -->
+
+  <ModalForm id="success-modal-booking" football title="Inscription réussie !">
+    Ton inscription est dans nos mains.<br />On se retrouve sur le terrain !
+  </ModalForm>
 </section>
 
 <script>
-  const form = document.getElementById('booking-form') as HTMLFormElement | null
-  const status = document.getElementById('booking-status')
-  const submitLabel = document.getElementById('booking-submit-label')
-  const button = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null
-  const birthdate = document.getElementById('birthdate') as HTMLInputElement | null
-  const parentField = document.getElementById('parent-field')
-  const parentInput = document.getElementById('parentname') as HTMLInputElement | null
+  const form = document.getElementById('booking-form')
+  const modal = document.getElementById('success-modal-booking')
+  const close = document.querySelector('[data-modal-close="success-modal-booking"]')
+  const testButton = document.getElementById('test-button')
 
-  function toggleParentField() {
-    if (!birthdate?.value || !parentField) return
-    const dob = new Date(birthdate.value)
-    const age = (Date.now() - dob.getTime()) / (1000 * 60 * 60 * 24 * 365.25)
-
-    if (age < 18) {
-      parentField.classList.remove('hidden')
-      parentInput?.setAttribute('required', 'true')
-    } else {
-      parentField.classList.add('hidden')
-      parentInput?.removeAttribute('required')
-    }
+  function openModal() {
+    modal?.classList.remove('hidden', 'opacity-0')
+    modal?.classList.add('flex', 'opacity-100')
   }
 
-  birthdate?.addEventListener('change', toggleParentField)
+  function closeModal() {
+    modal?.classList.add('hidden', 'opacity-0')
+    modal?.classList.remove('flex', 'opacity-100')
+  }
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault()
-    if (!form || !status || !submitLabel || !button) return
+  testButton?.addEventListener('click', () => {
+    openModal()
+  })
 
-    button.disabled = true
-    submitLabel.textContent = 'Envoi en cours...'
-    status.classList.add('hidden')
+  close?.addEventListener('click', () => {
+    closeModal()
+  })
 
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
-      })
-
-      if (response.ok) {
-        form.reset()
-        parentField?.classList.add('hidden')
-        status.textContent = 'Inscription envoyée ! On revient vers vous rapidement.'
-        status.className = 'text-sm text-center text-win'
-      } else {
-        throw new Error('Request failed')
-      }
-    } catch {
-      status.textContent = 'Un souci est survenu. Contactez-nous directement en attendant.'
-      status.className = 'text-sm text-center text-brand-700'
-    } finally {
-      status.classList.remove('hidden')
-      button.disabled = false
-      submitLabel.textContent = 'Réserver ma place'
+  // Fermer avec Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal()
     }
+  })
+
+  // Fermer en cliquant sur le fond
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal()
+    }
+  })
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(form as HTMLFormElement)
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+      .then(() => {
+        modal?.classList.remove('hidden')
+        form?.reset()
+      })
+      .catch((error) => console.error(error))
+  })
+  close?.addEventListener('click', () => {
+    modal?.classList.add('hidden')
+    modal?.classList.remove('flex')
   })
 </script>
