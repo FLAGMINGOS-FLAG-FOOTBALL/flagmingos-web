@@ -114,7 +114,7 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
             for="parentname"
             class="text-ink-soft mb-1.5 block font-mono text-[11px] tracking-wide uppercase"
           >
-            Nom / Prénom du parent{' '}
+            Nom / Prénom du parent
             <span class="text-ink-soft font-sans normal-case">
               (obligatoire pour les 9-17 ans)
             </span>
@@ -159,16 +159,6 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
             />
           </div>
         </div>
-
-        {
-          /*<div>
-          <label for="address" class="block font-mono text-[11px] uppercase tracking-wide text-ink-soft mb-1.5">Adresse</label>
-          <input
-            type="text" id="address" name="address"
-            class="w-full border-2 border-line focus:border-brand-500 outline-none px-3.5 py-2.5 text-sm transition-colors"
-          />
-        </div>*/
-        }
 
         <fieldset class="border-line border-2 p-4">
           <legend class="text-ink-soft px-1 font-mono text-[11px] tracking-wide uppercase">
@@ -246,7 +236,8 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
       }
     }
   })
-
+</script>
+<script>
   const form = document.getElementById('booking-form')
   const modal = document.getElementById('success-modal-booking')
   const close = document.querySelector('[data-modal-close="success-modal-booking"]')
