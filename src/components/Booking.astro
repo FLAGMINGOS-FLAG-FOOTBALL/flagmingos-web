@@ -123,7 +123,6 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
             type="text"
             id="parentname"
             name="parentname"
-            required
             class="border-line focus:border-brand-500 w-full border-2 px-3.5 py-2.5 text-sm transition-colors outline-none"
           />
         </div>
@@ -227,6 +226,28 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
     Ton inscription est dans nos mains.<br />On se retrouve sur le terrain !
   </ModalForm>
 </section>
+
+<script>
+  const birthdateInput = document.getElementById('birthdate') as HTMLInputElement
+  const parentField = document.getElementById('parent-field')
+  const parentName = document.getElementById('parentname') as HTMLInputElement
+
+  birthdateInput?.addEventListener('change', () => {
+    const birthdateValue = birthdateInput.value
+    if (birthdateValue) {
+      const birthdate = new Date(birthdateValue)
+      const today = new Date()
+      const age = today.getFullYear() - birthdate.getFullYear()
+      if (age < 18) {
+        parentField?.classList.remove('hidden')
+        parentName.required = true
+      } else {
+        parentField?.classList.add('hidden')
+        parentName.required = false
+      }
+    }
+  })
+</script>
 
 <script>
   const form = document.getElementById('booking-form')
