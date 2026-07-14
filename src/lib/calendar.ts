@@ -1,5 +1,6 @@
 import ICAL from 'ical.js'
 const CALENDAR_URL = import.meta.env.GOOGLE_CALENDAR_URL
+const TIMEZONE = 'Europe/Paris'
 
 export type Event = {
   summary: string
@@ -16,6 +17,7 @@ export function formatDateDisplay(date: Date) {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
+    timeZone: TIMEZONE,
   }).format(date)
 
   return formatted
@@ -29,6 +31,7 @@ export function formatDate(date: Date) {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
+    timeZone: TIMEZONE,
   }
   return date.toLocaleDateString('fr-FR', options)
 }
@@ -37,6 +40,7 @@ export function formatTime(date: Date) {
   const options: Intl.DateTimeFormatOptions = {
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: TIMEZONE,
   }
   return date.toLocaleTimeString('fr-FR', options)
 }
