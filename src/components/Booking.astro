@@ -218,6 +218,9 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
 </section>
 
 <script>
+  import { submitForm } from '../lib/form'
+  submitForm('booking-form', 'success-modal-booking')
+
   const birthdateInput = document.getElementById('birthdate') as HTMLInputElement
   const parentField = document.getElementById('parent-field')
   const parentName = document.getElementById('parentname') as HTMLInputElement
@@ -236,64 +239,5 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
         parentName.required = false
       }
     }
-  })
-</script>
-<script>
-  const form = document.getElementById('booking-form')
-  const modal = document.getElementById('success-modal-booking')
-  const close = document.querySelector('[data-modal-close="success-modal-booking"]')
-  const testButton = document.getElementById('test-button')
-
-  function openModal() {
-    modal?.classList.remove('hidden', 'opacity-0')
-    modal?.classList.add('flex', 'opacity-100')
-  }
-
-  function closeModal() {
-    modal?.classList.add('hidden', 'opacity-0')
-    modal?.classList.remove('flex', 'opacity-100')
-  }
-
-  testButton?.addEventListener('click', () => {
-    openModal()
-  })
-
-  close?.addEventListener('click', () => {
-    closeModal()
-  })
-
-  // Fermer avec Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModal()
-    }
-  })
-
-  // Fermer en cliquant sur le fond
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal()
-    }
-  })
-
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault()
-
-    const formData = new FormData(form as HTMLFormElement)
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData as any).toString(),
-    })
-      .then(() => {
-        modal?.classList.remove('hidden')
-        form?.reset()
-      })
-      .catch((error) => console.error(error))
-  })
-  close?.addEventListener('click', () => {
-    modal?.classList.add('hidden')
-    modal?.classList.remove('flex')
   })
 </script>

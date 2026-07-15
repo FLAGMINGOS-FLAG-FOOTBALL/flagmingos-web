@@ -112,3 +112,26 @@ const current = variants[variant]
     </div>
   </div>
 </div>
+
+<script define:vars={{ id }}>
+  const modal = document.getElementById(id)
+  const closeBtn = document.querySelector(`[data-modal-close="${id}"]`)
+
+  function openModal() {
+    modal?.classList.remove('hidden', 'opacity-0')
+    modal?.classList.add('flex', 'opacity-100')
+  }
+  function closeModal() {
+    modal?.classList.add('hidden', 'opacity-0')
+    modal?.classList.remove('flex', 'opacity-100')
+  }
+
+  closeBtn?.addEventListener('click', closeModal)
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal()
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal()
+  })
+  document.addEventListener(`open-modal:${id}`, openModal)
+</script>
