@@ -114,6 +114,8 @@ import UserRoundPlus from '@lucide/astro/icons/user-round-plus'
       <Image
         alt="Joueur de Flag Football"
         src={Player}
+        loading="eager"
+        fetchpriority="high"
         class="absolute -right-10 -bottom-10 w-52 lg:right-0 lg:-bottom-20 lg:w-[clamp(300px,40vw,500px)]"
       />
     </div>

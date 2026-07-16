@@ -1,24 +1,30 @@
 ---
 import '../styles/global.css'
-
+import Seo from '../components/Seo.astro'
 interface Props {
   title?: string
   description?: string
 }
 
-const { title = 'Flagmingos — Flag Football Balma' } = Astro.props
+const {
+  title = 'Flagmingos — Flag Football Balma',
+  description = 'L’association sportive les Flagmingos de Balma, propose la pratique du Flag Football ou Flag, proche de Toulouse en région Occitanie. Le Flag est un sport collectif mixte, sans contact, accessible des 12 ans, ouvert à toutes et tous…',
+} = Astro.props
+
+const canonicalUrl = new URL(Astro.site.pathname, Astro.site)
 ---
 
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <meta name="description" content={description} />
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -26,6 +32,7 @@ const { title = 'Flagmingos — Flag Football Balma' } = Astro.props
       href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap"
       rel="stylesheet"
     /> -->
+    <Seo/>
   </head>
 
   <body>

@@ -1,0 +1,22 @@
+---
+import { email, phone, address, instagram } from '../params.json'
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SportsClub',
+  name: 'Flagmingos',
+  url: Astro.site?.toString(),
+  logo: new URL('/android-chrome-512x512.png', Astro.site).toString(),
+  email,
+  telephone: phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: address,
+    addressCountry: 'FR',
+  },
+  sameAs: [`https://instagram.com/${instagram}`],
+  sport: 'Flag Football',
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

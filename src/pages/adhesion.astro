@@ -10,7 +10,10 @@ import Engagement from '../components/adhesion/Engagement.astro'
 import CtaHelloasso from '../components/adhesion/CtaHelloasso.astro'
 ---
 
-<Page title="Adhésion - Flagmingos">
+<Page
+  title="Adhésion - Flagmingos"
+  description="Rejoignez les Flagmingos : équipes compétition, féminine, jeunes et loisir. Choisissez votre section et adhérez pour la saison."
+>
   <PageHeader
     eyebrow="BECOME A FLAGMINGO"
     title="REJOINS"
@@ -19,16 +22,10 @@ import CtaHelloasso from '../components/adhesion/CtaHelloasso.astro'
     subtitle="Choisis la section qui te correspond et rejoins les Flagmingos pour une saison de flag football, de progression et de partage."
   />
   <PageContent>
-    <SectionTitle
-      title="TROUVE TON"
-      highlight="ÉQUIPE"
-      tagline="BECOME A FLAGMINGO"
-      size="large"
-    />
+    <SectionTitle title="TROUVE TON" highlight="ÉQUIPE" tagline="BECOME A FLAGMINGO" size="large" />
     <Paragraph>
-      Que tu sois débutant ou compétiteur, jeune ou adulte, il y a une équipe
-      pour toi. Découvre les différentes sections proposées par les Flagmingos
-      et choisis celle qui te correspond le mieux.
+      Que tu sois débutant ou compétiteur, jeune ou adulte, il y a une équipe pour toi. Découvre les
+      différentes sections proposées par les Flagmingos et choisis celle qui te correspond le mieux.
     </Paragraph>
     <LicenceCards />
   </PageContent>
@@ -40,9 +37,7 @@ import CtaHelloasso from '../components/adhesion/CtaHelloasso.astro'
       tagline="Club benefits"
       size="medium"
     />
-    <Paragraph>
-        Aux Flagmingos, ton engagement dans la vie du club est valorisé.
-    </Paragraph>
+    <Paragraph> Aux Flagmingos, ton engagement dans la vie du club est valorisé. </Paragraph>
     <Engagement />
   </PageContent>
   <PageContent noBackground={true}>

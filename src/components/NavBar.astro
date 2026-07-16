@@ -88,6 +88,7 @@ const navLinks = navigation.filter((link) => link.navbar)
     menuIcon?.classList.remove('hidden')
     closeIcon?.classList.add('hidden')
     toggle?.setAttribute('aria-expanded', 'false')
+    toggle?.setAttribute('aria-label', 'Ouvrir le menu')
   }
 
   const openMenu = () => {
@@ -95,6 +96,7 @@ const navLinks = navigation.filter((link) => link.navbar)
     menuIcon?.classList.add('hidden')
     closeIcon?.classList.remove('hidden')
     toggle?.setAttribute('aria-expanded', 'true')
+    toggle?.setAttribute('aria-label', 'Fermer le menu')
   }
 
   toggle?.addEventListener('click', (e) => {

@@ -5,6 +5,7 @@ import ClipboardCheck from '@lucide/astro/icons/clipboard-check'
 
 export const teamBuilding = {
   pageTitle: 'Team Building - Flagmingos',
+  pageDescription: "Organisez un événement de team building original avec les Flagmingos : initiation au Flag Football pour votre entreprise",
   pageHeader: {
     eybrow: 'CORPORATE EVENTS',
     title: 'TEAM',
