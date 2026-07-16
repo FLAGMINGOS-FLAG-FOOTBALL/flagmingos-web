@@ -1,0 +1,162 @@
+---
+interface Props {
+  name: string
+  role: string
+  number?: number
+  category: 'bureau' | 'ca' | 'coach' | 'headcoach'
+  stat?: string
+  photoUrl?: string
+}
+
+const { name, role, number, category, stat, photoUrl } = Astro.props
+
+const styles = {
+  bureau: {
+    zone: 'bg-brand-900',
+    num: 'text-brand-700 opacity-70',
+    // badge: 'border border-white/40 text-white bg-brand-900',
+    badge: 'text-white',
+    bar: 'bg-brand-800',
+    name: 'text-white',
+    role: 'text-white/70',
+    stat: 'text-white/45',
+    border: 'border-2 border-brand-700',
+  },
+  ca: {
+    zone: 'bg-bg',
+    num: 'text-line',
+    badge: 'border-line text-ink-soft',
+    bar: 'bg-bg-raised border-t border-line',
+    name: 'text-ink',
+    role: 'text-ink-soft',
+    stat: 'text-ink-soft',
+    border: 'border-2 border-bg',
+  },
+  coach: {
+    zone: 'bg-brand-50',
+    num: 'text-brand-200 opacity-70',
+    badge: 'border-brand-500 text-brand-600',
+    bar: 'bg-bg-raised border-t-2 border-brand-500',
+    name: 'text-ink',
+    role: 'text-brand-600',
+    stat: 'text-ink-soft',
+    border: '',
+  },
+  headcoach: {
+    zone: 'bg-brand-600',
+    num: 'text-brand-400 opacity-70',
+    badge: 'border-white/60 text-white',
+    bar: 'bg-brand-500',
+    name: 'text-white',
+    role: 'text-white/85',
+    stat: 'text-white/60',
+    border: 'border-2 border-white/30',
+  },
+}
+
+const s = styles[category]
+const isHeadCoach = category === 'headcoach'
+
+const initials = name
+  .split(/[\s.]+/)
+  .filter(Boolean)
+  .map((w) => w[0])
+  .join('')
+  .slice(0, 2)
+  .toUpperCase()
+---
+
+<div class={`perspective-[900px] @container`}>
+  <div
+    class="group border-line relative flex aspect-5/7 w-full flex-col overflow-hidden border shadow-xl will-change-transform"
+    style="transition: transform 0.15s ease-out;"
+    data-tilt-card
+  >
+    <!-- Shine : suit le curseur, invisible au repos -->
+    <div
+      class="pointer-events-none absolute inset-0 z-20 opacity-0"
+      style="transition: opacity 0.15s ease-out; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.4), transparent 55%); mix-blend-mode: overlay;"
+      data-tilt-shine
+    >
+    </div>
+    <div class={`absolute inset-0 z-10  ${s.border} m-2`}></div>
+    <div class={`relative flex flex-1 items-center justify-center ${s.zone} overflow-hidden`}>
+      {
+        number && (
+          <span
+            class={`absolute top-3 left-3 px-1.5 py-0.5 font-mono text-[10px] tracking-wider uppercase ${s.badge} z-3`}
+          >
+            #{String(number).padStart(2, '0')}
+          </span>
+        )
+      }
+      <!-- <span
+        class={`absolute bottom-10 -right-6 px-1.5 py-0.5 font-bold text-[10px] tracking-wider uppercase ${s.badge} z-3 transform -rotate-90 origin-center`}
+      >
+        FLAGMINGOS
+      </span> -->
+
+      {photoUrl && <img src={photoUrl} alt={name} class="z-2 h-1/2 w-1/2 object-cover" />}
+      <span
+        class={`absolute font-display text-[calc(150cqw)] leading-none select-none ${s.num} -skew-x-6 z-1`}
+        aria-hidden="true"
+      >
+        {initials}
+      </span>
+    </div>
+
+    <!-- Bandeau nom-->
+    <div class={`flex flex-col gap-0.5 px-4 py-3 ${s.bar}`}>
+      <h3 class={`font-display text-lg uppercase leading-none tracking-wide ${s.name}`}>
+        {name}
+      </h3>
+      <p class={`font-mono text-[11px] uppercase tracking-wider ${s.role}`}>
+        {role}
+      </p>
+      {stat && <p class={`mt-1 font-mono text-[10px] ${s.stat}`}>{stat}</p>}
+    </div>
+  </div>
+</div>
+
+<script>
+  function initTiltCards() {
+    const MAX_TILT = 15
+
+    document.querySelectorAll('[data-tilt-card]').forEach((card) => {
+      if (card.dataset.tiltBound) return // évite les doubles listeners
+      card.dataset.tiltBound = 'true'
+
+      const shine = card.querySelector('[data-tilt-shine]')
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect()
+        const px = (e.clientX - rect.left) / rect.width
+        const py = (e.clientY - rect.top) / rect.height
+
+        const rotateY = (px - 0.5) * MAX_TILT * 2
+        const rotateX = -(py - 0.5) * MAX_TILT * 2
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`
+
+        if (shine) {
+          shine.style.setProperty('--mx', `${px * 100}%`)
+          shine.style.setProperty('--my', `${py * 100}%`)
+          shine.style.opacity = '1'
+        }
+      })
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'
+        if (shine) shine.style.opacity = '0'
+      })
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTiltCards)
+  } else {
+    initTiltCards()
+  }
+  // Astro View Transitions : ré-attache le tilt après une navigation client-side
+  document.addEventListener('astro:page-load', initTiltCards)
+</script>

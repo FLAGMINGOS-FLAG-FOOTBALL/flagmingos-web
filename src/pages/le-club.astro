@@ -4,14 +4,16 @@ import PageHeader from '../components/PageHeader.astro'
 import PageContent from '../components/ui/PageContent.astro'
 import SectionTitle from '../components/ui/SectionTitle.astro'
 import Paragraph from '../components/ui/Paragraph.astro'
-
 import Palmares from '../components/club/Palmares.astro'
-// import StaffSection from '../components/club/StaffSection.astro'
+import TradingCard from '../components/club/TradingCard.astro'
 
 import Button from '../components/ui/Button.astro'
 import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
 
+import flagmingball from '../assets/flagmingball.jpg'
 import winners from '../assets/winners.jpg'
+import Logo from '../assets/logo.png'
+import { board, coachs, medical } from '../data/club'
 ---
 
 <Page title="Le Club - Flagmingos">
@@ -23,18 +25,27 @@ import winners from '../assets/winners.jpg'
     subtitle="Une bande d'ami(e)s réunie autour du flag football à Balma, devenue championne de France Division 2."
   />
   <PageContent>
-    <SectionTitle title="POURQUOI" highlight="FLAGMINGOS?" tagline="Our Story" />
-    <Paragraph>
-      Flamingos, le flamant rose en anglais — un clin d'œil à la brique rose de Toulouse. Une espèce
-      grégaire, qui vit en groupe, à l'image de notre collectif. Et puis il y a une seconde lecture
-      : « Flamingos » contient « amigos », les amis en espagnol. Associé à notre sport, ça donne Fla<strong
-        class="text-brand-700">g</strong
-      >mingos — le flag des amis.
-    </Paragraph>
-    <Paragraph>
-      Le club est né en 2019 d'une bande d'ami(e)s et de joueurs(ses) qui évoluaient depuis
-      plusieurs années dans différentes structures, réunis autour d'un projet commun.
-    </Paragraph>
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_1fr] md:items-start">
+      <div>
+        <SectionTitle title="POURQUOI" highlight="FLAGMINGOS?" tagline="Our Story" />
+        <Paragraph>
+          Flamingos, le flamant rose en anglais — un clin d'œil à la brique rose de Toulouse. Une
+          espèce grégaire, qui vit en groupe, à l'image de notre collectif. Et puis il y a une
+          seconde lecture : « Flamingos » contient « amigos », les amis en espagnol. Associé à notre
+          sport, ça donne Fla<strong class="text-brand-700">g</strong>mingos — le flag des amis.
+        </Paragraph>
+        <Paragraph>
+          Le club est né en 2019 d'une bande d'ami(e)s et de joueurs(ses) qui évoluaient depuis
+          plusieurs années dans différentes structures, réunis autour d'un projet commun.
+        </Paragraph>
+      </div>
+      <img
+        src={flagmingball.src}
+        alt={'Flagmingball'}
+        class="h-full w-full object-cover"
+        loading="lazy"
+      />
+    </div>
   </PageContent>
   <PageContent noBackground={true}>
     <SectionTitle title="LE FLAG POUR" highlight="TOUS" tagline="BEYOND THE FIELD" />
@@ -71,7 +82,7 @@ import winners from '../assets/winners.jpg'
       </article>
     </div>
   </PageContent>
-  <PageContent>
+  <!-- <PageContent>
     <SectionTitle title="NOS" highlight="ÉQUIPES" tagline="LE CLUB" size="large" />
     <Paragraph>
       Le club des Flagmingos propose plusieurs équipes pour différents niveaux et catégories d'âge.
@@ -79,12 +90,23 @@ import winners from '../assets/winners.jpg'
       correspond à vos compétences et à vos ambitions. Rejoignez-nous pour vivre l'expérience du
       flag football dans un environnement stimulant et convivial.
     </Paragraph>
-  </PageContent>
+  </PageContent> -->
   <PageContent>
-    <!-- <StaffSection /> -->
-  </PageContent>
-  <PageContent>
-    <SectionTitle title="NOS" highlight="ENTRAÎNEURS" tagline="LE CLUB" size="large" />
+    <SectionTitle title="NOTRE" highlight="ORGANISATION" tagline="THE BOARD" size="large" />
+    <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
+      {
+        board.map((member) => (
+          <TradingCard
+            name={member.name}
+            role={member.role}
+            number={member.number}
+            category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
+            photoUrl={Logo.src}
+          />
+        ))
+      }
+    </div>
+    <SectionTitle title="NOS" highlight="COACHS" tagline="COACHING STAFF" size="large" />
     <Paragraph>
       Nos entraîneurs sont des passionnés de flag football, dévoués à aider chaque joueur à
       atteindre son plein potentiel. Ils apportent leur expertise et leur expérience pour créer des
@@ -92,9 +114,37 @@ import winners from '../assets/winners.jpg'
       chaque joueur. Leur objectif est de favoriser le développement des compétences, la confiance
       en soi et l'esprit d'équipe au sein du club
     </Paragraph>
+    <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
+      {
+        coachs.map((member) => (
+          <TradingCard
+            name={member.name}
+            role={member.role}
+            number={member.number}
+            category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
+            photoUrl={Logo.src}
+          />
+        ))
+      }
+    </div>
+    <SectionTitle title="PERSONNEL" highlight="MÉDICAL" tagline="MEDICAL STAFF" size="large" />
+    <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
+      {
+        medical.map((member) => (
+          <TradingCard
+            name={member.name}
+            role={member.role}
+            number={member.number}
+            category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
+            photoUrl={Logo.src}
+          />
+        ))
+      }
+    </div>
   </PageContent>
+
   <PageContent>
-    <SectionTitle title="NOS" highlight="PERFORMANCES" tagline="FEAR THE FOCK" size="large"/>
+    <SectionTitle title="NOS" highlight="PERFORMANCES" tagline="FEAR THE FOCK" size="large" />
     <div class="grid grid-cols-1 gap-10 md:grid-cols-[1fr_1.3fr] md:items-start">
       <div>
         <Paragraph>
@@ -105,11 +155,16 @@ import winners from '../assets/winners.jpg'
           de montrer leur talent et de continuer à écrire l'histoire du club avec fierté et ambition.
         </Paragraph>
         <Paragraph>
-          Découvrez le palmarès du club, retraçant les moments forts et les succès qui ont
-          marqué notre parcours depuis nos débuts. Chaque trophée et chaque victoire est le fruit de
+          Découvrez le palmarès du club, retraçant les moments forts et les succès qui ont marqué
+          notre parcours depuis nos débuts. Chaque trophée et chaque victoire est le fruit de
           l'engagement et de la passion de nos joueurs, entraîneurs et supporters.
         </Paragraph>
-        <img src={winners.src} alt="Palmarès du club" class="border-line mt-6 w-full" />
+        <img
+          src={winners.src}
+          alt="Palmarès du club"
+          class="border-line mt-6 w-full"
+          loading="lazy"
+        />
       </div>
       <Palmares />
     </div>

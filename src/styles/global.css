@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-brand-50: #fdf2f5;
@@ -6,31 +6,29 @@
   --color-brand-200: #f391af;
   --color-brand-300: #ee608c;
   --color-brand-400: #e93069;
-  --color-brand-500: #E50046;
+  --color-brand-500: #e50046;
   --color-brand-600: #b70038;
   --color-brand-700: #89002a;
   --color-brand-800: #5b001c;
   --color-brand-900: #2d000d;
 
-  --color-bg: #F6F4F0;
-  --color-bg-raised: #FFFFFF;
+  --color-bg: #f6f4f0;
+  --color-bg-raised: #ffffff;
 
-  --color-ink: #100D0E;
-  --color-ink-soft: #59554F;
+  --color-ink: #100d0e;
+  --color-ink-soft: #59554f;
 
-  --color-line: #E4DFD6;
-
+  --color-line: #e4dfd6;
 
   --color-hover: #cd003e;
 
-  --font-display: "Anton", sans-serif;
-  --font-sans: "Inter", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-display: 'Anton', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 
   --animate-scroll-left: scroll-left 22s linear infinite;
   --animate-blob: blob 12s ease-in-out infinite;
   --animate-blob-delayed: blob 12s ease-in-out infinite 6s;
-
 }
 
 @layer base {
@@ -58,7 +56,6 @@
 }
 
 @keyframes blob {
-
   0%,
   100% {
     transform: translate(0, 0) scale(1);
@@ -69,9 +66,8 @@
   }
 
   66% {
-    transform: translate(-20px, 10px) scale(.95);
+    transform: translate(-20px, 10px) scale(0.95);
   }
-
 }
 
 @keyframes shine {
