@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import "./fonts.css";
 
 @theme {
   --color-brand-50: #fdf2f5;
