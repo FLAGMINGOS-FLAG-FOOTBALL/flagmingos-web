@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 import Player from '../assets/player.png'
 import Logo from '../assets/logo.png'
 import Button from './ui/Button.astro'
@@ -9,28 +10,22 @@ import UserRoundPlus from '@lucide/astro/icons/user-round-plus'
 <section class="relative overflow-hidden py-12 lg:pt-16">
   <!-- Grid ackground -->
   <div
-    class="-z-10 absolute inset-0 bg-[linear-gradient(to_right,#292724_1px,transparent_1px),linear-gradient(to_bottom,#292724_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-5"
+    class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#292724_1px,transparent_1px),linear-gradient(to_bottom,#292724_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] bg-size-[4rem_4rem] opacity-5"
   >
   </div>
 
   <!-- Logo -->
-  <div
-    class="absolute -right-20 -top-20 opacity-5 pointer-events-none select-none"
-  >
-    <img
-      alt="Logo Flagmingos"
-      class="w-150 h-auto object-contain"
-      src={Logo.src}
-    />
+  <div class="pointer-events-none absolute -top-20 -right-20 opacity-5 select-none">
+    <Image alt="Logo Flagmingos" class="h-auto w-150 object-contain" src={Logo} />
   </div>
   <!-- Blob  -->
   <div
-    class="absolute top-0 -left-32 w-50 h-50 lg:w-150 lg:h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob"
+    class="bg-brand-500/8 animate-blob absolute top-0 -left-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"
   >
   </div>
 
   <div
-    class="absolute top-1/6 -right-32 w-50 h-50 lg:w-150 lg:h-150 rounded-full bg-brand-500/8 blur-3xl animate-blob-delayed"
+    class="bg-brand-500/8 animate-blob-delayed absolute top-1/6 -right-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"
   >
   </div>
 
@@ -47,7 +42,7 @@ import UserRoundPlus from '@lucide/astro/icons/user-round-plus'
         ÉQUIPE D'OCCITANIE
       </div> -->
       <div
-        class="mb-5 inline-flex items-center gap-2 bg-ink px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
+        class="bg-ink mb-5 inline-flex items-center gap-2 px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
       >
         <span class="bg-brand-500 px-1.5 py-0.5">
           <span id="achievement-icon">#1</span>
@@ -81,48 +76,32 @@ import UserRoundPlus from '@lucide/astro/icons/user-round-plus'
         }, 3500)
       </script>
       <!-- Title -->
-      <h1 class="font-display uppercase origin-left -skew-x-3 leading-[0.86]">
-        <span class="block mb-6 text-[clamp(42px,10vw,96px)] tracking-tight">
-          Let's Play
-        </span>
+      <h1 class="font-display origin-left -skew-x-3 leading-[0.86] uppercase">
+        <span class="mb-6 block text-[clamp(42px,10vw,96px)] tracking-tight"> Let's Play </span>
 
         <span class="text-[clamp(46px,15vw,142px)]">
-          <span class="text-brand-500">FLAG</span><span
-            class="text-ink opacity-[0.1]">MINGOS</span
-          >
+          <span class="text-brand-500">FLAG</span><span class="text-ink opacity-[0.1]">MINGOS</span>
         </span>
 
         <br />
 
-        <span class="block mt-2 text-[clamp(46px,15vw,142px)] text-brand-500">
-          Football
-        </span>
+        <span class="text-brand-500 mt-2 block text-[clamp(46px,15vw,142px)]"> Football </span>
       </h1>
 
       <!-- Description -->
-      <p
-        class="mt-5 max-w-130 text-base leading-relaxed text-ink-soft md:mt-7 md:text-lg"
-      >
-        Découvrez le <b>Flag Football</b> à Balma : un sport collectif spectaculaire,
-        dynamique, sans contact physique, où l'agilité, la mixité et la stratégie
-        font toute la différence
+      <p class="text-ink-soft mt-5 max-w-130 text-base leading-relaxed md:mt-7 md:text-lg">
+        Découvrez le <b>Flag Football</b> à Balma : un sport collectif spectaculaire, dynamique, sans
+        contact physique, où l'agilité, la mixité et la stratégie font toute la différence
       </p>
 
       <!-- Buttons -->
-      <div
-        class="mt-8
-        flex
-        flex-col
-        gap-3
-        min-[480px]:flex-row
-        min-[480px]:flex-wrap"
-      >
+      <div class="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
         <Button href="#rejoindre" variant="primary" size="small">
-          <UserRoundPlus class="w-5 h-5" />
+          <UserRoundPlus class="h-5 w-5" />
           Rejoindre l'équipe
         </Button>
         <Button href="/flag-football" variant="secondary" size="small">
-          <BookOpen class="w-5 h-5" />
+          <BookOpen class="h-5 w-5" />
           Découvrir le sport
         </Button>
       </div>
@@ -130,22 +109,12 @@ import UserRoundPlus from '@lucide/astro/icons/user-round-plus'
 
     <!-- Visual -->
     <div
-      class="order-first hidden pointer-events-none select-none
-      lg:flex
-      justify-center
-      lg:order-0
-      lg:items-end
-      lg:justify-end"
+      class="pointer-events-none order-first hidden justify-center select-none lg:order-0 lg:flex lg:items-end lg:justify-end"
     >
-      <img
-        src={Player.src}
-        class="absolute
-    -right-10
-    -bottom-10
-    w-52
-    lg:right-0
-    lg:-bottom-20
-    lg:w-[clamp(300px,40vw,500px)]"
+      <Image
+        alt="Joueur de Flag Football"
+        src={Player}
+        class="absolute -right-10 -bottom-10 w-52 lg:right-0 lg:-bottom-20 lg:w-[clamp(300px,40vw,500px)]"
       />
     </div>
   </div>

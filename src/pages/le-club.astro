@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Page from '../layouts/Page.astro'
 import PageHeader from '../components/PageHeader.astro'
 import PageContent from '../components/ui/PageContent.astro'
@@ -39,8 +40,8 @@ import { board, coachs, medical } from '../data/club'
           plusieurs années dans différentes structures, réunis autour d'un projet commun.
         </Paragraph>
       </div>
-      <img
-        src={flagmingball.src}
+      <Image
+        src={flagmingball}
         alt={'Flagmingball'}
         class="h-full w-full object-cover"
         loading="lazy"
@@ -101,7 +102,7 @@ import { board, coachs, medical } from '../data/club'
             role={member.role}
             number={member.number}
             category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
-            photoUrl={Logo.src}
+            photo={Logo}
           />
         ))
       }
@@ -122,7 +123,7 @@ import { board, coachs, medical } from '../data/club'
             role={member.role}
             number={member.number}
             category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
-            photoUrl={Logo.src}
+            photo={Logo}
           />
         ))
       }
@@ -136,7 +137,7 @@ import { board, coachs, medical } from '../data/club'
             role={member.role}
             number={member.number}
             category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
-            photoUrl={Logo.src}
+            photo={Logo}
           />
         ))
       }
@@ -159,9 +160,9 @@ import { board, coachs, medical } from '../data/club'
           notre parcours depuis nos débuts. Chaque trophée et chaque victoire est le fruit de
           l'engagement et de la passion de nos joueurs, entraîneurs et supporters.
         </Paragraph>
-        <img
-          src={winners.src}
-          alt="Palmarès du club"
+        <Image
+          src={winners}
+          alt="Flagmingos Champions de France 2022 Division 2"
           class="border-line mt-6 w-full"
           loading="lazy"
         />

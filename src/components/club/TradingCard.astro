@@ -1,14 +1,15 @@
 ---
+import { Image } from 'astro:assets'
 interface Props {
   name: string
   role: string
   number?: number
   category: 'bureau' | 'ca' | 'coach' | 'headcoach'
   stat?: string
-  photoUrl?: string
+  photo?: string | ImageMetadata
 }
 
-const { name, role, number, category, stat, photoUrl } = Astro.props
+const { name, role, number, category, stat, photo } = Astro.props
 
 const styles = {
   bureau: {
@@ -96,7 +97,7 @@ const initials = name
         FLAGMINGOS
       </span> -->
 
-      {photoUrl && <img src={photoUrl} alt={name} class="z-2 h-1/2 w-1/2 object-cover" />}
+      {photo && <Image src={photo} alt={name} class="z-2 h-1/2 w-1/2 object-cover" />}
       <span
         class={`absolute font-display text-[calc(150cqw)] leading-none select-none ${s.num} -skew-x-6 z-1`}
         aria-hidden="true"

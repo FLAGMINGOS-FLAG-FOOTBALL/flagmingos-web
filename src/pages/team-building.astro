@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Page from '../layouts/Page.astro'
 import PageHeader from '../components/PageHeader.astro'
 import PageContent from '../components/ui/PageContent.astro'
@@ -21,8 +22,9 @@ import AssetTeamBuilding from '../assets/teambuilding-asset.jpg'
   />
 
   <div class="bg-brand-800 mt-20 h-38 lg:h-48">
-    <img
-      src={LogoTeamBuilding.src}
+    <Image
+      alt="Badge Flagmingos Team Building"
+      src={LogoTeamBuilding}
       class="relative mx-auto w-full max-w-64 translate-y-[-50%] object-contain lg:max-w-72"
     />
   </div>
@@ -39,7 +41,7 @@ import AssetTeamBuilding from '../assets/teambuilding-asset.jpg'
     <div class="grid grid-cols-1 gap-10 lg:grid-cols-2 items-center mb-10">
       <div class="grid grid-cols-1 lg:gap-6">
         {teamBuilding.description.map((paragraph) => <Paragraph>{paragraph}</Paragraph>)}
-        <img src={AssetTeamBuilding.src} class="mt-6 w-full object-cover" />
+        <Image src={AssetTeamBuilding} alt="Team Building Image" class="mt-6 w-full object-cover" />
       </div>
 
       <div>
