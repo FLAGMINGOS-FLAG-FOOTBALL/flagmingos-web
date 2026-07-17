@@ -1,144 +1,38 @@
 ---
 import { Image } from 'astro:assets'
-import Player from '../assets/player.png'
+import Player from '../assets/hero.png'
 import Logo from '../assets/logo.png'
-import Button from './ui/Button.astro'
-import BookOpen from '@lucide/astro/icons/book-open-text'
-import UserRoundPlus from '@lucide/astro/icons/user-round-plus'
+import HeroTitle from './HeroTitle.astro'
 ---
-
-<section class="relative overflow-hidden py-12 lg:pt-16">
-  <!-- Grid ackground -->
-  <div
-    class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#292724_1px,transparent_1px),linear-gradient(to_bottom,#292724_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] bg-size-[4rem_4rem] opacity-5"
-  >
-  </div>
+<section class="relative flex flex-col overflow-hidden pt-12 lg:block lg:pt-16">
+  <!-- Grid background -->
+  <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#292724_1px,transparent_1px),linear-gradient(to_bottom,#292724_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] bg-size-[4rem_4rem] opacity-5"></div>
 
   <!-- Logo -->
   <div class="pointer-events-none absolute -top-20 -right-20 opacity-5 select-none">
     <Image alt="Logo Flagmingos" class="h-auto w-150 object-contain" src={Logo} />
   </div>
-  <!-- Blob  -->
-  <div
-    class="bg-brand-500/8 animate-blob absolute top-0 -left-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"
-  >
+
+  <!-- Blobs -->
+  <div class="bg-brand-500/8 animate-blob absolute top-0 -left-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"></div>
+  <div class="bg-brand-500/8 animate-blob-delayed absolute top-1/6 -right-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"></div>
+
+  <!-- Text -->
+  <div class="relative z-50 mx-auto w-full max-w-350 px-5 lg:px-10 lg:pb-20">
+    <HeroTitle />
   </div>
 
-  <div
-    class="bg-brand-500/8 animate-blob-delayed absolute top-1/6 -right-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"
-  >
-  </div>
-
-  <div
-    class="relative mx-auto grid max-w-295 grid-cols-1 gap-2 px-5 lg:grid-cols-[1.15fr_.85fr] lg:px-10"
-  >
-    <!-- HERO -->
-    <div class="relative z-50 lg:pb-20">
-      <!-- Ranking -->
-      <!-- <div
-        class="mb-5 inline-flex items-center gap-2 bg-ink px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
-      >
-        <span class="bg-brand-500 px-1.5 py-0.5"> #1 </span>
-        ÉQUIPE D'OCCITANIE
-      </div> -->
-      <div
-        class="bg-ink mb-5 inline-flex items-center gap-2 px-3 py-1.5 font-mono text-xs font-bold text-white lg:mb-7 lg:px-4"
-      >
-        <span class="bg-brand-500 px-1.5 py-0.5">
-          <span id="achievement-icon">#1</span>
-        </span>
-
-        <span id="achievement-text"> ÉQUIPE D'OCCITANIE </span>
-      </div>
-
-      <script>
-        const achievements = [
-          {
-            icon: '#1',
-            text: "ÉQUIPE D'OCCITANIE",
-          },
-          {
-            icon: '#1',
-            text: 'CHAMPION DE FRANCE D2 2022',
-          },
-        ]
-
-        let index = 0
-
-        const icon = document.querySelector('#achievement-icon')
-        const text = document.querySelector('#achievement-text')
-
-        setInterval(() => {
-          index = (index + 1) % achievements.length
-
-          icon.textContent = achievements[index].icon
-          text.textContent = achievements[index].text
-        }, 3500)
-      </script>
-      <!-- Title -->
-      <h1 class="font-display origin-left -skew-x-3 leading-[0.86] uppercase">
-        <span class="mb-6 block text-[clamp(42px,10vw,96px)] tracking-tight"> Let's Play </span>
-
-        <span class="text-[clamp(46px,15vw,142px)]">
-          <span class="text-brand-500">FLAG</span><span class="text-ink opacity-[0.1]">MINGOS</span>
-        </span>
-
-        <br />
-
-        <span class="text-brand-500 mt-2 block text-[clamp(46px,15vw,142px)]"> Football </span>
-      </h1>
-
-      <!-- Description -->
-      <p class="text-ink-soft mt-5 max-w-130 text-base leading-relaxed md:mt-7 md:text-lg">
-        Découvrez le <b>Flag Football</b> à Balma : un sport collectif spectaculaire, dynamique, sans
-        contact physique, où l'agilité, la mixité et la stratégie font toute la différence
-      </p>
-
-      <!-- Buttons -->
-      <div class="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
-        <Button href="#rejoindre" variant="primary" size="small">
-          <UserRoundPlus class="h-5 w-5" />
-          Rejoindre l'équipe
-        </Button>
-        <Button href="/flag-football" variant="secondary" size="small">
-          <BookOpen class="h-5 w-5" />
-          Découvrir le sport
-        </Button>
-      </div>
-    </div>
-
-    <!-- Visual -->
-    <div
-      class="pointer-events-none order-first hidden justify-center select-none lg:order-0 lg:flex lg:items-end lg:justify-end"
-    >
+  <!-- Player visual -->
+  <div class="pointer-events-none mt-4 flex justify-center select-none lg:absolute lg:inset-x-0 lg:inset-y-0 lg:mt-0 lg:items-end lg:justify-end">
+    <div class="mx-auto flex w-full max-w-350 justify-center px-5 lg:justify-end">
       <Image
-        alt="Joueur de Flag Football"
+        alt="Joueurs de Flag Football"
         src={Player}
+        sizes="(min-width: 1024px) 700px, (min-width: 640px) 384px, 288px"
         loading="eager"
         fetchpriority="high"
-        class="absolute -right-10 -bottom-10 w-52 lg:right-0 lg:-bottom-20 lg:w-[clamp(300px,40vw,500px)]"
+        class="w-96 lg:w-[clamp(500px,42vw,700px)]"
       />
     </div>
   </div>
 </section>
-
-<style>
-  @keyframes shine {
-    from {
-      background-position: -200%;
-    }
-    to {
-      background-position: 200%;
-    }
-  }
-
-  .shine {
-    background: linear-gradient(120deg, #d40036 30%, #ff9fb0 50%, #d40036 70%);
-
-    background-size: 200%;
-    color: transparent;
-    background-clip: text;
-
-    animation: shine 8s linear infinite;
-  }
-</style>
