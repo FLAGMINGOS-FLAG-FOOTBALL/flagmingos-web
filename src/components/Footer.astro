@@ -26,6 +26,8 @@ const socials = [
     href: 'https://www.tiktok.com/@flagmingos',
   },
 ]
+const appleMapsUrl = 'https://maps.apple/p/Nq44xWInDFKy6w'
+const googleMapsUrl = 'https://maps.app.goo.gl/czwtr3dnYYcYznaE8'
 ---
 
 <footer class="bg-brand-800 text-white overflow-hidden">
@@ -62,7 +64,7 @@ const socials = [
         </p>
       </div>
       <div class="flex flex-col gap-3">
-        <FooterTitle title="Email" />
+        <FooterTitle title="E-mail" />
         <a
           href={`mailto:${email}`}
           class="text-brand-50/80 text-sm hover:text-brand-500 transition-colors mb-3"
@@ -84,14 +86,18 @@ const socials = [
           set:html={address.replace(',', '<br />')}
         />
         <a
-          href="https://maps.apple.com/?q=Flagmingos%20Flag%20Football"
+          href={appleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           class="text-brand-50/80 hover:text-brand-400 transition-colors text-sm inline-flex items-center gap-1.5"
           >Apple Plans <span aria-hidden="true"
             ><ArrowUpRight size={16} stroke-width={3} /></span
           ></a
         >
         <a
-          href="https://goo.gl/maps/?q=Flagmingos%20Flag%20Football"
+          href={googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           class="text-brand-50/80 hover:text-brand-400 transition-colors text-sm inline-flex items-center gap-1.5"
           >Google Maps <span aria-hidden="true"
             ><ArrowUpRight size={16} stroke-width={3} /></span

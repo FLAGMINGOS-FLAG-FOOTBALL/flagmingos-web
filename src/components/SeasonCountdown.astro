@@ -7,10 +7,10 @@ const openHouseStart = '25 août'
 const openHouseEnd = '13 septembre'
 
 const units = [
-  { id: 'cd-days', label: 'Jours' },
-  { id: 'cd-hours', label: 'Heures' },
-  { id: 'cd-minutes', label: 'Min' },
-  { id: 'cd-seconds', label: 'Sec' },
+  { id: 'cd-days', label: 'Jours', color: 'text-brand-700' },
+  { id: 'cd-hours', label: 'Heures', color: 'text-brand-700/80' },
+  { id: 'cd-minutes', label: 'Min', color: 'text-brand-700/80' },
+  { id: 'cd-seconds', label: 'Sec', color: 'text-brand-700/60' },
 ]
 ---
 
@@ -29,12 +29,12 @@ const units = [
 
       <div id="season-upcoming" class="mx-auto mt-4 max-w-xl text-base text-white">
         La saison 2026-2027 commence le {openHouseStart}. Rejoins-nous pour ton premier
-        entraînement. Portes Ouvertes du {openHouseStart} au {openHouseEnd}.
+        entraînement. Portes ouvertes du {openHouseStart} au {openHouseEnd}.
         <p class="mt-3 items-center gap-2 text-sm text-white/80">
           Pas envie d'attendre août ?
           <a
             href="/initiation"
-            class="inline-flex items-center justify-center gap-1.5 px-0 py-0 text-sm font-bold text-white transition-colors hover:text-white/80"
+            class="inline-flex items-center justify-center gap-1.5 px-2 py-0 text-sm font-bold text-white transition-colors hover:text-white/80"
           >
             Viens essayer dès maintenant
             <RightArrow class="h-4 w-4" />
@@ -43,14 +43,14 @@ const units = [
       </div>
 
       <div id="season-started" class="mx-auto mt-4 hidden text-base text-white">
-        La saison est lancée ! Les Portes Ouvertes continuent jusqu'au {openHouseEnd} — viens essayer,
+        La saison est lancée ! Les portes ouvertes continuent jusqu'au {openHouseEnd} : viens essayer,
         aucun engagement requis.
         <p class="mt-3 text-sm text-white/80">
           <a
             href="/initiation"
-            class="inline-flex items-center justify-center gap-1.5 px-0 py-0 text-sm font-bold text-white transition-colors hover:text-white/80"
+            class="inline-flex items-center justify-center gap-1.5 px-2 py-0 text-sm font-bold text-white transition-colors hover:text-white/80"
           >
-            Rejoins nous dès maintenant
+            Rejoins-nous dès maintenant
             <RightArrow class="h-4 w-4" />
           </a>
         </p>
@@ -64,7 +64,7 @@ const units = [
             <div class="mx-auto flex flex-col items-center justify-center">
               <div
                 id={u.id}
-                class="text-brand-700 font-display w-[2ch] text-7xl font-extrabold tabular-nums lg:text-9xl"
+                class={`font-display w-[2ch] text-7xl font-extrabold tabular-nums lg:text-9xl ${u.color}`}
               >
                 00
               </div>
