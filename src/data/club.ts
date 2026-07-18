@@ -43,22 +43,22 @@ export const board = [
   },
   {
     role: 'Responsable Événementiel',
-    name: 'Nom Prenom',
+    name: 'Guillaume Prunier',
     category: 'ca',
-    number: 0
+    number: 2
   },
-  {
-    role: 'Représentant des joueurs',
-    name: 'Nom Prenom',
-    category: 'ca',
-    number: 0
-  },
-  {
-    role: 'Représentant des joueuses',
-    name: 'Nom Prenom',
-    category: 'ca',
-    number: 0
-  },
+  // {
+  //   role: 'Représentant des joueurs',
+  //   name: 'Nom Prenom',
+  //   category: 'ca',
+  //   number: 0
+  // },
+  // {
+  //   role: 'Représentant des joueuses',
+  //   name: 'Nom Prenom',
+  //   category: 'ca',
+  //   number: 0
+  // },
 ]
 
 export const coachs = [
@@ -66,36 +66,43 @@ export const coachs = [
     role: 'Head Coach Séniors',
     name: 'Sylvain Vallot',
     category: 'headcoach',
+    number: 21
   },
   {
     role: 'Head Coach Jeunes',
     name: 'Nuria Inglada',
     category: 'headcoach',
+    number: 1
   },
   {
     role: 'Coachs Séniors',
     name: 'Manon Pialat',
     category: 'coach',
+    number: 26
   },
   {
     role: 'Coachs Jeunes',
     name: 'Simon Barrois',
     category: 'coach',
+    number: 13
   },
   {
     role: 'Coachs Jeunes',
     name: 'Nicolas Rateau',
     category: 'coach',
+    number: 7
   },
   {
     role: 'Préparation physique',
     name: 'Rémy Gaudry',
     category: 'coach',
+    number: 32
   },
   {
     role: 'Préparation physique',
     name: 'Nuria Inglada Soler',
     category: 'coach',
+    number: 1
   }
 ]
 
@@ -104,10 +111,12 @@ export const medical = [
     role: 'Ostéopathe',
     name: 'Thomas Mouries',
     category: 'coach',
+    number: 29
   },
   {
     role: 'Kinésithérapeute',
     name: 'Rémy Gaudry',
     category: 'coach',
+    number: 32
   },
 ]

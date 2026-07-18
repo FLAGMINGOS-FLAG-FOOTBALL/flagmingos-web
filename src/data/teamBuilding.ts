@@ -19,7 +19,7 @@ export const teamBuilding = {
             séminaire sportif permet d'en désamorcer une bonne partie.`,
     `C'est l'occasion idéale de faire
             découvrir à vos collaborateurs un nouvel univers. Avec le flag football, les Flagmingos
-            proposent une immersion complète dans un sport collectif, stratégique, mixte et sans contact —
+            proposent une immersion complète dans un sport collectif, stratégique, mixte et sans contact -
             accessible à tous, quel que soit le niveau.`,
   ],
   sectionTitle: {
@@ -36,7 +36,7 @@ export const teamBuilding = {
     {
       icon: Shield,
       title: 'Sans contact, sans risque',
-      text: 'Le flag football se joue sans plaquage — accessible à tous les niveaux physiques.',
+      text: 'Le flag football se joue sans plaquage - accessible à tous les niveaux physiques.',
     },
     {
       icon: MapPin,
