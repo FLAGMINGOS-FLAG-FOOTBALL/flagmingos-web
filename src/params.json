@@ -1,63 +1,85 @@
 {
-    "email": "contact@flagmingos.fr",
-    "instagram": "flagmingosflagfootball",
-    "phone": "+33 7 66 46 53 35",
-    "address": "Stade du parc Lagarde, 31130 Balma",
+  "email": "contact@flagmingos.fr",
+  "instagram": "flagmingosflagfootball",
+  "phone": "+33 7 66 46 53 35",
+  "address": "Stade du parc Lagarde, 31130 Balma",
 
-    "navigation": [
-        {
-            "label": "Accueil",
-            "url": "/",
-            "navbar": false,
-            "footer": true
-        },
-        {
-            "label": "Le Flag",
-            "url": "/flag-football",
-            "navbar": true,
-            "footer": true
-        },
-        {
-            "label": "Club",
-            "url": "/le-club",
-            "navbar": true,
-            "footer": true
-        },
-        {
-            "label": "Adhésion",
-            "url": "/adhesion",
-            "navbar": true,
-            "footer": true
-        },
-        {
-            "label": "Initiation",
-            "url": "/initiation",
-            "navbar": true,
-            "footer": true
-        },
-        {
-            "label": "Équipes",
-            "url": "/#",
-            "navbar": false,
-            "footer": false
-        },
-        {
-            "label": "Calendrier",
-            "url": "/#",
-            "navbar": false,
-            "footer": false
-        },
-        {
-            "label": "Team Building",
-            "url": "/team-building",
-            "navbar": true,
-            "footer": true
-        },
-        {
-            "label": "Contact",
-            "url": "/#contact",
-            "navbar": true,
-            "footer": true
-        }
-    ]
+  "navigation": [
+    {
+      "label": "Accueil",
+      "url": "/",
+      "navbar": false,
+      "footer": true
+    },
+    {
+      "label": "Le Flag",
+      "url": "/flag-football",
+      "navbar": true,
+      "footer": true
+    },
+    {
+      "label": "Club",
+      "url": "/le-club",
+      "navbar": true,
+      "footer": true
+    },
+    {
+      "label": "Adhésion",
+      "url": "/adhesion",
+      "navbar": true,
+      "footer": true
+    },
+    {
+      "label": "Initiation",
+      "url": "/initiation",
+      "navbar": true,
+      "footer": true
+    },
+    {
+      "label": "Équipes",
+      "url": "/#",
+      "navbar": false,
+      "footer": false
+    },
+    {
+      "label": "Calendrier",
+      "url": "/#",
+      "navbar": false,
+      "footer": false
+    },
+    {
+      "label": "Team Building",
+      "url": "/team-building",
+      "navbar": true,
+      "footer": true
+    },
+    {
+      "label": "Contact",
+      "url": "/#contact",
+      "navbar": true,
+      "footer": true
+    }
+  ],
+  "socials": [
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com/flagmingosflagfootball/"
+    },
+    {
+      "name": "Facebook",
+      "href": "https://www.facebook.com/flagmingos/"
+    },
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/company/flagmingos/"
+    },
+    {
+      "name": "TikTok",
+      "href": "https://www.tiktok.com/@flagmingosflagfootball"
+    }
+  ],
+  "gps": {
+    "apple": "https://maps.apple/p/Nq44xWInDFKy6w",
+    "google": "https://maps.app.goo.gl/czwtr3dnYYcYznaE8"
+  }
 }

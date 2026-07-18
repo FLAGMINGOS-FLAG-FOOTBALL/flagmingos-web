@@ -31,7 +31,7 @@ export const teamBuilding = {
     {
       icon: Users,
       title: 'Toutes tailles d\u2019équipe',
-      text: 'De 10 à 50 collaborateurs, en interne ou entre plusieurs services.',
+      text: 'De 10 à 50 personnes, en interne ou entre plusieurs services.',
     },
     {
       icon: Shield,

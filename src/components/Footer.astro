@@ -3,31 +3,11 @@ import ArrowUpRight from '@lucide/astro/icons/arrow-up-right'
 import Logotype from '@ui/Logotype.astro'
 import FooterTitle from '@ui/FooterTitle.astro'
 import Signature from '@ui/Signature.astro'
-import { address, email, phone } from '../params.json'
-import { navigation } from '../params.json'
+import { address, email, phone, socials, navigation, gps } from '../params.json'
 
 const navLinks = navigation.filter((link) => link.footer)
-
-const socials = [
-  {
-    name: 'Instagram',
-    href: 'https://www.instagram.com/flagmingos/',
-  },
-  {
-    name: 'Facebook',
-    href: 'https://www.facebook.com/flagmingos/',
-  },
-  {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/flagmingos/',
-  },
-  {
-    name: 'TikTok',
-    href: 'https://www.tiktok.com/@flagmingos',
-  },
-]
-const appleMapsUrl = 'https://maps.apple/p/Nq44xWInDFKy6w'
-const googleMapsUrl = 'https://maps.app.goo.gl/czwtr3dnYYcYznaE8'
+const appleMapsUrl = gps.apple
+const googleMapsUrl = gps.google
 ---
 
 <footer class="bg-brand-800 text-white overflow-hidden">

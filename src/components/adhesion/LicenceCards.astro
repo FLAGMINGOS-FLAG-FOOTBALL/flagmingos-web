@@ -142,10 +142,11 @@ let view = 2
               {section.details && (
                 <ul class="space-y-2">
                   {section.details.map((detail) => (
-                    <li class="text-ink-soft text-sm flex items-start gap-2">
-                      <span class="text-brand-500 font-bold mt-0.5">
-                        <Plus class="w-4 h-4"/>
-                      </span> {detail}
+                    <li class="text-ink-soft flex items-start gap-2 text-sm">
+                      <span class="text-brand-500 mt-0.5 font-bold">
+                        <Plus class="h-4 w-4" />
+                      </span>{' '}
+                      {detail}
                     </li>
                   ))}
                 </ul>
@@ -178,8 +179,8 @@ let view = 2
       <p>
         <strong class="text-ink">Surclassement :</strong>
         <br />
-        Les joueurs nés en {new Date().getFullYear() - 17} souhaitant évoluer en catégorie séniors doivent
-        obtenir une validation préalable.
+        Si tu es né en {new Date().getFullYear() - 17} et que tu souhaites évoluer en catégorie séniors,
+        tu dois obtenir une validation préalable.
       </p>
     </div>
   </div>

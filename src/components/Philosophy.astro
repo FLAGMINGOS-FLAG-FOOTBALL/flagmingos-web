@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from 'astro:assets'
 import ArrowRight from '@lucide/astro/icons/arrow-right'
 import team from '@assets/team.jpg'
 import Button from '@ui/Button.astro'
@@ -8,34 +8,29 @@ import Paragraph from '@ui/Paragraph.astro'
 ---
 
 <section class="bg-bg">
-  <div class="mx-auto max-w-295 px-5 md:px-10 grid lg:grid-cols-2">
+  <div class="mx-auto grid max-w-295 px-5 md:px-10 lg:grid-cols-2">
     <!-- Image -->
     <div class="relative min-h-92 overflow-hidden">
-      <Image
-        src={team}
-        alt="Les Flagmingos"
-        class="absolute inset-0 h-full w-full object-cover"
-      />
+      <Image src={team} alt="Les Flagmingos" class="absolute inset-0 h-full w-full object-cover" />
     </div>
 
     <!-- Content -->
     <div class="flex flex-col justify-center px-6 py-20 lg:px-16">
       <SectionTitle
-        title='WE ARE'
+        title="WE ARE"
         highlight="FLAGMINGOS"
         tagline="ONE CLUB. ONE FLOCK."
         skew={true}
       />
       <Paragraph>
-        Depuis 2019, nous développons le flag football à Balma et Toulouse.
-        Débutants, compétiteurs, jeunes ou adultes, chacun trouve sa place dans
-        une équipe où l'on joue vite, progresse ensemble et partage la même
-        passion.
+        Depuis 2019, nous développons le flag football à Balma et Toulouse. Quel que soit ton niveau
+        ou ton âge, tu trouveras ta place dans une équipe où l’on joue vite, progresse ensemble et
+        partage la même passion.
       </Paragraph>
 
       <Button href="/club" variant="text" class="mt-3" size="text">
         Découvrir le club
-        <ArrowRight class="w-4 h-4" />
+        <ArrowRight class="h-4 w-4" />
       </Button>
 
       <!-- <div

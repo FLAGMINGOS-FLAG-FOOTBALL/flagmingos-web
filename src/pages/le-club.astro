@@ -19,14 +19,14 @@ import { board, coachs, medical } from '@data/club'
 
 <Page
   title="Le Club - Flagmingos"
-  description="Le club de Flag Football Flagmingos à Balma, champion de France Division 2 : histoire, palmarès, équipes et staff."
+  description="Le club de Flag Football Flagmingos à Balma, champion de France de Division 2 : histoire, palmarès, équipes et staff."
 >
   <PageHeader
     eyebrow="SINCE 2019"
     title="LE"
     highlight="CLUB"
     break={false}
-    subtitle="Une bande d'ami(e)s réunie autour du flag football à Balma, devenue championne de France Division 2."
+    subtitle="Une bande de passionnés réunie autour du flag football à Balma, devenue championne de France de Division 2."
   />
   <PageContent>
     <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_1fr] md:items-start">
@@ -39,8 +39,9 @@ import { board, coachs, medical } from '@data/club'
           sport, ça donne Fla<strong class="text-brand-700">g</strong>mingos — le flag des amis.
         </Paragraph>
         <Paragraph>
-          Le club est né en 2019 d'une bande d'ami(e)s et de joueurs(ses) qui évoluaient depuis
-          plusieurs années dans différentes structures, réunis autour d'un projet commun.
+          Le club est né en 2019 d'un collectif de joueuses et joueurs qui évoluaient depuis
+          plusieurs années dans différentes structures, avant de se réunir autour d'un projet
+          commun.
         </Paragraph>
       </div>
       <Image
@@ -60,9 +61,9 @@ import { board, coachs, medical } from '@data/club'
           Flag pour les plus jeunes
         </h3>
         <p class="text-ink-soft mt-4 text-sm leading-relaxed">
-          Initiations et démonstrations dans les écoles, centres aérés et structures accueillant
-          enfants et adolescents. Ils nous font confiance : le CA Balma Athlétisme, l'ETB, le
-          collège J. Rostand de Balma, l'ALSH Calvel de Balma, le SESSAD de Bruguières…
+          Initiations et démonstrations dans les écoles, centres aérés et structures jeunesse. Ils
+          nous ont fait confiance : CA Balma Athlétisme, l'ETB, le collège J. Rostand (Balma),
+          l'ALSH Calvel (Balma), le SESSAD de Bruguières…
         </p>
         <Button href="/#contact" variant="text" size="text" class="mt-5">
           Nous contacter
@@ -97,6 +98,12 @@ import { board, coachs, medical } from '@data/club'
   </PageContent> -->
   <PageContent>
     <SectionTitle title="NOTRE" highlight="ORGANISATION" tagline="THE BOARD" size="large" />
+    <Paragraph>
+      Le bureau et les responsables veillent au bon fonctionnement du club au quotidien : gestion
+      administrative, organisation des événements, communication... Une équipe engagée qui donne de
+      son temps pour que le club vive et grandisse, et pour que tu te sentes bien accueilli, sur le
+      terrain comme en dehors.
+    </Paragraph>
     <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
       {
         board.map((member) => (
@@ -110,44 +117,50 @@ import { board, coachs, medical } from '@data/club'
         ))
       }
     </div>
-    <SectionTitle title="NOS" highlight="COACHS" tagline="COACHING STAFF" size="large" />
-    <Paragraph>
-      Nos entraîneurs sont des passionnés de flag football, dévoués à aider chaque joueur à
-      atteindre son plein potentiel. Ils apportent leur expertise et leur expérience pour créer des
-      séances d'entraînement engageantes et efficaces, adaptées aux besoins de chaque équipe et de
-      chaque joueur. Leur objectif est de favoriser le développement des compétences, la confiance
-      en soi et l'esprit d'équipe au sein du club
-    </Paragraph>
-    <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
-      {
-        coachs.map((member) => (
-          <TradingCard
-            name={member.name}
-            role={member.role}
-            number={member.number}
-            category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
-            photo={Logo}
-          />
-        ))
-      }
+    <div class="py-20">
+      <SectionTitle title="NOS" highlight="COACHS" tagline="COACHING STAFF" size="large" />
+      <Paragraph>
+        Nos coachs sont des passionnés de flag football, dévoués à t'aider à progresser et à
+        atteindre ton plein potentiel. Grâce à leur expertise et leur expérience, ils construisent
+        des séances engageantes et efficaces, pensées pour toi comme pour ton équipe. Leur objectif
+        : développer tes compétences, ta confiance en toi et l'esprit d'équipe qui fait la force du
+        club.
+      </Paragraph>
+      <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
+        {
+          coachs.map((member) => (
+            <TradingCard
+              name={member.name}
+              role={member.role}
+              number={member.number}
+              category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
+              photo={Logo}
+            />
+          ))
+        }
+      </div>
     </div>
-    <SectionTitle title="PERSONNEL" highlight="MÉDICAL" tagline="MEDICAL STAFF" size="large" />
-    <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
-      {
-        medical.map((member) => (
-          <TradingCard
-            name={member.name}
-            role={member.role}
-            number={member.number}
-            category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
-            photo={Logo}
-          />
-        ))
-      }
+    <div class="pb-20">
+      <SectionTitle title="PERSONNEL" highlight="MÉDICAL" tagline="MEDICAL STAFF" size="large" />
+      <Paragraph>
+        Ta forme, c'est aussi leur mission. Un kiné et un ostéopathe accompagnent le club, entre
+        prévention des blessures et suivi de ta récupération, pour que tu puisses jouer en toute
+        tranquillité.
+      </Paragraph>
+      <div class="grid grid-cols-2 gap-4 py-10 sm:grid-cols-3 md:grid-cols-4">
+        {
+          medical.map((member) => (
+            <TradingCard
+              name={member.name}
+              role={member.role}
+              number={member.number}
+              category={member.category as 'bureau' | 'ca' | 'coach' | 'headcoach'}
+              photo={Logo}
+            />
+          ))
+        }
+      </div>
     </div>
-  </PageContent>
-
-  <PageContent>
     <SectionTitle title="NOS" highlight="PERFORMANCES" tagline="FEAR THE FOCK" size="large" />
     <div class="grid grid-cols-1 gap-10 md:grid-cols-[1fr_1.3fr] md:items-start">
       <div>
@@ -160,8 +173,8 @@ import { board, coachs, medical } from '@data/club'
         </Paragraph>
         <Paragraph>
           Découvrez le palmarès du club, retraçant les moments forts et les succès qui ont marqué
-          notre parcours depuis nos débuts. Chaque trophée et chaque victoire est le fruit de
-          l'engagement et de la passion de nos joueurs, entraîneurs et supporters.
+          notre parcours depuis nos débuts. Chaque trophée et chaque victoire sont le fruit de
+          l'engagement et de la passion de nos joueur·ses, entraîneur·ses et supporters.
         </Paragraph>
         <Image
           src={winners}

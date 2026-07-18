@@ -3,12 +3,12 @@ const steps = [
   {
     n: '01',
     title: "L'engagement",
-    desc: "Le center transmet le ballon au quarterback pour lancer l'action. Pas de coup de pied, juste une passe au sol.",
+    desc: 'Chaque action commence par un snap. Le centre transmet le ballon au quarterback, qui choisit de passer ou courir.',
   },
   {
     n: '02',
     title: 'La progression',
-    desc: "L'équipe attaquante dispose de plusieurs tentatives pour franchir les zones du terrain, par la passe ou la course.",
+    desc: "L’équipe attaquante dispose de plusieurs tentatives pour avancer sur le terrain, par la passe ou la course, et atteindre la zone d’en-but.",
   },
   {
     n: '03',
@@ -23,28 +23,24 @@ const steps = [
 ]
 ---
 
-<section class="bg-brand-800 text-white py-14 md:py-20">
+<section class="bg-brand-800 py-14 text-white md:py-20">
   <div class="mx-auto max-w-295 px-5 md:px-10">
-    <div class="text-center mb-10 md:mb-12">
-      <div class="font-mono text-xs tracking-[0.15em] text-brand-500 mb-3">
-        HOW IT WORKS
-      </div>
-      <h2
-        class="font-display uppercase text-[clamp(28px,6vw,44px)] leading-none"
-      >
+    <div class="mb-10 text-center md:mb-12">
+      <div class="text-brand-500 mb-3 font-mono text-xs tracking-[0.15em]">HOW IT WORKS</div>
+      <h2 class="font-display text-[clamp(28px,6vw,44px)] leading-none uppercase">
         Le déroulé d'une action
       </h2>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {
         steps.map((s) => (
-          <div class="relative p-6 border-white/15 border-2 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-brand-500 hover:shadow-2xl">
-            <div class="absolute -right-4 -top-4 font-display text-[120px] leading-none opacity-5 pointer-events-none select-none -skew-x-6">
+          <div class="hover:border-brand-500 relative overflow-hidden border-2 border-white/15 p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <div class="font-display pointer-events-none absolute -top-4 -right-4 -skew-x-6 text-[120px] leading-none opacity-5 select-none">
               {s.n}
             </div>
-            <div class="font-display uppercase text-2xl mb-2">{s.title}</div>
-            <p class="text-sm text-[#B9B5AE] leading-relaxed">{s.desc}</p>
+            <div class="font-display mb-2 text-2xl uppercase">{s.title}</div>
+            <p class="text-sm leading-relaxed text-[#B9B5AE]">{s.desc}</p>
           </div>
         ))
       }
