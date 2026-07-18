@@ -124,15 +124,27 @@ export const coachs = [
 
 export const medical = [
   {
+    role: 'Kinésithérapeute',
+    name: 'Rémy Gaudry',
+    category: 'coach',
+    number: 32,
+  },
+  {
     role: 'Ostéopathe',
     name: 'Thomas Mouries',
     category: 'coach',
     number: 29,
   },
   {
-    role: 'Kinésithérapeute',
-    name: 'Rémy Gaudry',
-    category: 'coach',
-    number: 32,
+    role: 'Préparation physique',
+    name: 'Manon Pialat',
+    category: 'ca',
+    number: 26,
   },
+  {
+    role: 'Préparation physique',
+    name: 'Nuria Inglada Soler',
+    category: 'ca',
+    number: 1,
+  }
 ]
