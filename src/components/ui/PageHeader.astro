@@ -26,7 +26,7 @@ const linebreak = Astro.props.break ?? true
       class="font-display uppercase leading-[0.9] text-[clamp(38px,9vw,84px)]"
     >
       {title}
-      <br class={`${linebreak ? '' : 'hidden'} `} />
+      {linebreak ? <br /> : ' '}
       {highlight && <span class="text-brand-500">{highlight}</span>}
     </h1>
     {
