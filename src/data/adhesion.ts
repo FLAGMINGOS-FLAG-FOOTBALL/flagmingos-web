@@ -93,11 +93,11 @@ export const sections = [
     title: 'Section Loisir',
     highlight: 'Jouer sans pression',
     description:
-      "Découvrir le flag football, progresser à son rythme et partager une expérience sportive conviviale.",
+      "Découvrir le flag football, progresser à son rythme et partager une expérience sportive, conviviale.",
     price: 100,
     public: 'Dès 17 ans',
     details: [
-        "Accès à tout les entraînements",
+        "Accès à tous les entraînements",
         "Pas de compétition, juste le plaisir de jouer",
     ],
     trainings: [
@@ -125,5 +125,5 @@ export const gear = [
     "1 short, bas de jogging, ou legging sans poche",
     "1 paire de crampons moulés (crampons métalliques et bouts anti-usure interdits)",
     "1 gourde ou bouteille d’eau",
-    "Recommandé: un protège-dents",
+    "Recommandé : un protège-dents",
 ]
