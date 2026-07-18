@@ -68,7 +68,7 @@ const current = variants[variant]
   >
     <!-- decorative wordmark, same treatment as footer -->
     <div
-      class="font-display text-brand-500/10 pointer-events-none absolute inset-x-0 bottom-0 z-0 translate-y-[28%] -skew-x-6 text-center leading-[0.8] uppercase select-none text-8xl"
+      class="font-display text-brand-500/10 pointer-events-none absolute inset-x-0 bottom-0 z-0 translate-y-[28%] -skew-x-6 text-center text-8xl leading-[0.8] uppercase select-none"
       aria-hidden="true"
     >
       FLAGMINGOS
@@ -102,13 +102,15 @@ const current = variants[variant]
       <p id={contentId} class="text-ink-soft mt-4 text-sm leading-relaxed">
         <slot />
       </p>
-
-      <button
-        data-modal-close={id}
-        class="group border-brand-500 bg-brand-500 hover:bg-bg hover:text-brand-500 mt-8 inline-flex items-center justify-center gap-2 border-2 px-8 py-3.5 text-sm font-bold tracking-wide text-white uppercase transition-all"
-      >
-        {button}
-      </button>
+      <div class="mt-6 flex flex-col items-center gap-3">
+        <slot name="actions" />
+        <button
+          data-modal-close={id}
+          class="group border-brand-500 bg-brand-500 hover:bg-bg hover:text-brand-500 mt-8 inline-flex items-center justify-center gap-2 border-2 px-8 py-3.5 text-sm font-bold tracking-wide text-white uppercase transition-all"
+        >
+          {button}
+        </button>
+      </div>
     </div>
   </div>
 </div>

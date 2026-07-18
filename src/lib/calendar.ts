@@ -112,3 +112,50 @@ export async function getAllEvents() {
   })
   return events
 }
+
+export function buildIcsFile(
+  session: Pick<Event, 'startDate' | 'endDate' | 'location' | 'summary'>,
+) {
+  const formatIcsDate = (date: Date) => date.toISOString().replace(/-|:|\.\d+/g, '')
+
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'BEGIN:VEVENT',
+    `DTSTART:${formatIcsDate(session.startDate)}`,
+    `DTEND:${formatIcsDate(session.endDate)}`,
+    `SUMMARY:${session.summary ?? "Séance d'initiation Flag Football - Flagmingos"}`,
+    'DESCRIPTION:Séance découverte encadrée par les Flagmingos.',
+    `LOCATION:${session.location ?? ''}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n')
+}
+
+export function downloadIcs(
+  session: Pick<Event, 'startDate' | 'endDate' | 'location' | 'summary'>,
+) {
+  const blob = new Blob([buildIcsFile(session)], { type: 'text/calendar' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'seance-initiation.ics'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}
+
+export function buildGoogleCalendarUrl(session: Pick<Event, 'startDate' | 'endDate' | 'location' | 'summary'>) {
+  const formatGoogleDate = (date: Date) => date.toISOString().replace(/-|:|\.\d+/g, '')
+
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: session.summary || "Séance d'initiation Flag Football - Flagmingos",
+    dates: `${formatGoogleDate(session.startDate)}/${formatGoogleDate(session.endDate)}`,
+    details: 'Séance découverte encadrée par les Flagmingos.',
+    location: session.location ?? '',
+  })
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`
+}

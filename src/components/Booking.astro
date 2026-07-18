@@ -46,6 +46,10 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
                   class="peer sr-only"
                   required
                   value={formatDate(s.startDate)}
+                  data-start={s.startDate.toISOString()}
+                  data-end={s.endDate.toISOString()}
+                  data-location={s.location ?? ''}
+                  data-summary={s.summary ?? ''}
                 />
 
                 <div>
@@ -188,7 +192,10 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
           <span>
             J'accepte que mes données soient utilisées uniquement pour gérer mon inscription à la
             séance d'initiation.
-            <a href="/mentions-legales#donnees-personnelles" class="hover:text-brand-700 underline px-1">
+            <a
+              href="/mentions-legales#donnees-personnelles"
+              class="hover:text-brand-700 px-1 underline"
+            >
               En savoir plus.
             </a>
           </span>
@@ -213,14 +220,35 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
   <!-- <button id="test-button" class="block" type="button"> Test modal </button> -->
   <ModalForm id="success-modal-booking" football title="Inscription réussie !">
     Ton inscription est dans nos mains.<br />On se retrouve sur le terrain !
+    <div slot="actions" class="flex justify-center gap-3">
+      <a
+        id="add-to-google-calendar"
+        href="#"
+        target="_blank"
+        rel="noopener"
+        class="border-line hover:border-brand-500 flex items-center gap-2 border-2 px-4 py-2.5 text-sm transition-colors cursor-pointer"
+      >
+        Ajouter au Calendrier Google
+      </a>
+      <button
+        type="button"
+        id="add-to-apple-calendar"
+        class="border-line hover:border-brand-500 flex items-center gap-2 border-2 px-4 py-2.5 text-sm transition-colors cursor-pointer"
+      >
+        Ajouter au Calendrier Apple (.ics)
+      </button>
+    </div>
   </ModalForm>
   <ModalForm id="error-modal-booking" variant="error" title="Oups !">
-    Une erreur est survenue lors de l'envoi du formulaire.<br />Merci de réessayer plus tard ou de nous <a href="/#contact" class="hover:text-brand-700 underline">contacter</a> directement.
+    Une erreur est survenue lors de l'envoi du formulaire.<br />Merci de réessayer plus tard ou de
+    nous <a href="/#contact" class="hover:text-brand-700 underline">contacter</a> directement.
   </ModalForm>
 </section>
 
 <script>
   import { submitForm } from '../lib/form'
+  import { downloadIcs, buildGoogleCalendarUrl } from '../lib/calendar'
+
   submitForm('booking-form', 'success-modal-booking', 'error-modal-booking')
 
   const birthdateInput = document.getElementById('birthdate') as HTMLInputElement
@@ -242,4 +270,47 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
       }
     }
   })
+
+  // Add to calendar button
+  interface SelectedSession {
+    startDate: Date
+    endDate: Date
+    location: string
+    summary: string
+  }
+
+  let selectedSession: SelectedSession | null = null
+
+  const sessionRadios = document.querySelectorAll<HTMLInputElement>('input[name="session"]')
+
+  sessionRadios.forEach((radio) => {
+    radio.addEventListener('change', () => {
+      if (radio.checked && radio.dataset.start && radio.dataset.end) {
+        selectedSession = {
+          startDate: new Date(radio.dataset.start),
+          endDate: new Date(radio.dataset.end),
+          location: radio.dataset.location ?? '',
+          summary: radio.dataset.summary ?? '',
+        }
+      }
+    })
+  })
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement
+    if (target?.id === 'add-to-apple-calendar' && selectedSession) {
+      downloadIcs(selectedSession)
+    }
+  })
+
+  sessionRadios.forEach((radio) => {
+  radio.addEventListener('change', () => {
+    if (selectedSession) {
+      const googleLink = document.getElementById('add-to-google-calendar') as HTMLAnchorElement
+      if (googleLink) {
+        googleLink.href = buildGoogleCalendarUrl(selectedSession)
+      }
+    }
+  })
+})
 </script>
