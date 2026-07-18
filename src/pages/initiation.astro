@@ -1,4 +1,6 @@
 ---
+export const prerender = false
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=60')
 import Page from '@layouts/Page.astro'
 import PageHeader from '@ui/PageHeader.astro'
 import PageContent from '@ui/PageContent.astro'
