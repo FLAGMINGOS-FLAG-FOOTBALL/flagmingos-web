@@ -1,15 +1,15 @@
 ---
 import { Image } from 'astro:assets';
-import Page from '../layouts/Page.astro'
-import PageHeader from '../components/PageHeader.astro'
-import PageContent from '../components/ui/PageContent.astro'
-import SectionTitle from '../components/ui/SectionTitle.astro'
-import Paragraph from '../components/ui/Paragraph.astro'
-import FeatureCard from '../components/ui/FeatureCard.astro'
-import TeamBuildingForm from '../components/TeamBuildingForm.astro'
-import { teamBuilding } from '../data/teamBuilding'
-import LogoTeamBuilding from '../assets/teambuilding.png'
-import AssetTeamBuilding from '../assets/teambuilding-asset.jpg'
+import Page from '@layouts/Page.astro'
+import PageHeader from '@ui/PageHeader.astro'
+import PageContent from '@ui/PageContent.astro'
+import SectionTitle from '@ui/SectionTitle.astro'
+import Paragraph from '@ui/Paragraph.astro'
+import FeatureCard from '@ui/FeatureCard.astro'
+import TeamBuildingForm from '@components/TeamBuildingForm.astro'
+import { teamBuilding } from '@data/teamBuilding'
+import LogoTeamBuilding from '@assets/teambuilding.png'
+import AssetTeamBuilding from '@assets/teambuilding-asset.jpg'
 ---
 
 <Page title={teamBuilding.pageTitle} description={teamBuilding.pageDescription}>
