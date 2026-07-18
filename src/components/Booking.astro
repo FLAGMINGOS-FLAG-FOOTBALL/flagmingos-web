@@ -10,6 +10,13 @@ interface props {
 const { sessions } = Astro.props as props
 
 import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/calendar'
+
+const badgeStyle = {
+  adultes: 'border-line text-ink-soft',
+  jeunes: 'border-brand-500 text-brand-500',
+}
+
+type BadgeStyleKey = keyof typeof badgeStyle
 ---
 
 <section>
@@ -53,8 +60,10 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
                 />
 
                 <div>
+                  <span class={`${badgeStyle[(s.type?.toLowerCase() as BadgeStyleKey) || 'adultes']} mb-2 inline-block border px-1.5 py-0.5 font-mono text-[10px] tracking-wider uppercase`}>
+                    {s.type || 'Adultes'}
+                  </span>
                   <p class="text-ink font-semibold">{formatDateDisplay(s.startDate)}</p>
-
                   <p class="text-ink-soft mt-2 font-mono text-sm">
                     {formatTime(s.startDate)} - {formatTime(s.endDate)}
                   </p>
@@ -226,14 +235,14 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
         href="#"
         target="_blank"
         rel="noopener"
-        class="border-line hover:border-brand-500 flex items-center gap-2 border-2 px-4 py-2.5 text-sm transition-colors cursor-pointer"
+        class="border-line hover:border-brand-500 flex cursor-pointer items-center gap-2 border-2 px-4 py-2.5 text-sm transition-colors"
       >
         Ajouter au Calendrier Google
       </a>
       <button
         type="button"
         id="add-to-apple-calendar"
-        class="border-line hover:border-brand-500 flex items-center gap-2 border-2 px-4 py-2.5 text-sm transition-colors cursor-pointer"
+        class="border-line hover:border-brand-500 flex cursor-pointer items-center gap-2 border-2 px-4 py-2.5 text-sm transition-colors"
       >
         Ajouter au Calendrier Apple (.ics)
       </button>
@@ -304,13 +313,13 @@ import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/ca
   })
 
   sessionRadios.forEach((radio) => {
-  radio.addEventListener('change', () => {
-    if (selectedSession) {
-      const googleLink = document.getElementById('add-to-google-calendar') as HTMLAnchorElement
-      if (googleLink) {
-        googleLink.href = buildGoogleCalendarUrl(selectedSession)
+    radio.addEventListener('change', () => {
+      if (selectedSession) {
+        const googleLink = document.getElementById('add-to-google-calendar') as HTMLAnchorElement
+        if (googleLink) {
+          googleLink.href = buildGoogleCalendarUrl(selectedSession)
+        }
       }
-    }
+    })
   })
-})
 </script>
