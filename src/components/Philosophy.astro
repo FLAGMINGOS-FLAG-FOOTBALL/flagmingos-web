@@ -8,14 +8,20 @@ import Paragraph from '@ui/Paragraph.astro'
 ---
 
 <section class="bg-bg">
-  <div class="mx-auto grid max-w-295 px-5 md:px-10 lg:grid-cols-2">
+  <div class="mx-auto grid max-w-295 md:px-10 lg:grid-cols-2">
     <!-- Image -->
     <div class="relative min-h-92 overflow-hidden">
-      <Image src={team} alt="Les Flagmingos" class="absolute inset-0 h-full w-full object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+      <Image
+        src={team}
+        alt="Les Flagmingos"
+        class="absolute inset-0 h-full w-full object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        widths={[400, 768, 1024, 1620]}
+      />
     </div>
 
     <!-- Content -->
-    <div class="flex flex-col justify-center px-6 py-20 lg:px-16">
+    <div class="flex flex-col justify-center px-5 py-20 lg:px-16">
       <SectionTitle
         title="WE ARE"
         highlight="FLAGMINGOS"
