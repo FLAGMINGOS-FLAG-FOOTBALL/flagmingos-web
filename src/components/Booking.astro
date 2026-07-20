@@ -22,6 +22,20 @@ type BadgeStyleKey = keyof typeof badgeStyle
 <section>
   <div class="mx-auto max-w-180 px-5 md:px-10">
     <div class="border-line border bg-white p-6 md:p-9">
+      <!-- Netlify Form Detection -->
+      <form name="initiation" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="initiation" />
+        <input name="bot-field" />
+        <input name="session" />
+        <input name="lastname" />
+        <input name="firstname" />
+        <input name="birthdate" />
+        <input name="parentname" />
+        <input name="phone" />
+        <input name="email" />
+        <input name="communication" />
+        <input type="checkbox" name="privacy-consent" />
+      </form>
       <form
         id="booking-form"
         name="initiation"
