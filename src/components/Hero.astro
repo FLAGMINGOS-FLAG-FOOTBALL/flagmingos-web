@@ -4,18 +4,34 @@ import Player from '@assets/hero.png'
 import Logo from '@assets/logo.png'
 import HeroTitle from '@components/HeroTitle.astro'
 ---
+
 <section class="relative flex flex-col overflow-hidden pt-12 lg:block lg:pt-16">
   <!-- Grid background -->
-  <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#292724_1px,transparent_1px),linear-gradient(to_bottom,#292724_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] bg-size-[4rem_4rem] opacity-5"></div>
+  <div
+    class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#292724_1px,transparent_1px),linear-gradient(to_bottom,#292724_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] bg-size-[4rem_4rem] opacity-5"
+  >
+  </div>
 
   <!-- Logo -->
   <div class="pointer-events-none absolute -top-20 -right-20 opacity-5 select-none">
-    <Image alt="Logo Flagmingos" class="h-auto w-150 object-contain" src={Logo} />
+    <Image
+      alt="Logo Flagmingos"
+      class="h-auto w-150 object-contain"
+      src={Logo}
+      loading="eager"
+      fetchpriority="high"
+    />
   </div>
 
   <!-- Blobs -->
-  <div class="bg-brand-500/8 animate-blob absolute top-0 -left-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"></div>
-  <div class="bg-brand-500/8 animate-blob-delayed absolute top-1/6 -right-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"></div>
+  <div
+    class="bg-brand-500/8 animate-blob absolute top-0 -left-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"
+  >
+  </div>
+  <div
+    class="bg-brand-500/8 animate-blob-delayed absolute top-1/6 -right-32 h-50 w-50 rounded-full blur-3xl lg:h-150 lg:w-150"
+  >
+  </div>
 
   <!-- Text -->
   <div class="relative z-50 mx-auto w-full max-w-350 px-5 lg:px-10 lg:pb-20">
@@ -23,7 +39,9 @@ import HeroTitle from '@components/HeroTitle.astro'
   </div>
 
   <!-- Player visual -->
-  <div class="pointer-events-none mt-4 flex justify-center select-none lg:absolute lg:inset-x-0 lg:inset-y-0 lg:mt-0 lg:items-end lg:justify-end">
+  <div
+    class="pointer-events-none mt-4 flex justify-center select-none lg:absolute lg:inset-x-0 lg:inset-y-0 lg:mt-0 lg:items-end lg:justify-end"
+  >
     <div class="mx-auto flex w-full max-w-350 justify-center px-5 lg:justify-end">
       <Image
         alt="Joueurs de Flag Football"
