@@ -81,5 +81,11 @@
   "gps": {
     "apple": "https://maps.apple/p/Nq44xWInDFKy6w",
     "google": "https://maps.app.goo.gl/czwtr3dnYYcYznaE8"
+  },
+  "jsonld": {
+    "streetAddress": "Stade du parc Lagarde",
+    "postalCode": "31130",
+    "addressLocality": "Balma",
+    "foundingDate": "2019"
   }
 }

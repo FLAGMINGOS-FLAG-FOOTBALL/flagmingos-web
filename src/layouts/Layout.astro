@@ -1,6 +1,8 @@
 ---
 import '@styles/global.css'
 import Seo from '@components/Seo.astro'
+import ogImage from '@assets/flagmingball.jpg'
+
 interface Props {
   title?: string
   description?: string
@@ -8,10 +10,8 @@ interface Props {
 
 const {
   title = 'Flagmingos - Flag Football Balma',
-  description = 'L’association sportive les Flagmingos de Balma, propose la pratique du Flag Football ou Flag, proche de Toulouse en région Occitanie. Le Flag est un sport collectif mixte, sans contact, accessible des 12 ans, ouvert à toutes et tous…',
+  description = 'L’association sportive les Flagmingos de Balma propose la pratique du Flag Football ou Flag, proche de Toulouse, en région Occitanie. Le Flag est un sport collectif mixte, sans contact, accessible dès 7 ans, ouvert à toutes et à tous.',
 } = Astro.props
-
-const canonicalUrl = new URL(Astro.site.pathname, Astro.site)
 ---
 
 <!doctype html>
@@ -24,9 +24,7 @@ const canonicalUrl = new URL(Astro.site.pathname, Astro.site)
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    <Seo/>
+    <Seo title={title} description={description} ogImage={ogImage} />
   </head>
 
   <body>
