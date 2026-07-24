@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /netlify-forms
 
 Sitemap: https://flagmingos.fr/sitemap-index.xml

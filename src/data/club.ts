@@ -70,7 +70,7 @@ export const coachs = [
   },
   {
     role: 'Head Coach Jeunes',
-    name: 'Nuria Inglada Soler',
+    name: 'Nuria Inglada',
     category: 'headcoach',
     number: 1,
   },
@@ -143,7 +143,7 @@ export const medical = [
   },
   {
     role: 'Préparation physique',
-    name: 'Nuria Inglada Soler',
+    name: 'Nuria Inglada',
     category: 'ca',
     number: 1,
   }
