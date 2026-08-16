@@ -1,22 +1,17 @@
 ---
-import CalendarCheck from '@lucide/astro/icons/calendar-check'
-import Calendar from '@lucide/astro/icons/calendar'
 import ButtonForm from '@ui/ButtonForm.astro'
 import ModalForm from '@ui/ModalForm.astro'
+import SessionCard from '@ui/SessionCard.astro'
 interface props {
   sessions: Event[]
 }
 
 const { sessions } = Astro.props as props
 
-import { formatDate, formatTime, formatDateDisplay, type Event } from '../lib/calendar'
+import { type Event } from '../lib/calendar'
 
-const badgeStyle = {
-  adultes: 'border-line text-ink-soft',
-  jeunes: 'border-brand-500 text-brand-500',
-}
-
-type BadgeStyleKey = keyof typeof badgeStyle
+const adultSessions = sessions.filter((s) => s.type?.toLowerCase() !== 'jeunes')
+const youthSessions = sessions.filter((s) => s.type?.toLowerCase() === 'jeunes')
 ---
 
 <section>
@@ -43,45 +38,44 @@ type BadgeStyleKey = keyof typeof badgeStyle
         >
           Séance choisie
         </label>
-        <div class="grid gap-4 sm:grid-cols-2">
-          {
-            sessions.slice(0, 6).map((s) => (
-              <label class="group border-line has-checked:border-brand-500 has-checked:bg-brand-50 flex items-center justify-between border-2 bg-white p-5 transition">
-                <input
-                  type="radio"
-                  name="session"
-                  class="peer sr-only"
-                  required
-                  value={formatDate(s.startDate)}
-                  data-start={s.startDate.toISOString()}
-                  data-end={s.endDate.toISOString()}
-                  data-location={s.location ?? ''}
-                  data-summary={s.summary ?? ''}
-                />
 
-                <div>
-                  <span
-                    class={`${badgeStyle[(s.type?.toLowerCase() as BadgeStyleKey) || 'adultes']} mb-2 inline-block border px-1.5 py-0.5 text-[10px] tracking-wider uppercase`}
-                  >
-                    {s.type?.toLowerCase() == 'jeunes' ? (
-                      <>
-                        Jeunes - <b class="font-extrabold">{s.format}</b>
-                      </>
-                    ) : (
-                      'Adultes'
-                    )}
-                  </span>
-                  <p class="text-ink font-semibold">{formatDateDisplay(s.startDate)}</p>
-                  <p class="text-ink-soft mt-2 font-mono text-sm">
-                    {formatTime(s.startDate)} - {formatTime(s.endDate)}
-                  </p>
-                </div>
-                <Calendar class="text-line 00 h-6 w-6 transition group-has-checked:hidden" />
-                <CalendarCheck class="text-line group-has-checked:text-brand-500 hidden h-6 w-6 transition group-has-checked:block" />
-              </label>
-            ))
-          }
-        </div>
+        {
+          adultSessions.length > 0 && (
+            <div>
+              <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
+                {adultSessions.map((s, i) => (
+                  <SessionCard session={s} class={i >= 4 ? 'session-extra hidden' : ''} />
+                ))}
+              </div>
+              {adultSessions.length > 4 && (
+                <button
+                  type="button"
+                  id="toggle-adult-sessions"
+                  aria-expanded="false"
+                  class="text-brand-500 mt-3 cursor-pointer font-mono text-[11px] tracking-wide uppercase underline"
+                >
+                  Voir {adultSessions.length - 4} séance
+                  {adultSessions.length - 4 > 1 ? 's' : ''} de plus
+                </button>
+              )}
+            </div>
+          )
+        }
+
+        {
+          youthSessions.length > 0 && (
+            <div class={adultSessions.length > 0 ? 'mt-6' : ''}>
+              <p class="text-brand-500 mb-3 font-mono text-[11px] font-bold tracking-wide uppercase">
+                Séances jeunes
+              </p>
+              <div class="grid gap-4 sm:grid-cols-2">
+                {youthSessions.map((s) => (
+                  <SessionCard session={s} />
+                ))}
+              </div>
+            </div>
+          )
+        }
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label
@@ -286,6 +280,18 @@ type BadgeStyleKey = keyof typeof badgeStyle
         parentName.required = false
       }
     }
+  })
+
+  // Toggle extra session cards
+  const toggleSessionsButton = document.getElementById('toggle-adult-sessions')
+  toggleSessionsButton?.addEventListener('click', () => {
+    const extraCards = document.querySelectorAll('.session-extra')
+    const expanded = toggleSessionsButton.getAttribute('aria-expanded') === 'true'
+    extraCards.forEach((card) => card.classList.toggle('hidden', expanded))
+    toggleSessionsButton.setAttribute('aria-expanded', String(!expanded))
+    toggleSessionsButton.textContent = expanded
+      ? `Voir ${extraCards.length} séance${extraCards.length > 1 ? 's' : ''} de plus`
+      : 'Voir moins'
   })
 
   // Add to calendar button
