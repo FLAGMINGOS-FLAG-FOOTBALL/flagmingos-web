@@ -29,7 +29,7 @@ type BadgeStyleKey = keyof typeof badgeStyle
     name="session"
     class="peer sr-only"
     required
-    value={formatDate(s.startDate)}
+    value={`${formatDate(s.startDate)}, ${formatTime(s.startDate)} - ${formatTime(s.endDate)}`}
     data-start={s.startDate.toISOString()}
     data-end={s.endDate.toISOString()}
     data-location={s.location ?? ''}
