@@ -25,3 +25,9 @@ pnpm-debug.log*
 playground
 # Local Netlify folder
 .netlify
+
+src/data/combine.json
+combine.csv
+alias.csv
+licences.csv
+techniques.csv
