@@ -51,9 +51,11 @@ Astro.response.headers.set("Cache-Control", "private, no-store");
 // un chemin codé en dur entre en conflit avec la normalisation du slash final → boucle de redirection
 const HERE = Astro.url.pathname;
  
-if (Astro.url.searchParams.has("logout")) {
+// Déconnexion sans redirection : on supprime le cookie et on rend directement la page de login
+// (aucune redirection possible → aucune boucle, quelle que soit la gestion du slash final par Netlify)
+const loggedOut = Astro.url.searchParams.has("logout");
+if (loggedOut) {
   Astro.cookies.delete(COOKIE, { path: COOKIE_PATH });
-  return Astro.redirect(HERE, 303);
 }
 
 // Connexion : licence + prénom (même normalisation que scripts/combine-auth.mjs)
@@ -85,7 +87,7 @@ if (Astro.request.method === "POST") {
 
 // Session : cookie signé "id.signature"
 const [cid = "", sig = ""] = (Astro.cookies.get(COOKIE)?.value ?? "").split(".");
-let me = SECRET && cid && sig && safeEqual(sig, hmac(`session:${cid}`))
+let me = !loggedOut && SECRET && cid && sig && safeEqual(sig, hmac(`session:${cid}`))
   ? joueurs.find((j) => j.id === cid)
   : undefined;
 
