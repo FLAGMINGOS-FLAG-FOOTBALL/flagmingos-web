@@ -1,0 +1,291 @@
+---
+// src/pages/combine.astro
+// Chaque joueur se connecte avec licence + prénom et ne voit que sa fiche.
+// Seul un hash (HMAC) de ce couple est stocké dans combine.json.
+// Rendu serveur : aucune autre ligne n'est envoyée au navigateur.
+export const prerender = false;
+
+import { createDecipheriv, createHash, createHmac, timingSafeEqual } from "node:crypto";
+import enc from "../data/combine.enc.json"; // version chiffrée (commitée) — voir scripts/combine-encrypt.mjs
+import "../styles/global.css"; // ← remets ton chemin CSS / ton Layout
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+
+const SECRET = import.meta.env.COMBINE_SECRET ?? "";
+
+// Déchiffrement des données (clé dérivée de COMBINE_SECRET, identique au script)
+function decrypt() {
+  const key = createHash("sha256").update(`data:${SECRET}`).digest();
+  const d = createDecipheriv("aes-256-gcm", key, Buffer.from(enc.iv, "base64"));
+  d.setAuthTag(Buffer.from(enc.tag, "base64"));
+  const plain = Buffer.concat([d.update(Buffer.from(enc.data, "base64")), d.final()]).toString("utf8");
+  return JSON.parse(plain);
+}
+let data;
+try {
+  data = decrypt();
+} catch {
+  throw new Error("combine.enc.json illisible : COMBINE_SECRET différent de celui utilisé par combine-encrypt.mjs ?");
+}
+const COOKIE = "combine_player";
+const COOKIE_PATH = "/combine";
+
+const hmac = (s: string) => createHmac("sha256", SECRET).update(s).digest("hex");
+const safeEqual = (a: string, b: string) => {
+  const A = Buffer.from(a);
+  const B = Buffer.from(b);
+  return A.length === B.length && timingSafeEqual(A, B);
+};
+
+type Test = { id: string; section: string; label: string; unit: string; lowerIsBetter: boolean; decimals: number };
+type Section = { id: string; label: string; date: string | null };
+type Player = { id: string; nom: string; authHashes?: string[]; res: Record<string, number | null> };
+const tests = data.tests as Test[];
+const sections = (data.sections ?? []) as Section[];
+const joueurs = data.joueurs as Player[];
+
+Astro.response.headers.set("X-Robots-Tag", "noindex, nofollow");
+Astro.response.headers.set("Cache-Control", "private, no-store");
+
+if (Astro.url.searchParams.has("logout")) {
+  Astro.cookies.delete(COOKIE, { path: COOKIE_PATH });
+  return Astro.redirect(COOKIE_PATH);
+}
+
+// Connexion : licence + prénom (même normalisation que scripts/combine-auth.mjs)
+const normLicence = (s: string) => s.toUpperCase().replace(/[\s.-]/g, "");
+// « Jean-Pierre », « jean pierre », « JEAN PIERRE » → « jeanpierre »
+const normPrenom = (s: string) =>
+  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z]/g, "");
+let error = false;
+if (Astro.request.method === "POST") {
+  const form = await Astro.request.formData();
+  const licence = normLicence(String(form.get("licence") ?? ""));
+  const prenom = normPrenom(String(form.get("prenom") ?? ""));
+  const valid = SECRET && licence && prenom;
+  const hash = valid ? hmac(`auth:${licence}|${prenom}`) : "";
+  const player = valid ? joueurs.find((j) => j.authHashes?.some((h) => safeEqual(h, hash))) : undefined;
+  if (player) {
+    Astro.cookies.set(COOKIE, `${player.id}.${hmac(`session:${player.id}`)}`, {
+      path: COOKIE_PATH,
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+    return Astro.redirect(COOKIE_PATH, 303);
+  }
+  await new Promise((r) => setTimeout(r, 1000)); // freine les essais en série
+  error = true;
+}
+
+// Session : cookie signé "id.signature"
+const [cid = "", sig = ""] = (Astro.cookies.get(COOKIE)?.value ?? "").split(".");
+let me = SECRET && cid && sig && safeEqual(sig, hmac(`session:${cid}`))
+  ? joueurs.find((j) => j.id === cid)
+  : undefined;
+
+// Dev uniquement : /combine?as=Thomas%20D. affiche la fiche de ce joueur sans login
+if (import.meta.env.DEV) {
+  const as = Astro.url.searchParams.get("as");
+  if (as) me = joueurs.find((j) => j.nom === as) ?? me;
+}
+
+const dateFr = (d: string | null) =>
+  d ? new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : "";
+const annee = new Date(sections.find((s) => s.date)?.date ?? Date.now()).getFullYear();
+
+// Sections affichées : uniquement celles où le joueur a au moins un résultat
+const mesSections = me
+  ? sections
+      .map((s) => ({ ...s, tests: tests.filter((t) => t.section === s.id) }))
+      .filter((s) => s.tests.some((t) => me!.res[t.id] != null))
+  : [];
+const fmt = (v: number, d: number) => v.toFixed(d).replace(".", ",");
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Combine {annee} · Flagmingos</title>
+  </head>
+  <body class="min-h-screen bg-bg font-sans text-ink antialiased">
+    <main class="mx-auto max-w-2xl px-4 py-12 md:py-20">
+      <a href="/" class="mb-8 inline-block" aria-label="Retour à l'accueil Flagmingos">
+        <Image src={logo} alt="Flagmingos" width={160} class="h-14 w-auto md:h-16" loading="eager" fetchpriority="high" />
+      </a>
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-500">Espace membres</p>
+
+      {
+        !me ? (
+          <>
+            <h1 class="mt-3 -skew-x-6 font-display text-6xl uppercase leading-[0.9] md:text-8xl">
+              Ta fiche
+              <span class="block text-brand-500">combine {annee}</span>
+            </h1>
+            <p class="mt-5 max-w-md text-ink/70">
+              Connecte-toi avec ton numéro de licence et ton prénom pour voir tes résultats.
+            </p>
+
+            <form method="POST" class="mt-10 max-w-sm space-y-5">
+              <div class="space-y-2">
+                <label for="licence" class="block font-mono text-[0.7rem] uppercase tracking-[0.18em] text-ink/60">
+                  N° de licence
+                </label>
+                <input
+                  id="licence"
+                  name="licence"
+                  type="text"
+                  required
+                  autofocus
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="w-full border-0 border-b-2 border-ink/20 bg-transparent px-0 py-2 font-mono text-xl tracking-wider transition focus:border-brand-500 focus:outline-none focus:ring-0"
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="prenom" class="block font-mono text-[0.7rem] uppercase tracking-[0.18em] text-ink/60">
+                  Prénom
+                </label>
+                <input
+                  id="prenom"
+                  name="prenom"
+                  type="text"
+                  required
+                  autocomplete="given-name"
+                  spellcheck="false"
+                  class="w-full border-0 border-b-2 border-ink/20 bg-transparent px-0 py-2 font-mono text-xl transition focus:border-brand-500 focus:outline-none focus:ring-0"
+                />
+              </div>
+
+              {error && (
+                <p class="border-l-4 border-brand-500 bg-brand-50 px-3 py-2 text-sm text-brand-800" role="alert">
+                  Licence ou prénom incorrect. Si ça persiste, préviens ton coach.
+                </p>
+              )}
+
+              <button class="group mt-2 inline-block -skew-x-12 bg-brand-500 px-8 py-3 transition hover:bg-brand-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500">
+                <span class="inline-block skew-x-12 font-display text-xl uppercase tracking-wide text-white">
+                  Voir ma fiche
+                </span>
+              </button>
+            </form>
+          </>
+        ) : (
+          <>
+            <article class="card relative mt-4 overflow-hidden rounded-2xl bg-ink text-bg shadow-2xl">
+              <!-- Bandeau -->
+              <header class="flex items-center justify-between bg-brand-500 px-6 py-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-white">
+                <span>Flagmingos</span>
+                <span>Combine {annee}</span>
+              </header>
+
+              <!-- Bandes diagonales décoratives -->
+              <div class="stripes pointer-events-none absolute -right-10 top-10 h-48 w-48" aria-hidden="true"></div>
+
+              <div class="relative px-6 pb-8 pt-8">
+                <Image
+                  src={logo}
+                  alt=""
+                  width={160}
+                  class="pointer-events-none absolute right-6 top-6 h-14 w-auto opacity-90 md:h-20"
+                  aria-hidden="true"
+                />
+                <p class="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-bg/50">Fiche joueur</p>
+                <h1 class="mt-2 -skew-x-6 pr-20 font-display text-6xl uppercase leading-[0.9] text-white md:pr-28 md:text-7xl">
+                  {me.nom}
+                </h1>
+              </div>
+
+              {mesSections.map((s) => {
+                // 1er test en vedette sur 2 colonnes seulement si ça remplit la grille
+                // (mobile 2 col. : nb impair ; desktop 3 col. : nb+1 multiple de 3)
+                const n = s.tests.length;
+                const feat2 = n % 2 === 1;
+                const feat3 = (n + 1) % 3 === 0;
+                return (
+                  <section class="relative" aria-labelledby={`sec-${s.id}`}>
+                    <div class="flex items-baseline justify-between gap-4 border-t border-bg/10 px-6 pb-3 pt-6">
+                      <h2 id={`sec-${s.id}`} class="-skew-x-6 font-display text-2xl uppercase tracking-wide text-brand-300">
+                        {s.label}
+                      </h2>
+                      {s.date && (
+                        <span class="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-bg/40">{dateFr(s.date)}</span>
+                      )}
+                    </div>
+                    <dl class="grid grid-cols-2 gap-px bg-bg/10 sm:grid-cols-3">
+                      {s.tests.map((t, i) => {
+                        const v = me.res[t.id];
+                        const pct = t.unit === "%";
+                        return (
+                          <div
+                            class:list={[
+                              "bg-ink px-5 py-6",
+                              i === 0 && feat2 && "col-span-2 [&_.val]:text-7xl",
+                              i === 0 && feat2 && !feat3 && "sm:col-span-1 sm:[&_.val]:text-5xl",
+                              i === 0 && feat3 && "sm:col-span-2 sm:[&_.val]:text-7xl",
+                            ]}
+                          >
+                            <dt class="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-bg/50">{t.label}</dt>
+                            {v == null ? (
+                              <dd class="mt-2">
+                                <span class="block -skew-x-6 font-display text-5xl text-bg/20">—</span>
+                                <span class="mt-1 block font-mono text-[0.65rem] uppercase tracking-widest text-bg/40">Non passé</span>
+                              </dd>
+                            ) : (
+                              <dd class="mt-2">
+                                <span class="flex items-baseline gap-1.5">
+                                  <span class="val -skew-x-6 font-display text-5xl tabular-nums text-white">{fmt(v, t.decimals)}</span>
+                                  <span class="font-mono text-xs text-brand-300">{t.unit}</span>
+                                </span>
+                                {pct && (
+                                  <span class="mt-3 block h-1.5 overflow-hidden rounded-full bg-bg/10" aria-hidden="true">
+                                    <span class="block h-full rounded-full bg-brand-500" style={`width:${Math.min(100, Math.max(v, 2))}%`} />
+                                  </span>
+                                )}
+                              </dd>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </dl>
+                  </section>
+                );
+              })}
+
+              <footer class="relative flex items-center justify-end border-t border-bg/10 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-bg/50">
+                <a href="?logout" class="underline-offset-4 transition hover:text-brand-300 hover:underline">
+                  Déconnexion
+                </a>
+              </footer>
+            </article>
+          </>
+        )
+      }
+    </main>
+
+    <style>
+      .stripes {
+        background: repeating-linear-gradient(
+          -55deg,
+          color-mix(in oklab, var(--color-brand-500) 35%, transparent) 0 10px,
+          transparent 10px 22px
+        );
+        mask-image: radial-gradient(circle at 70% 30%, black 20%, transparent 70%);
+      }
+      .card {
+        animation: card-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      @keyframes card-in {
+        from { opacity: 0; transform: translateY(16px) rotate(-1deg); }
+        to { opacity: 1; transform: none; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card { animation: none; }
+      }
+    </style>
+  </body>
+</html>
