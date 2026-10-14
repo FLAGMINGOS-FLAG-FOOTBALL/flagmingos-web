@@ -53,7 +53,7 @@ const HERE = Astro.url.pathname;
  
 // Déconnexion sans redirection : on supprime le cookie et on rend directement la page de login
 // (aucune redirection possible → aucune boucle, quelle que soit la gestion du slash final par Netlify)
-const loggedOut = Astro.url.searchParams.has("logout");
+const loggedOut = Astro.request.method !== "POST" && Astro.url.searchParams.has("logout");
 if (loggedOut) {
   Astro.cookies.delete(COOKIE, { path: COOKIE_PATH });
 }
@@ -133,7 +133,7 @@ const fmt = (v: number, d: number) => v.toFixed(d).replace(".", ",");
               Connecte-toi avec ton numéro de licence et ton prénom pour voir tes résultats.
             </p>
 
-            <form method="POST" class="mt-10 max-w-sm space-y-5">
+            <form method="POST" action={HERE} class="mt-10 max-w-sm space-y-5">
               <div class="space-y-2">
                 <label for="licence" class="block font-mono text-[0.7rem] uppercase tracking-[0.18em] text-ink/60">
                   N° de licence

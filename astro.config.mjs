@@ -16,7 +16,7 @@ export default defineConfig({
   adapter: netlify(),
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('netlify-forms'),
+      filter: (page) => !page.includes('netlify-forms') && !page.includes('/combine'),
     }),
   ],
 })
