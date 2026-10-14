@@ -47,9 +47,13 @@ const joueurs = data.joueurs as Player[];
 Astro.response.headers.set("X-Robots-Tag", "noindex, nofollow");
 Astro.response.headers.set("Cache-Control", "private, no-store");
 
+// Redirige vers le chemin tel qu'il a été demandé (/combine ou /combine/) :
+// un chemin codé en dur entre en conflit avec la normalisation du slash final → boucle de redirection
+const HERE = Astro.url.pathname;
+ 
 if (Astro.url.searchParams.has("logout")) {
   Astro.cookies.delete(COOKIE, { path: COOKIE_PATH });
-  return Astro.redirect(COOKIE_PATH);
+  return Astro.redirect(HERE, 303);
 }
 
 // Connexion : licence + prénom (même normalisation que scripts/combine-auth.mjs)
@@ -73,7 +77,7 @@ if (Astro.request.method === "POST") {
       sameSite: "strict",
       maxAge: 60 * 60 * 24 * 30,
     });
-    return Astro.redirect(COOKIE_PATH, 303);
+    return Astro.redirect(HERE, 303);
   }
   await new Promise((r) => setTimeout(r, 1000)); // freine les essais en série
   error = true;
